@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Xây dựng website khóa học tích hợp  (machine learning) chatbot (business module) + web rtc + hệ thống code 
++ 4000 5000 dòng dữ liệu
++ React ( front-end): giao diện clone pluralsight
++ Nodejs (back-end): webrtc
++ Database: MongoDB123
++ Ui/ux: Huy ->
++ App: react-native
+Craw data
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Chức năng: 
+Đăng nhập , đăng ký, đăng xuất
+Phân quyền  (admin, teacher, student)
++ admin : thêm, sửa, xóa, quản lí tài khoản, duyệt tài khoản teacher, thông báo, quản lí tài khoản teacher và student
++ teacher: đăng khóa học, thêm, sửa, xóa, tạo phòng stream,thông báo, quản lí tài khoản
++ student: mua khóa học, tìm kiếm , đánh giá, bình luận ,học, vào phòng stream, tương tác với chatbot, thông báo, giỏ hàng
+Thanh toán (thanh toán cho khóa học của học viên) (paypal+banking), quản lí tài khoản, làm bài test, nhận chứng chỉ khóa học
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+> Use git for new branch:
++ git remote
++ git fetch origin master
++ git branch ```your branch```
++ git checkout ```your branch```
++ git branch //check branchs in repo
++ git switch ```your branch```
++ git add ```add your files```
++ git commit -a -m "mess" -n //option: n for find your conflict
++ git push origin ```your branch```
++ link: https://www.atlassian.com/git/tutorials/syncing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+> Use for SSH key
++ On your termianl ```ssh keygen```
++ ```ssh-agent sh -c 'ssh-add; ssh-add -L'```
++ Go to github or gitlab, change directory to SSH : upload your ssh key
++ Done!!!
 
-## Learn More
+- front-end version 2
+    - NextJS with typeScript, redux
+    - sass, MaterialUI, formik, yup, notistack
+    - husky, tslint
 
-To learn more about Next.js, take a look at the following resources:
+tslint -config:
+    - function complexity less then 10 
+    - no call console - log - error
+    - bank line before return
+    - no semicolon
+    - quotemark -- single
+    - no using else
+    - no async without await
+    - max line length 130
+    - tab indent 2
+    - no consecutive blank lines
+    - using comma in the last item
+    - no export default
+    - using return early patterns
+    - no implicit dependencies ( callBack, memo, effect )
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- run command: npm run tslint or yarn tslint before commit!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- file tree: 
+ex: page:
+        + logic: 
+                * actions.ts
+                * reducers.ts
+                * api.ts
+        * type:
+                * index.ts 
+                (...)
+        * components: (...).tsx
+        * index.page.tsx
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
