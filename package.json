@@ -37,18 +37,5 @@
     "tslint-react": "^5.0.0",
     "tslint-react-hooks": "^2.2.2",
     "typescript": "4.4.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,vue,tsx}": [
-      "npm run lint",
-      "git add"
-    ]
   }
 }
