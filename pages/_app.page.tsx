@@ -10,7 +10,7 @@ import Layout from '../components/layout/Layout'
 
 function myApp({ Component, pageProps, store }: any) {
 
-  console.log(123)
+  console.log(123123)
 
   const getPaths = (paths: string[]) => {
     const newPaths: string[] = []
