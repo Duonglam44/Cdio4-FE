@@ -11,7 +11,7 @@ import Layout from '../components/layout/Layout'
 function myApp({ Component, pageProps, store }: any) {
 
 
-  console.log(12123)
+  console.log(12123123)
   const getPaths = (paths: string[]) => {
     const newPaths: string[] = []
 
