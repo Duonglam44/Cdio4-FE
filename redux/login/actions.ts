@@ -1,4 +1,4 @@
-import { LoginActions } from '../types'
+import { LoginActions } from './types'
 
 export const Login = (value: string) => {
   return {

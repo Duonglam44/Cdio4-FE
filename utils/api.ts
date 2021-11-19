@@ -7,7 +7,7 @@ interface ApiDataType {
   data?: object
   headers?: { [key: string]: string }
   errorHandler?: (error: any) => void
-  needThrowError: boolean
+  needThrowError?: boolean
 }
 
 const handleThrowError = (
