@@ -11,7 +11,6 @@ interface ILayout {
 
 const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
   const path = window.location.pathname
-  const userID = useSelector((state: RootStateOrAny) => state?.userInfo?.userID)
 
   if (withoutPaths.includes(path)) {
     return <>{children}</>
@@ -31,12 +30,7 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
         <CssBaseline />
           <div className='main-layout--children'>
             {
-              !userID ? (
-                <div className='main-layout-loading'>
-                  loading...
-                </div>
-              ) :
-                children
+              children
             }
           </div>
       </div>

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/Reducer_combiner'
 import { getJwt } from '../../utils/Auth'
-import { GetUserDataThunkAction } from '../../pages/Login/logic/reducers'
+import { GetUserDataThunkAction } from '../../redux/login/reducers'
 
 type Token = string | null
 

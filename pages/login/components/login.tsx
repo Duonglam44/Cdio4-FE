@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import logo from '../../../assets/images/logoGuru.png'
-import bgLogin from '../../../assets/images/bgLogin.png'
+import React, { FunctionComponent } from 'react'
 import Link from 'next/link'
 import { Formik, Form, Field } from 'formik'
 
-const SignIn = () => {
+const LoginFc: FunctionComponent = () => {
+
   return (
     <div className='signIn'>
       <div className='signIn__content'>
@@ -75,4 +74,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default LoginFc
