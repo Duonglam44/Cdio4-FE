@@ -8,58 +8,43 @@ import theme from '../styles/theme'
 import { SnackbarProvider } from 'notistack'
 import Layout from '../components/layout/Layout'
 
-function myApp({ Component, pageProps, store }: any) {
+const getPaths = (paths: string[]) => {
+  const newPaths: string[] = []
 
-
-  console.log(12123123)
-  const getPaths = (paths: string[]) => {
-    const newPaths: string[] = []
-
-    paths.map((path) => {
-      if (path === '/') {
-        newPaths.push(path)
-
-        return
-      }
+  paths.map((path) => {
+    if (path === '/') {
       newPaths.push(path)
-    })
 
-    return newPaths
-  }
+      return
+    }
+    newPaths.push(path)
+  })
 
-  const publicPages = getPaths([])
-  const withoutLayoutPaths = getPaths([])
+  return newPaths
+}
 
-  const notistackRef = React.createRef<SnackbarProvider>()
-  const onClickDismiss = (key: any) => {
-    notistackRef?.current?.closeSnackbar(key)
-  }
+const publicPages = getPaths([])
+const withoutLayoutPaths = getPaths([])
 
+const notistackRef = React.createRef<SnackbarProvider>()
+const onClickDismiss = (key: any) => {
+  notistackRef?.current?.closeSnackbar(key)
+}
+
+function myApp({ Component, pageProps, store }: any) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <NoSsr>
-        <SnackbarProvider
-              ref={notistackRef}
-              action={key => (
-                <Button className='close-notification' onClick={() => onClickDismiss(key)}>
-                  X
-                </Button>
-              )}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              maxSnack={100}
-            >
-              <Layout withoutPaths={withoutLayoutPaths} publicPages={publicPages}>
-                <Component {...pageProps} />
-              </Layout>
-            </SnackbarProvider>
+          <Layout withoutPaths={withoutLayoutPaths} publicPages={publicPages}>
+            <Component {...pageProps} />
+          </Layout>
         </NoSsr>
       </ThemeProvider>
     </Provider>
   )
 }
+
+// const wrapper = createWrapper(makeStore)
 
 export default withRedux(makeStore)(myApp)

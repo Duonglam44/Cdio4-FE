@@ -5,7 +5,7 @@ import rootReducer from './Reducer_combiner'
 /**
  * @param {object} initialState
  */
-export const makeStore = (initialState: object) => {
+export const makeStore = (initialState: any) => {
 
   return createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(thunk)))
 }

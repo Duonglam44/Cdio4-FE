@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-  reactStrictMode: true,
+
+module.exports = () => {
+  const config = {
+    pageExtensions: ['page.tsx'],
+    reactStrictMode: true
+  }
+
+  return config
 }

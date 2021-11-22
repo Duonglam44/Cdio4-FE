@@ -1,7 +1,8 @@
-import { LoginActions } from '../types'
+import { LoginActions } from './types'
 import { GetUserData } from './actions'
-import { UserInfo } from '../../../types'
-import { api } from '../../../utils/api'
+import { UserInfo } from './../../types'
+import { api } from '../../utils/api'
+
 const initialState: UserInfo = {
   _id: '',
   firstName: '',
