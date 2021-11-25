@@ -6,7 +6,7 @@ const defaultTheme = {
       main: '#637381',
     },
     secondary: {
-      main: '#00AB55',
+      main: '#38B6FF',
     },
     error: {
       light: '#e57373',
