@@ -1,4 +1,3 @@
-import jwtDecode from 'jwt-decode'
 const tokenKey = 'Guru-auth'
 
 export function loginWithJwt(jwt: string) {

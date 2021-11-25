@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/Reducer_combiner'
+import { useDispatch } from 'react-redux'
 import { getJwt } from '../../utils/Auth'
-import { GetUserDataThunkAction } from '../../redux/login/reducers'
+// import { GetUserDataThunkAction } from '../../redux/login/actions'
 
 type Token = string | null
 
@@ -14,27 +13,41 @@ const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children, publ
   const dispatch = useDispatch()
 
   useEffect(() => {
-    void checkLogin()
+    // checkLogin()
+    checkAccessUser()
     // eslint-disable-next-line
   }, [])
 
-  const checkLogin = async () => {
-    try {
-      const token: Token = getJwt()
+  // const checkLogin = async () => {
+  //   try {
+  //     const token: Token = getJwt()
 
-      await Promise.resolve(dispatch(GetUserDataThunkAction(token)))
-      setLoading(false)
-    } catch (error) {
-      localStorage.removeItem('access_token')
-      await router.replace('/login')
+  //     if(!token) {
+  //       router.replace('/login')
+
+  //       return
+  //     }
+  //     await Promise.resolve(dispatch(GetUserDataThunkAction(token)))
+  //   } catch (error) {
+  //     localStorage.removeItem('access_token')
+  //     router.replace('/login')
+
+  //     return
+  //   }
+  // }
+
+  const checkAccessUser = () => {
+    if (publicPages.includes(path)) {
 
       return
     }
+
+    void router.replace('/access_denied')
   }
 
-  if (loading) {
-    return <>loading...</>
-  }
+  // if (loading) {
+  //   return <>loading...</>
+  // }
 
   return (
     <>

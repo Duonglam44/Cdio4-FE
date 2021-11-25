@@ -1,0 +1,68 @@
+@import '../../../styles/sass/variable.scss';
+
+.signIn {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    &__content {
+        height: 100%;
+        flex: 3;
+        @include flex(space-between, center);
+        flex-direction: column;
+    }
+    &__background {
+        flex: 4;
+        height: 100%;
+        overflow: hidden;
+        user-select: none;
+    }
+    &__logo {
+        width: 270px;
+    }
+    &__context {
+        width: 400px;
+        height: 65%;
+        @include flex(space-between, center);
+        flex-direction: column;
+        &-form {
+            width: 100%;
+            @include flex(center, flex-start);
+            flex-direction: column;
+            .select-boxes{
+                width: 100%;
+                @include flex(space-between, center);
+                select{
+                    width: 30%;
+                    border: 1px solid #ccc ;
+                    border-radius: 5px;
+                    height: 30px;
+                    outline: none ;
+                    background: none ;
+                }
+            }
+        }
+    }
+    &__option {
+        display: block;
+    }
+    .forgotPassword {
+        margin-bottom: 10px;
+        color: $gray-text-color;
+        background: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &__copyright {
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        text-align: center;
+        p {
+            color: $gray-text-color;
+            font-size: 12px;
+            font-weight: normal;
+            margin: 0;
+        }
+    }
+}
