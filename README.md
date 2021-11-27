@@ -72,3 +72,5 @@ ex: page:
         * components: (...).tsx
         * index.page.tsx
 
+- styles
+-- use 'background' instead of 'background-color'

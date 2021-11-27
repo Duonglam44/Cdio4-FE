@@ -1,4 +1,5 @@
 import axios, { Method } from 'axios'
+import { getJwt } from '.././utils/Auth'
 
 interface ApiDataType {
   path?: string
@@ -13,7 +14,7 @@ interface ApiDataType {
 const handleThrowError = (
   error: any,
   errorHandler: any,
-  needThrowError: any,
+  needThrowError: any
 ) => {
   if (needThrowError) {
     throw error
@@ -33,29 +34,34 @@ export const api = async ({
   headers,
   errorHandler,
   data,
-  needThrowError,
+  needThrowError = true,
 }: ApiDataType) => {
-  try {
-    const token = localStorage.getItem('access_token')
-    if (!token && !headers) {
-      return Promise.reject({ message: 'Missing token' })
-    }
-
-    const paramsAxios = {
-      method,
-      params,
-      data,
-      url: `http://localhost:5000${path}`,
-      headers: headers || {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const result = await axios(paramsAxios)
-
-    return result
-  } catch (error) {
-    handleThrowError(error, errorHandler, needThrowError)
+  const token = getJwt()
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   }
+
+  const paramsAxios = {
+    method,
+    params,
+    data,
+    url: `https://guru-academy-api.herokuapp.com/api/v1${path}`,
+    headers: headers || {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  return new Promise((resolve) => {
+    axios(paramsAxios)
+      .then((res) => {
+        resolve(res.data)
+      })
+      .catch((error) => {
+        handleThrowError(
+          error.response.data.message,
+          errorHandler,
+          needThrowError
+        )
+      })
+  })
 }

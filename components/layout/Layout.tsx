@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
 import { CssBaseline } from '@material-ui/core'
-import { RootStateOrAny, useSelector } from 'react-redux'
 import Auth from '../auth/auth'
 
 interface ILayout {
@@ -16,7 +15,7 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
     return <>{children}</>
   }
 
-  if (path.includes('/login') || path.includes('/access_denied')) {
+  if (path.includes('/login')) {
     return (
       <div className='main-layout'>
         {children}
@@ -29,9 +28,7 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
       <div className='main-layout'>
         <CssBaseline />
           <div className='main-layout--children'>
-            {
-              children
-            }
+            {children}
           </div>
       </div>
     </Auth>
