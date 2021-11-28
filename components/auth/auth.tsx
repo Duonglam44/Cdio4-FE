@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { getJwt } from '../../utils/Auth'
+// import { getJwt } from '../../utils/Auth'
 // import { GetUserDataThunkAction } from '../../redux/login/actions'
 
 type Token = string | null
@@ -36,14 +36,10 @@ const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children, publ
   //   }
   // }
 
-  const checkAccessUser = () => {
-    if (publicPages.includes(path)) {
+  // const checkAccessUser = () => {
+  //   if (publicPages.includes(path)) return
 
-      return
-    }
-
-    void router.replace('/access_denied')
-  }
+  // }
 
   // if (loading) {
   //   return <>loading...</>

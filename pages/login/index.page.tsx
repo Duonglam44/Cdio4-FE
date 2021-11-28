@@ -5,7 +5,6 @@ import { LoginForm } from './components/loginForm'
 import { useRouter } from 'next/router'
 
 const Login: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter()
 
   return (
