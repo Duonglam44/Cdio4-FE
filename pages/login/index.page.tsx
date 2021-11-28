@@ -1,11 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { ButtonType } from '../../types/componentTypes'
 import { FormButton } from '../../components/Form-Button'
 import { LoginForm } from './components/loginForm'
 import { useRouter } from 'next/router'
+import { RootStateOrAny, useSelector } from 'react-redux'
+import { getJwt } from 'utils/Auth'
 
 const Login: React.FC = () => {
   const router = useRouter()
+  const loading = useSelector((state: RootStateOrAny) => state.userInfo.loading)
+
+  useEffect(() => {
+    checkLogin()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
+
+  const checkLogin = () => {
+    const LoginToken = getJwt()
+
+    if (!LoginToken) {
+      return
+    }
+    router.replace('/')
+  }
+
+  if (loading) return (<div>loading...</div>)
 
   return (
     <div className='signIn'>

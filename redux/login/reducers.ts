@@ -1,4 +1,4 @@
-import { LoginActions, SignUpActions } from './types'
+import { LoginActions, SignUpActions, UserDataActions } from './types'
 // import { UserInfo } from './../../types'
 
 const initialState: any = {
@@ -15,15 +15,26 @@ const initialState: any = {
     learningCourses: [],
     createdAt: '',
   },
-  loading: false
+  loading: false,
 }
 
 export const userInfo = (state = initialState, action: any) => {
   switch (action.type) {
-    case LoginActions.SIGN_IN:
+    // login actions
+    case LoginActions.SIGN_IN_REQUEST:
       return {
         ...state,
-        ...action?.userId,
+        loading: action.loading
+      }
+    case LoginActions.SIGN_IN_SUCCEEDED:
+      return {
+        ...state,
+        loading: action.loading
+      }
+    case LoginActions.SIGN_IN_FAILED:
+      return {
+        ...state,
+        loading: action.loading
       }
     //  sign up actions
     case SignUpActions.SIGN_UP_REQUEST:
@@ -43,7 +54,7 @@ export const userInfo = (state = initialState, action: any) => {
         loading: action?.loading,
       }
     //  get use data acitons
-    case LoginActions.GET_USER_DATA:
+    case UserDataActions.GET_USER_DATA:
       return {
         ...state,
         ...action?.payload,

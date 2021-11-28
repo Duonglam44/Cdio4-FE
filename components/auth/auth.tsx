@@ -12,11 +12,11 @@ const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children, publ
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  // useEffect(() => {
     // checkLogin()
-    checkAccessUser()
+    // checkAccessUser()
     // eslint-disable-next-line
-  }, [])
+  // }, [])
 
   // const checkLogin = async () => {
   //   try {

@@ -9,6 +9,7 @@ import { getJwt } from '../../../utils/Auth'
 import { useRouter } from 'next/router'
 import { LoginThunkAction } from '../../../redux/login/thunks'
 import { toast } from 'react-toastify'
+
 const validationSchema = yup.object().shape({
   email: yup
     .string()
@@ -20,7 +21,6 @@ const validationSchema = yup.object().shape({
 export const LoginForm: React.FC = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const userInfo = useSelector(state => state)
 
   const formik = useFormik({
     validationSchema,
@@ -35,20 +35,6 @@ export const LoginForm: React.FC = () => {
       dispatch(LoginThunkAction(values, errorFunc))
     }
   })
-
-  useEffect(() => {
-    checkLogin()
-    // eslint-disable-next-line
-  }, [userInfo])
-
-  const checkLogin = () => {
-    const LoginToken = getJwt()
-
-    if (!LoginToken) {
-      return
-    }
-    router.replace('/')
-  }
 
   return (
     <form
