@@ -10,5 +10,6 @@ export interface UserInfo {
   teachingCourses: string[]
   notifications: string[]
   learningCourses?: string[]
-  createdAt: string
+  createdAt: string,
+  loading: boolean,
 }

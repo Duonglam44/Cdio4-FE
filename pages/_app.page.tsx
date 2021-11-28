@@ -6,8 +6,8 @@ import { NoSsr, ThemeProvider } from '@material-ui/core'
 import theme from '../styles/theme'
 import Layout from '../components/layout/Layout'
 import '../styles/sass/index.scss'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const getPaths = (paths: string[]) => {
   const newPaths: string[] = []

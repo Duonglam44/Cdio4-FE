@@ -1,56 +1,48 @@
-import { LoginActions, LoginParams } from './types'
-import { api } from '../../utils/api'
-import { MethodTypes } from '../../types/MethodTypes'
-import { loginWithJwt } from '../../utils/Auth'
-import { toast } from 'react-toastify'
+import { LoginActions, SignUpActions, UserDataActions } from './types'
 
-export const Logout = (value: string) => {
+// sign in actions
+export const LoginRequest = () => {
   return {
-    type: LoginActions.LOGOUT,
+    type: LoginActions.SIGN_IN_REQUEST,
+    loading: true,
   }
 }
-
+export const LoginSucceeded = () => {
+  return {
+    type: LoginActions.SIGN_IN_SUCCEEDED,
+    loading: false,
+  }
+}
+export const LoginFailed = () => {
+  return {
+    type: LoginActions.SIGN_IN_FAILED,
+    loading: false,
+  }
+}
+// sign up actions
+export const SignUpRequest = () => {
+  return {
+    type: SignUpActions.SIGN_UP_REQUEST,
+    loading: true
+  }
+}
+export const SignUpSucceeded = () => {
+  return {
+    type: SignUpActions.SIGN_UP_SUCCEEDED,
+    createCompleted: true,
+    loading: false
+  }
+}
+export const SignUpFailed = () => {
+  return {
+    type: SignUpActions.SIGN_UP_FAILED,
+    loading: false
+  }
+}
+// get user data actions
 export const GetUserData = (res: any) => {
   return {
-    type: LoginActions.GET_USER_DATA,
+    type: UserDataActions.GET_USER_DATA,
     payload: res,
   }
 }
-
-export const GetUserDataThunkAction =
-  (token: string | null) => async (dispatch: any) => {
-    try {
-      if (!token) {
-        return
-      }
-
-      const res: any = await api({
-        path: '/auth',
-        method: MethodTypes.GET,
-        needThrowError: false,
-      })
-      dispatch(GetUserData({ ...res?.data.user }))
-    } catch (error: any) {
-      throw error
-    }
-  }
-
-export const LoginThunkAction =
-  (params: LoginParams, errorFunc) => async (dispatch: any) => {
-    try {
-      const res: any = await api({
-        path: '/auth/login',
-        method: MethodTypes.POST,
-        needThrowError: false,
-        data: { ...params },
-        errorHandler: (error) => {
-          errorFunc(error)
-        },
-      })
-      toast.success(res.message)
-      loginWithJwt(res?.data.token)
-      dispatch(GetUserDataThunkAction(res?.data.token))
-    } catch (error: any) {
-      throw error
-    }
-  }
