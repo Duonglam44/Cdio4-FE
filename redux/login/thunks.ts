@@ -8,6 +8,9 @@ import {
   SignUpRequest,
   SignUpSucceeded,
   SignUpFailed,
+  LoginRequest,
+  LoginFailed,
+  LoginSucceeded,
 } from './actions'
 
 export const GetUserDataThunkAction =
@@ -29,22 +32,21 @@ export const GetUserDataThunkAction =
 
 export const LoginThunkAction =
   (params: LoginParams, errorFunc) => async (dispatch: any) => {
-    try {
-      const res: any = await api({
-        path: '/auth/login',
-        method: MethodTypes.POST,
-        needThrowError: false,
-        data: { ...params },
-        errorHandler: (error) => {
-          errorFunc(error)
-        },
-      })
-      toast.success(res.message)
-      loginWithJwt(res?.data.token)
-      dispatch(GetUserDataThunkAction(res?.data.token))
-    } catch (error: any) {
-      throw error
-    }
+    dispatch(LoginRequest())
+    const res: any = await api({
+      path: '/auth/login',
+      method: MethodTypes.POST,
+      needThrowError: false,
+      data: { ...params },
+      errorHandler: (error) => {
+        dispatch(LoginFailed())
+        errorFunc(error)
+      },
+    })
+    toast.success(res.message)
+    loginWithJwt(res?.data.token)
+    dispatch(GetUserDataThunkAction(res?.data.token))
+    dispatch(LoginSucceeded())
   }
 
 export const SignUpThunkAction =

@@ -1,5 +1,24 @@
-import { LoginActions, SignUpActions } from './types'
+import { LoginActions, SignUpActions, UserDataActions } from './types'
 
+// sign in actions
+export const LoginRequest = () => {
+  return {
+    type: LoginActions.SIGN_IN_REQUEST,
+    loading: true,
+  }
+}
+export const LoginSucceeded = () => {
+  return {
+    type: LoginActions.SIGN_IN_SUCCEEDED,
+    loading: false,
+  }
+}
+export const LoginFailed = () => {
+  return {
+    type: LoginActions.SIGN_IN_FAILED,
+    loading: false,
+  }
+}
 // sign up actions
 export const SignUpRequest = () => {
   return {
@@ -23,7 +42,7 @@ export const SignUpFailed = () => {
 // get user data actions
 export const GetUserData = (res: any) => {
   return {
-    type: LoginActions.GET_USER_DATA,
+    type: UserDataActions.GET_USER_DATA,
     payload: res,
   }
 }
