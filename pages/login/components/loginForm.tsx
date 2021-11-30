@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Input } from '../../../components/input'
 import { FormButton } from '../../../components/Form-Button'
 import { ButtonType } from '../../../types/componentTypes'
-import { getJwt } from '../../../utils/Auth'
-import { useRouter } from 'next/router'
 import { LoginThunkAction } from '../../../redux/login/thunks'
 import { toast } from 'react-toastify'
 
@@ -20,7 +18,6 @@ const validationSchema = yup.object().shape({
 
 export const LoginForm: React.FC = () => {
   const dispatch = useDispatch()
-  const router = useRouter()
 
   const formik = useFormik({
     validationSchema,

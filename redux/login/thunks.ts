@@ -20,7 +20,7 @@ export const GetUserDataThunkAction =
         return
       }
       const res: any = await api({
-        path: '/auth',
+        path: '/users/all-info',
         method: MethodTypes.GET,
         needThrowError: false,
       })
