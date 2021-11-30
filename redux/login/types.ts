@@ -14,6 +14,10 @@ export enum SignUpActions {
   SIGN_UP_FAILED = 'SIGN_UP_FAILED',
 }
 
+export enum LogoutActions {
+  LOGOUT_SUCCEEDED = 'LOGOUT_SUCCEEDED',
+}
+
 export interface LoginParams {
   email: string
   password: string

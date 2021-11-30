@@ -1,0 +1,83 @@
+@import "../../styles/sass/variable.scss";
+
+.footer {
+  background: black;
+  &-top {
+    .container {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+  &__col {
+    text-align: left;
+    &-header {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 25px;
+      padding: 0;
+      text-transform: capitalize;
+    }
+    &-menu {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      &-text {
+        padding: 3px 0;
+        margin-bottom: 3px;
+        > a {
+          color: #fff;
+          font-weight: normal;
+          text-transform: capitalize;
+          transition: all ease 0.3s;
+          &:hover {
+            color: $secondary-text-color;
+          }
+        }
+      }
+      &-img {
+        width: 150px;
+        height: 45px;
+        margin-bottom: 10px;
+        object-fit: fill;
+      }
+    }
+  }
+  &-bottom {
+    display: flex;
+    align-items: center;
+    & .container {
+      @include flex(space-between, center);
+    }
+    & .footer_subMenu {
+      @include flex(flex-start, center);
+    }
+    &-link > a,
+    &-inc,
+    .social-link > a{
+      color: #fff !important;
+      margin: 10px;
+      display: inline-block;
+      font-weight: normal;
+    }
+    &-link a:hover {
+      color: $secondary-text-color !important;
+    }
+    .social-link{
+      @include flex();
+      width: 30px;
+      height: 30px;
+      margin-left: 5px;
+      padding: 0;
+      font-size: 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #fff;
+      color: #000 !important;
+      text-align: center;
+      line-height: 30px;
+    }
+  }
+}
