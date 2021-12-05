@@ -12,7 +12,8 @@ export const Header: React.FC = () => {
   const [isShowOption, setIsShowOption] = useState<boolean>(false)
   const global = useSelector((state: RootStateOrAny) => state.globalReducer)
 
-  headerItems[0]?.subItems?.push(...(global?.categories as []))
+  // headerItems[0]?.subItems?.push(...(global?.categories as []))
+
   window.onscroll = () => {
     const headerElement = document.getElementById('header')
     const isStickyHeader =
@@ -41,7 +42,7 @@ export const Header: React.FC = () => {
         <div className='container header__container'>
           <div className='header__img-wrapper'>
             <Link href='/' passHref={true}>
-              <img src='./assets/images/Logo.png' alt='logo Guru Academy' />
+              <img src='/assets/images/Logo.png' alt='logo Guru Academy' />
             </Link>
           </div>
           <div className='header__menu'>

@@ -1,5 +1,5 @@
 {
-  "name": "front-end-v2",
+  "name": "Guru_Academy_v2",
   "private": true,
   "scripts": {
     "dev": "next dev",

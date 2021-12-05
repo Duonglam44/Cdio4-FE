@@ -1,0 +1,259 @@
+@import "../../../styles/sass/variable.scss";
+
+.course {
+  .title-page {
+    margin-bottom: 30px;
+  }
+  padding: 30px 0;
+  min-height: calc(100vh - 362px);
+  &__top {
+    text-align: left;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 30%;
+      height: 3px;
+      bottom: -2px;
+      left: 0;
+      background-color: #ffde59;
+    }
+    h2 {
+      font-size: 25px;
+    }
+  }
+  &__content {
+    &-menu {
+      padding: 20px 30px;
+      &-item {
+        text-align: center;
+        padding: 20px 0;
+        border-radius: 20px;
+        font-size: 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        user-select: none;
+        text-transform: capitalize;
+        border: 1px solid #ccc;
+        color: #a3a3a3;
+        &.active {
+          background: $secondary-text-color;
+          color: #fff;
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.newCourse {
+  text-align: left;
+  padding: 20px 30px;
+  .upload-img {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 25%;
+  }
+  .error {
+    color: red;
+  }
+  .input-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    label {
+      text-transform: capitalize;
+      font-weight: 600;
+      margin: 0 !important;
+    }
+    .input {
+      width: 70%;
+      outline: none;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+      }
+    }
+    .input-select {
+      width: 50%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background: #fff;
+      text-transform: capitalize;
+      padding: 5px 10px;
+      cursor: pointer;
+      outline: none;
+      display: block;
+    }
+  }
+  .radio-group {
+    display: grid;
+    grid-template-columns: repeat(5, 145px);
+    column-gap: 30px;
+    row-gap: 20px;
+    margin-bottom: 30px;
+    .radio {
+      span {
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        text-align: center;
+        padding: 15px 0;
+        cursor: pointer;
+        user-select: none;
+      }
+      input {
+        display: none;
+      }
+      input:checked ~ span {
+        background: $secondary-text-color;
+        color: #fff;
+        border: none;
+      }
+    }
+  }
+  .big-label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+}
+
+.chapterCreate {
+  text-align: left;
+  padding: 20px 30px;
+  & .newChapter {
+    text-transform: none;
+    
+  }
+  .chapter {
+    &__header {
+      margin-bottom: 25px;
+      @include flex(space-between, center);
+      h4 {
+        width: fit-content;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+    }
+    &__body {
+      margin-left: 20px;
+      transition: ease 3s;
+      overflow: hidden;
+      height: fit-content;
+      &.hidden {
+        height: 0px;
+      }
+    }
+    &__footer {
+      text-align: right;
+      button {
+        width: 100px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+.button-toggle {
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}
+.popup_wrap {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  display: none;
+  z-index: 10;  
+  &.show {
+    display: block;
+  }
+  .popup_item {
+    padding: 20px 30px;
+    div {
+      width: 130px;
+      height: 15px;
+      text-transform: none;
+      @include flex(flex-start, center);
+    }
+  }
+}
+
+.controls {
+  text-align: right;
+  .button {
+    width: 110px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-left: 20px;
+    &--save {
+      color: white;
+    }
+    &--next {
+      font-weight: 500;
+    }
+  }
+}
+
+.lessonItem {
+  margin-bottom: 20px;
+  h4 {
+    margin: 10px 0;
+  }
+  &-header {
+    @include flex(space-between, center);
+  }
+  &-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  &-desc {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+  }
+  &-box {
+    &__wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 145px);
+      gap: 30px;
+    }
+    & button {
+      height: 50px;
+      font-weight: normal;
+      color: #000;
+      text-transform: none;
+    }
+  }
+  &-modal {
+    max-width: 500px;
+    margin: auto ;
+    @include flex();
+  }
+  &-modal-content {
+    width: 500px;
+    padding: 30px;
+    > button {
+      padding: 10px 30px;
+    }
+  }
+}

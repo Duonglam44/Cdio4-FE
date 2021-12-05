@@ -1,4 +1,5 @@
 import { GetCategories } from './types'
+import { convertArrayObjectToObject } from '../../helpers/Convert_Array_To_Object'
 
 const initialState = {
   categories: [],
@@ -16,7 +17,7 @@ export const globalReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: action.loading,
-        categories: action.categories
+        categories: convertArrayObjectToObject(action.categories, '_id')
       }
     case GetCategories.GET_CATEGORIES_FAILED:
       return {
