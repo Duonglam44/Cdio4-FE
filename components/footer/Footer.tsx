@@ -17,7 +17,7 @@ export const Footer = () => {
         <div className='container'>
           <Grid container spacing={3} style={{ marginRight: '0!important' }}>
             {footerContent.map((row, idx) => (
-              <Grid sm={6} md={3} lg={3} key={idx}>
+              <Grid item sm={6} md={3} lg={3} key={idx}>
                 <div className='footer__col'>
                   <h2 className='footer__col-header'>{row?.title}</h2>
                   <div className='footer__col-menu'>
@@ -66,19 +66,19 @@ export const Footer = () => {
           </div>
           <div className='footer_subMenu'>
             <div className='nav-link social-link'>
-              <Link href='https://fb.com' passHref={true}>
+              <a href='https://fb.com'>
                 <AiOutlineFacebook />
-              </Link>
+              </a>
             </div>
             <div className='nav-link social-link'>
-              <Link href='https://fb.com' passHref={true}>
+              <a href='https://fb.com'>
                 <AiFillTwitterSquare />
-              </Link>
+              </a>
             </div>
             <div className='nav-link social-link'>
-              <Link href='https://fb.com' passHref={true}>
+              <a href='https://fb.com'>
                 <AiFillGithub />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -147,10 +147,10 @@ const footerContent = [
     title: 'Contact',
     menu: [
       {
-        img: './assets/images/apple.png',
+        img: '/assets/images/apple.png',
       },
       {
-        img: './assets/images/ggplay.png',
+        img: '/assets/images/ggplay.png',
       },
     ],
   },

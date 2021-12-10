@@ -57,6 +57,7 @@
     "jsx-no-lambda": false,
     "trailing-comma": false,
     "object-literal-key-quotes": [false, "as-needed"],
-    "no-string-literal": false
+    "no-string-literal": false,
+    "no-shadowed-variable": false
   }
 }

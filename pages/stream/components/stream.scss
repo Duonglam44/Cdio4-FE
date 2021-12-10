@@ -1,0 +1,68 @@
+.stream {
+  background-color: red;
+  display:flex;
+  height: 100%;
+  width: 100%;
+}
+.stream-navigator {
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+  width: 8%;
+
+  .stream-navigator__logo {
+    background-color: wheat;
+  }
+  .stream-navigator__logo-navigators {
+    display: flex;
+    flex-direction: column;
+  }
+  .stream-navigator__profile {
+
+  }
+
+}
+
+.stream-main__stream {
+}
+.stream-main__ {
+}
+.stream-title {
+}
+.stream-main__ {
+}
+.stream-name--room-id {
+}
+.stream-main__info-stream {
+}
+.stream-main__record-time {
+}
+.stream-main__participate {
+}
+.stream-main__video-call {
+}
+.stream-main__author-stream {
+}
+.stream-chat--volume {
+}
+.stream-chat__button-option {
+}
+.stream-chat--button-leave {
+}
+.stream-chat__container {
+  background-color: yellowgreen;
+}
+.stream-chat__show-message {
+}
+.stream-chat__show-message {
+}
+.stream-chat--show-logo {
+}
+.stream-chat--show-message {
+}
+.stream-chat__name {
+}
+.stream-chat__mess-container {
+}
+.stream-chat__sent-message {
+}
