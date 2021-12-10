@@ -43,7 +43,7 @@ export const SignUpFailed = () => {
 export const logout = () => {
   return {
     type: LogoutActions.LOGOUT_SUCCEEDED,
-    loading: true
+    loading: false
   }
 }
 // get user data actions

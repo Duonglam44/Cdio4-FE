@@ -1,5 +1,5 @@
 {
-  "name": "front-end-v2",
+  "name": "Guru_Academy_v2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -17,6 +17,7 @@
     "@mui/material": "^5.2.2",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.24.0",
+    "firebase": "^9.6.0",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "next": "12.0.3",

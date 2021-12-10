@@ -1,5 +1,6 @@
 import { ButtonType } from '../../types/componentTypes'
 import { createStyles, makeStyles } from '@material-ui/styles'
+import { Button } from '@material-ui/core'
 
 type FormButton = {
   className?: string
@@ -7,6 +8,7 @@ type FormButton = {
   onClick?: (e: any) => void
   disabled?: boolean
   children?: any,
+  variant?: any
 }
 
 export const FormButton = ({
@@ -15,14 +17,15 @@ export const FormButton = ({
   onClick,
   disabled = false,
   children,
+  variant,
 }: FormButton) => {
 
   const classes = useStyles()
 
   return (
-    <button type={type} onClick={onClick} className={`${classes.button} ${className}`} disabled={disabled}>
+    <Button variant={variant} type={type} onClick={onClick} className={`${classes.button} ${className}`} disabled={disabled}>
       {children}
-    </button>
+    </Button>
   )
 }
 
@@ -40,6 +43,9 @@ const useStyles = makeStyles((theme: any) =>
       fontWeight: 500,
       textTransform: 'capitalize',
       cursor: 'pointer',
+      '&:hover': {
+        background: theme.palette.secondary.main
+      }
     }
   })
 )

@@ -11,7 +11,8 @@ type InputProps = {
   className?: string
   error?: string
   errorClassName?: string
-  label?: string
+  label?: string,
+  wrapperClass?: string
 }
 
 export const Input = ({
@@ -25,11 +26,12 @@ export const Input = ({
   error,
   errorClassName,
   label,
+  wrapperClass,
 }: InputProps) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.wrapper}>
+    <div className={`${classes.wrapper} ${wrapperClass}`}>
       <label htmlFor={name} className={classes.label}>
         {label}
       </label>
