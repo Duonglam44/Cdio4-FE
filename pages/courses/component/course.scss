@@ -190,6 +190,12 @@
       text-transform: none;
       @include flex(flex-start, center);
     }
+    .hiddenInput {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      z-index: 0;
+    }
   }
 }
 
@@ -254,6 +260,36 @@
     padding: 30px;
     > button {
       padding: 10px 30px;
+    }
+  }
+}
+
+.modalAttachment {
+  max-width: 800px;
+  margin: auto;
+  &-paper{
+    padding: 20px 30px;
+  }
+  &-field {
+    width: 100%;
+    margin-bottom: 15px!important;
+    outline: none;
+    padding: 10px 5px;
+    &.hidden {
+      position: absolute;
+      z-index: 0;
+      opacity: 0;
+      width: 100%;
+    }
+  }
+  & .chooseFile-btn {
+    text-transform: none;
+    color: $secondary-text-color;
+    border-color: $secondary-text-color;
+    margin-bottom: 10px;
+    &.error {
+      color: red;
+      border-color: red;
     }
   }
 }

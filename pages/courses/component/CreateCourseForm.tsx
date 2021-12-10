@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { Input } from '../../../components/input'
@@ -8,6 +8,7 @@ import { ButtonType } from '../../../types/componentTypes'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import { BsUpload } from 'react-icons/bs'
 import { createCourse } from '../../../redux/courses/thunks'
+import { uploadFile } from '../../../redux/global/thunks'
 
 const validationSchema = yup.object().shape({
   title: yup.string().required(),
@@ -22,7 +23,11 @@ export const CreateCourseForm = () => {
     (state: RootStateOrAny) => state.globalReducer.categories
   )
   const dispatch = useDispatch()
-  const currentCreateCourseId = useSelector((state: RootStateOrAny) => state.courseReducer.currentCreateCourseId)
+  const state = useSelector((state: RootStateOrAny) => state)
+
+  const uploadedUrl = state.globalReducer.uploadedUrl
+
+  const currentCreateCourseId = state.courseReducer.currentCreateCourseId
 
   const formik = useFormik({
     validationSchema,
@@ -34,13 +39,19 @@ export const CreateCourseForm = () => {
       discount: '',
       categoryId: '',
       topicId: '',
+      image: ''
     },
     onSubmit: (value) => {
       dispatch(createCourse(value))
     },
   })
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik
+  const { handleSubmit, handleChange, setFieldValue, values, errors, touched } = formik
+
+  useEffect(() => {
+    setFieldValue('image', uploadedUrl)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadedUrl])
 
   const topics = useMemo(
     () => categories[values.categoryId]?.topics,
@@ -74,13 +85,20 @@ export const CreateCourseForm = () => {
           >
             <BsUpload />
           </FormButton>
+          {
+            uploadedUrl &&
+              <img src={uploadedUrl} alt='course image' style={{ width: '150px', height: '150px' }}/>
+          }
         </div>
         <input
           type='file'
           id='image'
           name='image'
           style={{ display: 'none' }}
-          onChange={handleChange}
+          onChange={(e) => {
+            if (!e?.target?.files?.[0]) return
+            dispatch(uploadFile(e?.target?.files[0], () => { alert('123') }))
+          }}
         />
 
         <div className='input-box'>

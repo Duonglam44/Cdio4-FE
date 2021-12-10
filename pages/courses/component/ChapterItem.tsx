@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
-import { FormButton } from '@components/Form-Button'
-import { ButtonType } from 'types/componentTypes'
 import { LessonItem } from './LessonItem'
 import { PopupChapter } from './PopupChapter'
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -18,10 +16,11 @@ export const ChapterItem: React.FC<IChapter> = ({ idx }) => {
   const currentCreateChapterIds = state.chapterReducer.currentCreateChapterIds
 
   useEffect(() => {
-    if (!state.lessonReducer.currentCreatedLessonIds) return
-    setLessons([state.lessonReducer.currentCreatedLessonIds])
+    if (!state.lessonReducer.currentCreatedLessonId) return
+    setLessons([...lessons, state.lessonReducer.currentCreatedLessonId])
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state])
+  }, [state.lessonReducer.currentCreatedLessonId])
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +36,7 @@ export const ChapterItem: React.FC<IChapter> = ({ idx }) => {
   const { handleSubmit } = formik
 
   return (
-    <>
+    <div>
       <form className='chapter' onSubmit={handleSubmit}>
         <div className='chapter__header'>
           <h4
@@ -51,21 +50,14 @@ export const ChapterItem: React.FC<IChapter> = ({ idx }) => {
         </div>
         <div className={`chapter__body ${collapseChapter && 'hidden'}`}>
           <div className='chapter__body-item lesson' style={{ minHeight: '0' }}>
-            {lessons?.map((item, idx) => (
-              <LessonItem key={item as string}/>
+            {lessons.map(item => (
+              <LessonItem key={item as string}
+                lessonId={item}
+              />
             ))}
-          </div>
-          <div className='chapter__footer'>
-            <FormButton
-              variant='contained'
-              className='save--button'
-              type={ButtonType.SUBMIT}
-            >
-              save
-            </FormButton>
           </div>
         </div>
       </form>
-    </>
+    </div>
   )
 }

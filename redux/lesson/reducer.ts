@@ -1,8 +1,10 @@
-import { CreateLesson } from './types'
+import { CreateLesson, CreateChapter } from './types'
 
 const initialState = {
   createLoading: null!,
+  currentCreatedLessonId: '',
   currentCreatedLessonIds: [],
+  currentCreateAttachmentId: '',
 }
 
 export const lessonReducer = (state = initialState, action) => {
@@ -16,12 +18,29 @@ export const lessonReducer = (state = initialState, action) => {
       return {
         ...state,
         createLoading: action.createLoading,
+        currentCreatedLessonId: action.currentCreatedLessonId,
         currentCreatedLessonIds: [
           ...state.currentCreatedLessonIds,
           action.currentCreatedLessonId,
         ],
       }
     case CreateLesson.CREATE_LESSON_FAILED:
+      return {
+        ...state,
+        createLoading: action.createLoading,
+      }
+    case CreateChapter.CREATE_ATTACHMENT_REQUEST:
+      return {
+        ...state,
+        createLoading: action.createLoading,
+      }
+    case CreateChapter.CREATE_ATTACHMENT_SUCCEEDED:
+      return {
+        ...state,
+        createLoading: action.createLoading,
+        currentCreateAttachmentId: action.currentCreateAttachmentId
+      }
+    case CreateChapter.CREATE_ATTACHMENT_FAILED:
       return {
         ...state,
         createLoading: action.createLoading,

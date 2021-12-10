@@ -11,7 +11,9 @@ export const ChapterCreate = () => {
   const [chapters, setChapters] = useState<string[]>([])
   const dispatch = useDispatch()
 
-  const currentCreateChapterId: string = useSelector((state: RootStateOrAny) => state.chapterReducer.currentCreateChapterId)
+  const state = useSelector((state: RootStateOrAny) => state)
+  const currentCreateChapterId  = state.chapterReducer.currentCreateChapterId
+  const currentCreateCourseId = state.courseReducer.currentCreateCourseId
 
   useEffect(() => {
     if (!currentCreateChapterId) return
@@ -23,9 +25,19 @@ export const ChapterCreate = () => {
   const handleCreateChapter = () => {
     const params = {
       title: `chapter ${chapters.length + 1}`,
-      courseId: '61acf3c1caa49c85003b2481',
+      courseId: currentCreateCourseId,
     }
     dispatch(createChapter(params))
+  }
+
+  const handleCreateCourse = () => {
+    if (!currentCreateCourseId) {
+      alert('Your have to create course first!')
+
+      return
+    }
+
+    handleCreateChapter()
   }
 
   return (
@@ -36,9 +48,7 @@ export const ChapterCreate = () => {
       ))}
 
       <Button variant='outlined' className='newChapter'
-        onClick={() => {
-          handleCreateChapter()
-        }}
+        onClick={handleCreateCourse}
       >
         <CgMenuGridR />
         Add New Chapter
@@ -47,9 +57,6 @@ export const ChapterCreate = () => {
       <div className='controls'>
         <FormButton className='button button--next' type={ButtonType.SUBMIT}>
           {'< prev'}
-        </FormButton>
-        <FormButton className='button button--save' type={ButtonType.BUTTON}>
-          save
         </FormButton>
         <FormButton className='button button--next'>{'next >'}</FormButton>
       </div>

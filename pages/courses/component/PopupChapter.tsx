@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Paper, Button } from '@material-ui/core'
 import { AiFillPlusSquare, AiFillDelete } from 'react-icons/ai'
 import { HiPlus } from 'react-icons/hi'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createLesson } from '../../../redux/lesson/thunks'
 
 interface IPopupChapter {
@@ -16,7 +16,7 @@ export const PopupChapter: React.FC<IPopupChapter> = ({ chapterId }) => {
   const handleCreateLesson = () => {
     const params = {
       title: 'lesson',
-      chapterId: `${chapterId}`
+      chapterId: `${chapterId}`,
     }
     dispatch(createLesson(params))
   }
@@ -33,7 +33,15 @@ export const PopupChapter: React.FC<IPopupChapter> = ({ chapterId }) => {
           <HiPlus />
         </Button>
         <Paper elevation={3} className={`${isPopup && 'show'} popup_wrap`}>
-          <Button className='popup_item' onClick={() => { handleCreateLesson() }}>
+          <Button className='popup_item'>
+            <div>Save This Chapter</div>
+          </Button>
+          <Button
+            className='popup_item'
+            onClick={() => {
+              handleCreateLesson()
+            }}
+          >
             <div>
               <AiFillPlusSquare />
               Add lesson

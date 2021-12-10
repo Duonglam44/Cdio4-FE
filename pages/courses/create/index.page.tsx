@@ -31,8 +31,8 @@ const CourseCreate = () => {
               ))}
             </Grid>
             <Grid item xs={9} className='course__content-main'>
-              {/* <CreateCourseForm /> */}
-              <ChapterCreate />
+              { tab === 1 && <CreateCourseForm /> }
+              { tab === 2 && <ChapterCreate /> }
             </Grid>
           </Grid>
         </div>
