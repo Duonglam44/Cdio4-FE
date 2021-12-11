@@ -8,11 +8,13 @@ import Layout from '../components/layout/Layout'
 import '../styles/sass/index.scss'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Header } from '../components/header/Header'
+import { Footer } from '../components/footer/Footer'
 
 const getPaths = (paths: string[]) => {
   const newPaths: string[] = []
 
-  paths.map((path) => {
+  paths.map(path => {
     if (path === '/') {
       newPaths.push(path)
 
@@ -33,9 +35,11 @@ function myApp({ Component, pageProps, store }: any) {
       <ThemeProvider theme={theme}>
         <NoSsr>
           <ToastContainer />
+          <Header />
           <Layout withoutPaths={withoutLayoutPaths} publicPages={publicPages}>
             <Component {...pageProps} />
           </Layout>
+          <Footer />
         </NoSsr>
       </ThemeProvider>
     </Provider>

@@ -1,4 +1,4 @@
-import { LoginActions, SignUpActions, UserDataActions } from './types'
+import { LoginActions, SignUpActions, UserDataActions, LogoutActions } from './types'
 
 // sign in actions
 export const LoginRequest = () => {
@@ -36,6 +36,13 @@ export const SignUpSucceeded = () => {
 export const SignUpFailed = () => {
   return {
     type: SignUpActions.SIGN_UP_FAILED,
+    loading: false
+  }
+}
+//  logout action
+export const logout = () => {
+  return {
+    type: LogoutActions.LOGOUT_SUCCEEDED,
     loading: false
   }
 }

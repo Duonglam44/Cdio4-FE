@@ -1,0 +1,171 @@
+@import "../../styles/sass/variable.scss";
+
+.header {
+  width: 100%;
+  border: 1px solid $light-gray-color;
+  background: #fff;
+  box-shadow: 0px 2px 18px 0px #ccc;
+  height: 80px;
+  z-index: 10;
+  transition: all ease 0.5s;
+  &--sticky {
+    position: fixed;
+    top: -80px;
+    left: 0;
+    transform: translateY(80px);
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  &__img-wrapper {
+    width: 150px;
+    height: 60px;
+    cursor: pointer;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__menu {
+    flex-grow: 1;
+    margin-left: 25px;
+    @include flex(flex-start, center);
+    &-item {
+      margin: 0 10px;
+      padding: 10px 0;
+      &:hover {
+        & > div {
+          display: block;
+        }
+      }
+    }
+    &-link {
+      color: $main-text-color;
+      font-weight: normal;
+      transition: all ease 0.3s;
+      &:hover {
+        color: $secondary-text-color;
+      }
+      &-menu {
+        position: absolute;
+        top: 100%;
+        text-align: left;
+        border: 1px solid #ccc;
+        width: 150px;
+        background-color: white;
+        display: none;
+      }
+      &-sub {
+        padding: 10px 5px;
+        transition: ease 0.4s;
+        display: block;
+        &:hover {
+          color: white;
+          background-color: $secondary-text-color;
+        }
+      }
+    }
+    &-form {
+      display: flex;
+      align-items: center;
+      position: relative;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      overflow: hidden;
+      height: 35px;
+      input {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        padding: 0 10px 0 40px;
+      }
+      &-button {
+        position: absolute;
+        height: 100%;
+        width: 40px;
+        line-height: 30px;
+        font-size: 20px;
+        &:hover {
+          color: $secondary-text-color;
+        }
+      }
+    }
+  }
+  &__search {
+    display: flex;
+    align-items: center;
+    &-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+      color: $main-text-color;
+      cursor: pointer;
+
+      &:hover {
+        color: $secondary-text-color;
+      }
+    }
+    &-signIn {
+      font-size: $text--lg;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $main-text-color;
+      transition: all ease 0.5s;
+      position: relative;
+      a {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+    }
+  }
+  &__avatar-wrap {
+    margin-left: 10px;
+    position: relative;
+  }
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+.userOptions {
+  position: absolute;
+  top: 140%;
+  right: 0;
+  width: 150px;
+  height: fit-content;
+  text-align: center;
+  @include flex(flex-start);
+  flex-direction: column;
+  z-index: 10;
+}
+.userOption {
+  width: 100%;
+  height: 35px;
+  text-align: left;
+  font-weight: normal!important;
+  text-transform: none!important;
+  &:not(:last-child) {
+    border-bottom: 0.5px solid #ddd;
+  }
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      color: $secondary-text-color;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode'
 const tokenKey = 'Guru-auth'
 
 export function loginWithJwt(jwt: string) {
@@ -9,5 +10,13 @@ export function logout() {
 }
 
 export function getJwt() {
-  return localStorage.getItem(tokenKey)
+  try {
+    const token = localStorage.getItem(tokenKey)
+    const decodeToken = jwtDecode(token!)
+    if (!decodeToken) return
+
+    return token
+  } catch (error) {
+    localStorage.removeItem(tokenKey)
+  }
 }

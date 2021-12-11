@@ -1,5 +1,11 @@
-import { LoginActions, SignUpActions, UserDataActions } from './types'
+import {
+  LoginActions,
+  SignUpActions,
+  UserDataActions,
+  LogoutActions,
+} from './types'
 // import { UserInfo } from './../../types'
+import { logout } from '../../utils/Auth'
 
 const initialState: any = {
   data: {
@@ -24,17 +30,17 @@ export const userInfo = (state = initialState, action: any) => {
     case LoginActions.SIGN_IN_REQUEST:
       return {
         ...state,
-        loading: action.loading
+        loading: action.loading,
       }
     case LoginActions.SIGN_IN_SUCCEEDED:
       return {
         ...state,
-        loading: action.loading
+        loading: action.loading,
       }
     case LoginActions.SIGN_IN_FAILED:
       return {
         ...state,
-        loading: action.loading
+        loading: action.loading,
       }
     //  sign up actions
     case SignUpActions.SIGN_UP_REQUEST:
@@ -53,7 +59,15 @@ export const userInfo = (state = initialState, action: any) => {
         ...state,
         loading: action?.loading,
       }
-    //  get use data acitons
+    // logout action
+    case LogoutActions.LOGOUT_SUCCEEDED:
+      logout()
+
+      return {
+        ...state,
+        loading: action?.loading,
+      }
+    //  get use data actions
     case UserDataActions.GET_USER_DATA:
       return {
         ...state,
