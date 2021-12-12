@@ -4,6 +4,7 @@ import { AiFillPlusSquare, AiFillDelete } from 'react-icons/ai'
 import { HiPlus } from 'react-icons/hi'
 import { useDispatch } from 'react-redux'
 import { createLesson } from '../../../redux/lesson/thunks'
+import { deleteChapter } from '../../../redux/chapter/thunks'
 
 interface IPopupChapter {
   chapterId: string
@@ -16,6 +17,7 @@ export const PopupChapter: React.FC<IPopupChapter> = ({ chapterId }) => {
   const handleCreateLesson = () => {
     const params = {
       title: 'lesson',
+      url: 'none',
       chapterId: `${chapterId}`,
     }
     dispatch(createLesson(params))
@@ -26,19 +28,19 @@ export const PopupChapter: React.FC<IPopupChapter> = ({ chapterId }) => {
       <div style={{ position: 'relative' }}>
         <Button
           className='button-toggle'
-          onClick={(_) => {
+          onClick={(e) => {
+            e.stopPropagation()
             setIsPopup(!isPopup)
+            window.addEventListener('click', () => { setIsPopup(false) })
           }}
         >
           <HiPlus />
         </Button>
         <Paper elevation={3} className={`${isPopup && 'show'} popup_wrap`}>
-          <Button className='popup_item'>
-            <div>Save This Chapter</div>
-          </Button>
           <Button
             className='popup_item'
             onClick={() => {
+              setIsPopup(false)
               handleCreateLesson()
             }}
           >
@@ -51,6 +53,10 @@ export const PopupChapter: React.FC<IPopupChapter> = ({ chapterId }) => {
             className='popup_item'
             variant='contained'
             style={{ background: '#cd1010', color: '#fff' }}
+            onClick={(e) => {
+              setIsPopup(false)
+              dispatch(deleteChapter(chapterId))
+            }}
           >
             <div>
               <AiFillDelete />

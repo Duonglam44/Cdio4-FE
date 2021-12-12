@@ -1,9 +1,10 @@
-import { CreateCourse } from './types'
+import { CreateCourse, GetCourseById } from './types'
 
 const initialState = {
   courses: [],
   loading: null!,
-  currentCreateCourseId: ''
+  currentCreateCourseId: '',
+  courseItem: {}
 }
 
 export const courseReducer = (state = initialState, action: any) => {
@@ -17,9 +18,26 @@ export const courseReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: action.loading,
-        currentCreateCourseId: action.currentCreateCourseId
+        currentCreateCourseId: action.currentCreateCourseId,
       }
     case CreateCourse.CREATE_COURSE_FAILED:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    //
+    case GetCourseById.GET_COURSE_REQUEST:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    case GetCourseById.GET_COURSE_SUCCEEDED:
+      return {
+        ...state,
+        loading: action.loading,
+        courseItem: action.courseItem
+      }
+    case GetCourseById.GET_COURSE_FAILED:
       return {
         ...state,
         loading: action.loading,

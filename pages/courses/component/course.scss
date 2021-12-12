@@ -134,18 +134,29 @@
   padding: 20px 30px;
   & .newChapter {
     text-transform: none;
-    
   }
   .chapter {
     &__header {
       margin-bottom: 25px;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: capitalize;
       @include flex(space-between, center);
+      & > div {
+        @include flex();
+      }
       h4 {
         width: fit-content;
         cursor: pointer;
+      }
+      .rename-textArea {
+        resize: none;
+        border: 1px solid #000;
+        border-radius: 3px;
         font-size: 18px;
-        font-weight: 600;
-        text-transform: capitalize;
+        height: 30px;
+        padding: 5px;
+        overflow: hidden;
       }
     }
     &__body {
@@ -178,7 +189,7 @@
   flex-direction: column;
   max-width: 200px;
   display: none;
-  z-index: 10;  
+  z-index: 10;
   &.show {
     display: block;
   }
@@ -222,7 +233,27 @@
     margin: 10px 0;
   }
   &-header {
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
     @include flex(space-between, center);
+    & > div {
+      @include flex();
+    }
+    h5 {
+      width: fit-content;
+      cursor: pointer;
+    }
+    .rename-textArea {
+      resize: none;
+      border: 1px solid #000;
+      border-radius: 3px;
+      font-size: 18px;
+      height: 30px;
+      padding: 5px;
+      overflow: hidden;
+    }
   }
   &-title {
     font-size: 14px;
@@ -243,8 +274,40 @@
       grid-template-columns: repeat(4, 145px);
       gap: 30px;
     }
+    & .item {
+      text-align: center;
+      position: relative;
+      &:hover {
+        & .delete-icon {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+    & .delete-icon {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 23px;
+      height: 23px;
+      border: 1px solid;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: ease .3s;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      &:hover {
+        background-color: red;
+        color: #fff;
+      }
+    }
+    & a {
+      display: inline-block;
+      width: 100%;
+      line-height: 35px;
+    }
     & button {
-      height: 50px;
       font-weight: normal;
       color: #000;
       text-transform: none;
@@ -252,7 +315,7 @@
   }
   &-modal {
     max-width: 500px;
-    margin: auto ;
+    margin: auto;
     @include flex();
   }
   &-modal-content {
@@ -267,12 +330,12 @@
 .modalAttachment {
   max-width: 800px;
   margin: auto;
-  &-paper{
+  &-paper {
     padding: 20px 30px;
   }
   &-field {
     width: 100%;
-    margin-bottom: 15px!important;
+    margin-bottom: 15px !important;
     outline: none;
     padding: 10px 5px;
     &.hidden {

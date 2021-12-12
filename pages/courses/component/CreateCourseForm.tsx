@@ -2,7 +2,7 @@ import { useMemo, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { Input } from '../../../components/input'
-import { TextareaAutosize } from '@material-ui/core'
+import { TextareaAutosize, Snackbar } from '@material-ui/core'
 import { FormButton } from '@components/Form-Button'
 import { ButtonType } from '../../../types/componentTypes'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
@@ -15,10 +15,16 @@ const validationSchema = yup.object().shape({
   description: yup.string().max(300, 'mô tả không được quá 300 ký tự!'),
   price: yup.string().required(),
   categoryId: yup.string().required(),
-  discount: yup.number()
+  discount: yup.number(),
+  image: yup.string().required('image is required!')
 })
 
-export const CreateCourseForm = () => {
+interface ICreate {
+  setTab: (value: number) => void
+  tab: number
+}
+
+export const CreateCourseForm: React.FC<ICreate> = ({ setTab, tab }) => {
   const categories = useSelector(
     (state: RootStateOrAny) => state.globalReducer.categories
   )
@@ -36,21 +42,22 @@ export const CreateCourseForm = () => {
       description: '',
       tags: [],
       price: '',
-      discount: '',
+      discount: 0,
       categoryId: '',
       topicId: '',
-      image: ''
+      image: '',
     },
     onSubmit: (value) => {
       dispatch(createCourse(value))
     },
   })
 
-  const { handleSubmit, handleChange, setFieldValue, values, errors, touched } = formik
+  const { handleSubmit, handleChange, setFieldValue, values, errors, touched } =
+    formik
 
   useEffect(() => {
     setFieldValue('image', uploadedUrl)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadedUrl])
 
   const topics = useMemo(
@@ -85,10 +92,13 @@ export const CreateCourseForm = () => {
           >
             <BsUpload />
           </FormButton>
-          {
-            uploadedUrl &&
-              <img src={uploadedUrl} alt='course image' style={{ width: '150px', height: '150px' }}/>
-          }
+          {uploadedUrl && (
+            <img
+              src={uploadedUrl}
+              alt='course image'
+              style={{ width: '150px', height: '150px' }}
+            />
+          )}
         </div>
         <input
           type='file'
@@ -97,7 +107,11 @@ export const CreateCourseForm = () => {
           style={{ display: 'none' }}
           onChange={(e) => {
             if (!e?.target?.files?.[0]) return
-            dispatch(uploadFile(e?.target?.files[0], () => { alert('123') }))
+            dispatch(
+              uploadFile(e?.target?.files[0], () => {
+                return
+              })
+            )
           }}
         />
 
@@ -195,9 +209,12 @@ export const CreateCourseForm = () => {
           <FormButton className='button button--save' type={ButtonType.SUBMIT}>
             save
           </FormButton>
-          <FormButton className='button button--next' type={ButtonType.BUTTON} onClick={() => {
-            alert(123)
-          }}
+          <FormButton
+            className='button button--next'
+            type={ButtonType.BUTTON}
+            onClick={() => {
+              setTab(tab + 1)
+            }}
             disabled={currentCreateCourseId ? false : true}
           >
             {'next >'}

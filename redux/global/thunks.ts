@@ -24,7 +24,11 @@ export const getCategories = () => async (dispatch: any) => {
 }
 
 export const uploadFile =
-  (file: any, succeededFunc: (values: string) => void) =>
+  (
+    file: any,
+    succeededFunc: (values: string) => void,
+    progress?: (value: number) => void
+  ) =>
   async (dispatch: any) => {
     dispatch(uploadFileRequest())
     if (!file) return
@@ -35,8 +39,9 @@ export const uploadFile =
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const prog = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        if (!progress) return
+        progress(
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
         )
       },
       (err) => {
