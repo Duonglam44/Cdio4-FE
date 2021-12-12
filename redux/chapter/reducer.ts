@@ -1,9 +1,10 @@
-import { CreateChapter } from './types'
+import { CreateChapter, UpdateChapter, DeleteChapter } from './types'
 
 const initialValues = {
-  createLoading: null!,
+  loading: null!,
   currentCreateChapterIds: [],
   currentCreateChapterId: '',
+  deletedChapterId: ''
 }
 
 export const chapterReducer = (state = initialValues, action) => {
@@ -11,12 +12,12 @@ export const chapterReducer = (state = initialValues, action) => {
     case CreateChapter.CREATE_CHAPTER_REQUEST:
       return {
         ...state,
-        createLoading: action.createLoading,
+        loading: action.loading,
       }
     case CreateChapter.CREATE_CHAPTER_SUCCEEDED:
       return {
         ...state,
-        createLoading: action.createLoading,
+        loading: action.loading,
         currentCreateChapterId: action.currentCreateChapterId,
         currentCreateChapterIds: [
           ...state.currentCreateChapterIds,
@@ -26,7 +27,40 @@ export const chapterReducer = (state = initialValues, action) => {
     case CreateChapter.CREATE_CHAPTER_FAILED:
       return {
         ...state,
-        createLoading: action.createLoading,
+        loading: action.loading,
+      }
+    // update chapter
+    case UpdateChapter.UPDATE_CHAPTER_REQUEST:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    case UpdateChapter.UPDATE_CHAPTER_SUCCEEDED:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    case UpdateChapter.UPDATE_CHAPTER_FAILED:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    // delete chapter
+    case DeleteChapter.DELETE_CHAPTER_REQUEST:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    case DeleteChapter.DELETE_CHAPTER_SUCCEEDED:
+      return {
+        ...state,
+        loading: action.loading,
+        deletedChapterId: action.deletedChapterId
+      }
+    case DeleteChapter.DELETE_CHAPTER_FAILED:
+      return {
+        ...state,
+        loading: action.loading,
       }
     default:
       return state

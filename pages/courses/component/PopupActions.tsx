@@ -5,9 +5,8 @@ import {
   Modal,
   TextField,
   TextareaAutosize,
-  formatMs,
 } from '@material-ui/core'
-import { AiTwotoneVideoCamera } from 'react-icons/ai'
+import { AiTwotoneVideoCamera, AiFillDelete } from 'react-icons/ai'
 import { TiDocumentText } from 'react-icons/ti'
 import { IoMdAttach } from 'react-icons/io'
 import { HiPlus } from 'react-icons/hi'
@@ -15,7 +14,7 @@ import { uploadFile } from '../../../redux/global/thunks'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
-import { createChapter } from '../../../redux/lesson/thunks'
+import { createChapter, updateLesson, deleteLesson } from '../../../redux/lesson/thunks'
 
 const validationSchema = yup.object().shape({
   title: yup.string().required('Title is required!'),
@@ -25,10 +24,10 @@ const validationSchema = yup.object().shape({
 })
 
 export const PopupActions: React.FC<{
-  setFieldValue: any
-  values: any
+  setVideo: (value: string) => void
   lessonId: string
-}> = ({ setFieldValue, values, lessonId }) => {
+  setProgress: (value: number) => void
+}> = ({ lessonId, setVideo, setProgress }) => {
   const dispatch = useDispatch()
   const [isPopup, setIsPopup] = useState<boolean>(false)
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
@@ -52,7 +51,11 @@ export const PopupActions: React.FC<{
       <Button
         className='button-toggle'
         onClick={(e) => {
+          e.stopPropagation()
           setIsPopup(!isPopup)
+          window.addEventListener('click', () => {
+            setIsPopup(false)
+          })
         }}
       >
         <HiPlus />
@@ -69,8 +72,9 @@ export const PopupActions: React.FC<{
                 if (!e.target?.files?.[0]) return
                 dispatch(
                   uploadFile(e.target?.files?.[0], (url) => {
-                    setFieldValue('url', url)
-                  })
+                    setVideo(url)
+                    dispatch(updateLesson({ url }, lessonId))
+                  }, setProgress)
                 )
               }}
             />
@@ -93,7 +97,20 @@ export const PopupActions: React.FC<{
             Attachment
           </div>
         </Button>
+        <Button
+          className='popup_item'
+          style={{ background: '#cd1010', color: '#fff' }}
+          onClick={() => {
+            dispatch(deleteLesson(lessonId))
+          }}
+        >
+          <div>
+            <AiFillDelete />
+            Delete
+          </div>
+        </Button>
       </Paper>
+      {/* modal attachment */}
       <Modal
         open={isShowModal}
         onClose={() => {
@@ -103,7 +120,7 @@ export const PopupActions: React.FC<{
       >
         <form onSubmit={formik.handleSubmit}>
           <Paper elevation={3} className='modalAttachment-paper'>
-          <h3>Attachment Form</h3>
+            <h3>Attachment Form</h3>
             <TextField
               type='text'
               label='Title'
@@ -116,23 +133,21 @@ export const PopupActions: React.FC<{
             <Button
               variant='outlined'
               className={`chooseFile-btn ${
-                formik.touched.url && formik.errors.url
-                  ? 'error'
-                  : ''
+                formik.touched.url && formik.errors.url ? 'error' : ''
               }`}
             >
-              {
-                formik.values.url && 'Attachment Uploaded' || 'Add Attachment'
-              }
+              {(formik.values.url && 'Attachment Uploaded') || 'Add Attachment'}
               <input
                 type='file'
                 name='url'
                 className='modalAttachment-field hidden'
                 onChange={(e) => {
                   if (!e.target?.files?.[0]) return
-                  dispatch(uploadFile(e.target.files[0], (res) => {
-                    formik.setFieldValue('url', res)
-                  }))
+                  dispatch(
+                    uploadFile(e.target.files[0], (res) => {
+                      formik.setFieldValue('url', res)
+                    })
+                  )
                 }}
               />
             </Button>

@@ -1,43 +1,91 @@
+import { useState, useEffect } from 'react'
 import { Button, TextareaAutosize } from '@material-ui/core'
 import { PopupActions } from './PopupActions'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import { updateLesson, deleteAttachment } from '../../../redux/lesson/thunks'
+import { Attachment } from '../../../redux/lesson/types'
+import Link from 'next/link'
+import { RiCloseFill } from 'react-icons/ri'
 
-const validationSchema = yup.object().shape({
-  url: yup.string().required('You have to upload lesson video'),
-  description: yup.string(),
-  chapter: yup.string().required(),
-})
+export const LessonItem: React.FC<{ lessonId: string; index: number }> = ({
+  lessonId,
+  index,
+}) => {
+  const [isChangeName, setIsChangeName] = useState<boolean>(false)
+  const [progress, setProgress] = useState<number>(0)
+  const [currentTitle, setCurrentTitle] = useState<string>(
+    `lesson ${index + 1}`
+  )
+  const [video, setVideo] = useState<string>('')
+  const [attachments, setAttachments] = useState<{ [key: string]: Attachment }>(
+    null!
+  )
+  const dispatch = useDispatch()
+  const state = useSelector((state: RootStateOrAny) => state)
+  const createdAttachment = state.lessonReducer.currentCreateAttachment
 
-export const LessonItem: React.FC<{lessonId: string}> = ({ lessonId }) => {
-  const formik = useFormik({
-    validationSchema,
-    initialValues: {
-      url: '',
-      description: '',
-      chapter: '',
-    },
-    onSubmit: (values) => { return },
-  })
-
-  const { handleSubmit, handleChange, setFieldValue, values } = formik
+  useEffect(() => {
+    if (createdAttachment?.lesson !== lessonId || !createdAttachment) return
+    const temp = { ...attachments }
+    temp[createdAttachment._id] = createdAttachment
+    setAttachments(temp)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createdAttachment])
 
   return (
     <>
       <div className='lessonItem-header'>
-        <h5 className='lessonItem-title'>1. lessons</h5>
-        <PopupActions setFieldValue={setFieldValue} values={values}
+        <div>
+          {isChangeName || (
+            <h4
+              onDoubleClick={() => {
+                setIsChangeName(true)
+                window.addEventListener('click', () => {
+                  setIsChangeName(false)
+                })
+              }}
+            >
+              {`${index + 1}. ${currentTitle}`}
+            </h4>
+          )}
+          <textarea
+            className='rename-textArea'
+            style={{ display: `${isChangeName ? 'block' : 'none'}` }}
+            value={currentTitle}
+            onClick={(e) => {
+              e.stopPropagation()
+              e.preventDefault()
+            }}
+            onChange={(e) => {
+              setCurrentTitle(e.target.value)
+            }}
+            onKeyDown={(e) => {
+              if (e.keyCode !== 13) return
+              setIsChangeName(false)
+              dispatch(updateLesson({ title: currentTitle }, lessonId))
+            }}
+            onBlur={(e) => {
+              setIsChangeName(false)
+              dispatch(updateLesson({ title: currentTitle }, lessonId))
+            }}
+          />
+        </div>
+        <PopupActions
           lessonId={lessonId}
+          setVideo={setVideo}
+          setProgress={setProgress}
         />
       </div>
-      {/* <form action='' onSubmit={handleSubmit}></form> */}
       <div className='lessonItem'>
-        {values.url && (
+        {progress !== 100 && (
+          <>
+            <progress value={progress} max={100} />{' '}
+            <span>{`${progress}%`}</span>
+          </>
+        )}
+        {video && (
           <video width='320' height='240' controls>
-            <source
-              src={values.url}
-              type='video/mp4'
-            />
+            <source src={video} type='video/mp4' />
           </video>
         )}
         <div className='lessonItem-box'>
@@ -46,23 +94,34 @@ export const LessonItem: React.FC<{lessonId: string}> = ({ lessonId }) => {
             <Button variant='outlined'>test 1</Button>
           </div>
         </div>
-        <div className='lessonItem-box'>
-          <h4>Attachment</h4>
-          <div className='lessonItem-box__wrap'>
-            <Button variant='outlined'>Attachment 1</Button>
+        {attachments && (
+          <div className='lessonItem-box'>
+            <h4>Attachment</h4>
+            <div className='lessonItem-box__wrap'>
+              {Object.values(attachments).map((attachment, index) => (
+                <div className='item' key={index}>
+                  <Link href={attachment?.url} passHref={true}>
+                    <Button variant='outlined'>{attachment?.title}</Button>
+                  </Link>
+                  <RiCloseFill className='delete-icon'
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      dispatch(deleteAttachment(attachment._id))
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
         <h4>Description</h4>
         <TextareaAutosize
           className='lessonItem-desc'
           aria-label='description'
-          placeholder='Type lesson's description here...'
+          placeholder='Type lesson description here...'
           minRows={5}
           style={{ resize: 'none', width: '100%' }}
         />
-        <div style={{ textAlign: 'right' }}>
-          <Button variant='contained'>Save Lesson</Button>
-        </div>
       </div>
     </>
   )
