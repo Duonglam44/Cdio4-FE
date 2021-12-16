@@ -82,6 +82,7 @@ export const lessonReducer = (state = initialState, action) => {
         ...state,
         createLoading: action.createLoading,
       }
+    // delete attachment
     case DeleteAttachment.DELETE_ATTACHMENT_REQUEST:
       return {
         ...state,

@@ -24,19 +24,19 @@ export const createChapterFailed = () => {
 export const updateChapterRequest = () => {
   return {
     type: UpdateChapter.UPDATE_CHAPTER_REQUEST,
-    loading: true,
+    updateLoading: true,
   }
 }
 export const updateChapterSucceeded = (res) => {
   return {
     type: UpdateChapter.UPDATE_CHAPTER_SUCCEEDED,
-    loading: false,
+    updateLoading: false,
   }
 }
 export const updateChapterFailed = () => {
   return {
     type: UpdateChapter.UPDATE_CHAPTER_FAILED,
-    loading: false,
+    updateLoading: false,
   }
 }
 // delete chapter actions

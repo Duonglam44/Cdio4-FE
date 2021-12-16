@@ -61,7 +61,7 @@ export const ChapterCreate: React.FC<ICreate> = ({ setTab, tab }) => {
       <div className='chapterCreate'>
         <h2 className='title-page'>Setup your Chapter</h2>
         {Object.keys(chapters).map((item, idx) => (
-          <ChapterItem key={item} idx={idx} />
+          <ChapterItem key={item} idx={idx}  chapterId={item}/>
         ))}
 
         <Button
