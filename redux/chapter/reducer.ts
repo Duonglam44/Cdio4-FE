@@ -33,17 +33,17 @@ export const chapterReducer = (state = initialValues, action) => {
     case UpdateChapter.UPDATE_CHAPTER_REQUEST:
       return {
         ...state,
-        loading: action.loading,
+        updateLoading: action.updateLoading,
       }
     case UpdateChapter.UPDATE_CHAPTER_SUCCEEDED:
       return {
         ...state,
-        loading: action.loading,
+        updateLoading: action.updateLoading,
       }
     case UpdateChapter.UPDATE_CHAPTER_FAILED:
       return {
         ...state,
-        loading: action.loading,
+        updateLoading: action.updateLoading,
       }
     // delete chapter
     case DeleteChapter.DELETE_CHAPTER_REQUEST:

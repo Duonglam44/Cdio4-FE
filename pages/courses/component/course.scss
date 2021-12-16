@@ -144,6 +144,12 @@
       @include flex(space-between, center);
       & > div {
         @include flex();
+        & > span {
+          display: flex;
+          padding: 0 10px;
+          font-size: 20px;
+          cursor: pointer;
+        }
       }
       h4 {
         width: fit-content;

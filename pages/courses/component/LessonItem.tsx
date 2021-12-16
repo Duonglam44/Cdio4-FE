@@ -77,7 +77,7 @@ export const LessonItem: React.FC<{ lessonId: string; index: number }> = ({
         />
       </div>
       <div className='lessonItem'>
-        {progress !== 100 && (
+        {(progress !== 100 && progress !== 0) && (
           <>
             <progress value={progress} max={100} />{' '}
             <span>{`${progress}%`}</span>
@@ -121,6 +121,9 @@ export const LessonItem: React.FC<{ lessonId: string; index: number }> = ({
           placeholder='Type lesson description here...'
           minRows={5}
           style={{ resize: 'none', width: '100%' }}
+          onBlur={(e) => {
+            dispatch(updateLesson({ description: `${e.target.value}` }, lessonId))
+          }}
         />
       </div>
     </>

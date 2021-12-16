@@ -42,9 +42,15 @@ export const PopupActions: React.FC<{
       description: '',
     },
     onSubmit: (values) => {
-      dispatch(createChapter(values))
+      handleSubmit(values)
     },
   })
+
+  const handleSubmit = (values) => {
+    dispatch(createChapter(values))
+    setIsShowModal(false)
+    formik.resetForm()
+  }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -67,6 +73,7 @@ export const PopupActions: React.FC<{
             Video
             <input
               type='file'
+              accept='.mp4'
               className='hiddenInput'
               onChange={(e) => {
                 if (!e.target?.files?.[0]) return
@@ -140,6 +147,7 @@ export const PopupActions: React.FC<{
               <input
                 type='file'
                 name='url'
+                accept='.xlsx, .xls, .docx, .doc, .pdf, .txt'
                 className='modalAttachment-field hidden'
                 onChange={(e) => {
                   if (!e.target?.files?.[0]) return
