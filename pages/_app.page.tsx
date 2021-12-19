@@ -14,7 +14,7 @@ import { Footer } from '../components/footer/Footer'
 const getPaths = (paths: string[]) => {
   const newPaths: string[] = []
 
-  paths.map(path => {
+  paths.map((path: string) => {
     if (path === '/') {
       newPaths.push(path)
 

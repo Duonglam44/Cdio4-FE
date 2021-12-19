@@ -1,0 +1,77 @@
+@import "../../../styles/sass/variable.scss";
+
+.courseDetail {
+  min-height: calc(100vh - 367px);
+  padding: 40px 0;
+  color: #000;
+  &-header {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  &-desc {
+    color: #000000cc;
+    margin-bottom: 30px;
+  }
+  &-nav {
+    display: flex;
+    & li {
+      padding: 10px 20px 10px 0;
+      margin-right: 10px;
+      color: #000000cc;
+    }
+    & > li:first-child {
+      list-style: none;
+    }
+  }
+  &-tag {
+    @include flex();
+    padding: 15px 30px;
+    & > a {
+      display: inline-block;
+      flex: 1;
+      padding: 0px 20px;
+    }
+  }
+  .chapter-tag {
+    background: #f5f5f5;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .lesson-tag {
+    padding: 15px 40px;
+    border-bottom: 1px solid #ebebeb;
+  }
+  &-leftSide {
+    @include flex();
+    flex-direction: column;
+    & > h3 {
+      color: $secondary-text-color;
+      margin: 20px;
+    }
+  }
+  &-subBtn {
+    color: #fff !important;
+    background: #c00 !important;
+    margin-bottom: 20px !important;
+  }
+  .detail-tag {
+    & > div {
+      padding: 10px;
+      margin-bottom: 10px;
+      @include flex(flex-start, center);
+      & > svg {
+        margin-right: 20px;
+        font-size: 20px;
+      }
+    }
+  }
+  .courseDetail-video {
+    video {
+      width: 350px;
+    }
+  }
+  .svg-color {
+    color: $secondary-text-color;
+  }
+}

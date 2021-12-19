@@ -31,8 +31,12 @@ const CourseCreate = () => {
               ))}
             </Grid>
             <Grid item xs={9} className='course__content-main'>
-              { tab === 1 && <CreateCourseForm /> }
-              { tab === 2 && <ChapterCreate /> }
+              <div style={{ display: `${tab === 1 ? 'block' : 'none'}` }}>
+                <CreateCourseForm setTab={setTab} tab={tab} />
+              </div>
+              <div style={{ display: `${tab === 2 ? 'block' : 'none'}` }}>
+                <ChapterCreate setTab={setTab} tab={tab} />
+              </div>
             </Grid>
           </Grid>
         </div>
