@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Header } from '../components/header/Header'
 import { Footer } from '../components/footer/Footer'
+import 'swiper/css'
 
 const getPaths = (paths: string[]) => {
   const newPaths: string[] = []
