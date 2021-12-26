@@ -1,0 +1,9 @@
+@import '../../../styles/sass/variable.scss';
+
+.courses {
+  background: #64b7e11f
+  padding: 35px 0;
+  &-list {
+    padding-bottom: 20px;
+  }
+}
