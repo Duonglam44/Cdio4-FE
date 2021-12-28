@@ -11,7 +11,7 @@ const initialState = {
   totalCourses: 0,
   loading: null!,
   currentCreateCourseId: '',
-  courseItem: {},
+  courseItem: null!,
 }
 
 export const courseReducer = (state = initialState, action: any) => {

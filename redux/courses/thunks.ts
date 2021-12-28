@@ -36,7 +36,7 @@ export const createCourse = (params: any) => async (dispatch: any) => {
 export const getCourseById = (id: string) => async (dispatch: any) => {
   dispatch(getCourseByIdRequest())
   const res: any = await api({
-    path: `/courses/${id}`,
+    path: `/courses/auth/${id}`,
     method: 'GET',
     needThrowError: false,
     errorHandler: (res) => {

@@ -27,6 +27,16 @@ export enum DeleteAttachment {
   DELETE_ATTACHMENT_FAILED = 'DELETE_ATTACHMENT_FAILED',
 }
 
+export enum GetLessonById {
+  GET_LESSON_REQUEST = 'GET_LESSON_REQUEST',
+  GET_LESSON_SUCCEEDED = 'GET_LESSON_SUCCEEDED',
+  GET_LESSON_FAILED = 'GET_LESSON_FAILED'
+}
+
+export enum TakeCurrentLesson {
+  TAKE_CURRENT_LESSON = 'TAKE_CURRENT_LESSON'
+}
+
 export interface Attachment {
   createdAt: string
   description: string

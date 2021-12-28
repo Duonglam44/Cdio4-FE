@@ -1,4 +1,12 @@
-import { CreateLesson, CreateAttachment, UpdateLesson, DeleteLesson, DeleteAttachment } from './types'
+import {
+  CreateLesson,
+  CreateAttachment,
+  UpdateLesson,
+  DeleteLesson,
+  DeleteAttachment,
+  TakeCurrentLesson,
+  GetLessonById,
+} from './types'
 
 export const createLessonRequest = () => {
   return {
@@ -10,7 +18,7 @@ export const createLessonSucceeded = (res) => {
   return {
     type: CreateLesson.CREATE_LESSON_SUCCEEDED,
     loading: false,
-    currentCreateLesson: res
+    currentCreateLesson: res,
   }
 }
 export const createLessonFailed = () => {
@@ -49,7 +57,7 @@ export const deleteLessonSucceeded = (res: string) => {
   return {
     type: DeleteLesson.DELETE_LESSON_SUCCEEDED,
     loading: false,
-    deletedLessonId: res
+    deletedLessonId: res,
   }
 }
 export const deleteLessonFailed = () => {
@@ -69,7 +77,7 @@ export const createAttachmentSucceeded = (res) => {
   return {
     type: CreateAttachment.CREATE_ATTACHMENT_SUCCEEDED,
     createLoading: false,
-    currentCreateAttachment: res
+    currentCreateAttachment: res,
   }
 }
 export const createAttachmentFailed = () => {
@@ -89,12 +97,41 @@ export const deleteAttachmentSucceeded = (res: string) => {
   return {
     type: DeleteAttachment.DELETE_ATTACHMENT_SUCCEEDED,
     loading: false,
-    deletedAttachmentId: res
+    deletedAttachmentId: res,
   }
 }
 export const deleteAttachmentFailed = () => {
   return {
     type: DeleteAttachment.DELETE_ATTACHMENT_REQUEST,
+    loading: false,
+  }
+}
+// take current lesson
+export const takeCurrentLesson = (res: any) => {
+  return {
+    type: TakeCurrentLesson.TAKE_CURRENT_LESSON,
+    currentLesson: res,
+  }
+}
+// get lesson by id
+export const getLessonByIdRequest = () => {
+  return {
+    type: GetLessonById.GET_LESSON_REQUEST,
+    loading: true,
+  }
+}
+
+export const getLessonByIdSucceeded = (res: any) => {
+  return {
+    type: GetLessonById.GET_LESSON_REQUEST,
+    loading: false,
+    currentLesson: res
+  }
+}
+
+export const getLessonByIdFailed = () => {
+  return {
+    type: GetLessonById.GET_LESSON_REQUEST,
     loading: false,
   }
 }

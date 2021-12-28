@@ -1,6 +1,7 @@
 import { createTheme } from '@material-ui/core/styles'
 
 const defaultTheme = {
+  primaryTextColor: '#2b6da3',
   palette: {
     primary: {
       main: '#637381',
