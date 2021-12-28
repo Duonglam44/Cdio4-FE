@@ -16,7 +16,7 @@ const CourseDetail = () => {
     (state: RootStateOrAny) => state.courseReducer.courseItem
   )
 
-  const { title, chapters, description, price } = courseItem
+  const { title, chapters, description, price } = courseItem || {}
 
   useEffect(() => {
     dispatch(getCourseById(router.query.courseId as string))
@@ -59,7 +59,9 @@ const CourseDetail = () => {
                         key={lesson._id}
                       >
                         <AiFillPlayCircle />
-                        <a href='123'>{`${idx} ${lesson.title}`}</a>
+                        <a onClick={() => {
+                          router.push(`/lesson/${lesson._id}`)
+                        }}>{`${idx} ${lesson.title}`}</a>
                         <span>2:25</span>
                       </div>
                     ))}

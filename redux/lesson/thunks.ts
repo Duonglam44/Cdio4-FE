@@ -13,7 +13,10 @@ import {
   deleteLessonFailed,
   deleteAttachmentRequest,
   deleteAttachmentSucceeded,
-  deleteAttachmentFailed
+  deleteAttachmentFailed,
+  getLessonByIdRequest,
+  getLessonByIdSucceeded,
+  getLessonByIdFailed,
 } from './actions'
 import { api } from '../../utils/api'
 
@@ -83,4 +86,17 @@ export const deleteAttachment =  (id: string) => async (dispatch: any) => {
     },
   })
   dispatch(deleteAttachmentSucceeded(id))
+}
+
+export const GetLessonById = (id: string) => async(dispatch: any) => {
+  dispatch(getLessonByIdRequest())
+  const res: any = await api({
+    path: `/lessons/${id}`,
+    method: 'get',
+    needThrowError: false,
+    errorHandler: (_) => {
+      dispatch(getLessonByIdSucceeded(res?.data))
+    }
+  })
+  dispatch(getLessonByIdFailed())
 }

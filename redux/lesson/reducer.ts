@@ -4,6 +4,8 @@ import {
   UpdateLesson,
   DeleteLesson,
   DeleteAttachment,
+  TakeCurrentLesson,
+  GetLessonById,
 } from './types'
 
 const initialState = {
@@ -11,7 +13,8 @@ const initialState = {
   createLoading: null!,
   currentCreateLesson: [],
   currentCreateAttachment: null,
-  deletedAttachmentId: ''
+  deletedAttachmentId: '',
+  currentLesson: null!,
 }
 // eslint-disable-next-line
 export const lessonReducer = (state = initialState, action) => {
@@ -92,9 +95,33 @@ export const lessonReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.loading,
-        deletedAttachmentId: action.deleteAttachmentId
+        deletedAttachmentId: action.deleteAttachmentId,
       }
     case DeleteAttachment.DELETE_ATTACHMENT_FAILED:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    // take current lesson
+    case TakeCurrentLesson.TAKE_CURRENT_LESSON: {
+      return {
+        ...state,
+        currentLesson: action.currentLesson,
+      }
+    }
+    // get lesson by id
+    case GetLessonById.GET_LESSON_REQUEST:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    case GetLessonById.GET_LESSON_SUCCEEDED:
+      return {
+        ...state,
+        loading: action.loading,
+        currentLesson: action.currentLesson,
+      }
+    case GetLessonById.GET_LESSON_FAILED:
       return {
         ...state,
         loading: action.loading,
