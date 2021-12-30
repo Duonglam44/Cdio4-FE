@@ -8,23 +8,11 @@ import {
 import { logout } from '../../utils/Auth'
 
 const initialState: any = {
-  data: {
-    _id: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    address: '',
-    email: '',
-    role: {},
-    teachingCourses: [],
-    notifications: [],
-    learningCourses: [],
-    createdAt: '',
-  },
+  data: null,
   loading: false,
 }
 
-export const userInfo = (state = initialState, action: any) => {
+export const auth = (state = initialState, action: any) => {
   switch (action.type) {
     // login actions
     case LoginActions.SIGN_IN_REQUEST:
@@ -35,6 +23,7 @@ export const userInfo = (state = initialState, action: any) => {
     case LoginActions.SIGN_IN_SUCCEEDED:
       return {
         ...state,
+        data: action.data,
         loading: action.loading,
       }
     case LoginActions.SIGN_IN_FAILED:
@@ -68,10 +57,21 @@ export const userInfo = (state = initialState, action: any) => {
         loading: action?.loading,
       }
     //  get use data actions
-    case UserDataActions.GET_USER_DATA:
+    case UserDataActions.GET_USER_DATA_REQUEST:
       return {
         ...state,
-        ...action?.payload,
+        loading: action.loading,
+      }
+    case UserDataActions.GET_USER_DATA_SUCCEEDED:
+      return {
+        ...state,
+        data: action.data,
+        loading: action.loading,
+      }
+    case UserDataActions.GET_USER_DATA_FAILED:
+      return {
+        ...state,
+        loading: action.loading,
       }
     default:
       return state

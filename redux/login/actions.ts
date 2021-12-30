@@ -7,9 +7,10 @@ export const LoginRequest = () => {
     loading: true,
   }
 }
-export const LoginSucceeded = () => {
+export const LoginSucceeded = (res: any) => {
   return {
     type: LoginActions.SIGN_IN_SUCCEEDED,
+    data: res,
     loading: false,
   }
 }
@@ -47,9 +48,24 @@ export const logout = () => {
   }
 }
 // get user data actions
-export const GetUserData = (res: any) => {
+export const GetUserRequest = () => {
   return {
-    type: UserDataActions.GET_USER_DATA,
-    payload: res,
+    type: UserDataActions.GET_USER_DATA_REQUEST,
+    loading: true
+  }
+}
+
+export const GetUseSucceeded = (res: any) => {
+  return {
+    type: UserDataActions.GET_USER_DATA_SUCCEEDED,
+    data: res,
+    loading: false,
+  }
+}
+
+export const GetUserFailed = () => {
+  return {
+    type: UserDataActions.GET_USER_DATA_FAILED,
+    loading: false
   }
 }

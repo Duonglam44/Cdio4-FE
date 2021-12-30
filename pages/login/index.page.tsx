@@ -8,7 +8,7 @@ import { getJwt } from 'utils/Auth'
 
 const Login: React.FC = () => {
   const router = useRouter()
-  const loading = useSelector((state: RootStateOrAny) => state.userInfo.loading)
+  const loading = useSelector((state: RootStateOrAny) => state.auth.loading)
 
   useEffect(() => {
     checkLogin()

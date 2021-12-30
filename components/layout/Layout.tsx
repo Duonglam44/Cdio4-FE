@@ -19,7 +19,7 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
 
   if (path.includes('/login')) {
     return (
-      <div className={`${classes.layout} main-layout`}>
+      <div className={`${classes.layout}`}>
         {children}
       </div>
     )
@@ -27,9 +27,9 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
 
   return (
     <Auth publicPages={publicPages} >
-      <div className={`${classes.layout} main-layout`}>
+      <div className={`${classes.layout}`}>
         <CssBaseline />
-          <div className='main-layout--children'>
+          <div className={classes.mainLayoutChild}>
             {children}
           </div>
       </div>
@@ -39,6 +39,11 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
 
 export const useStyles = makeStyles({
   layout: {
+    height: '100%',
+    width: '100%',
+  },
+  mainLayoutChild: {
+    height: '100%',
     minHeight: 'calc(100vh - 370px)',
   }
 })
