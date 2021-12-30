@@ -6,7 +6,7 @@ import { RootStateOrAny, useSelector } from 'react-redux'
 
 const SignUp = () => {
   const router = useRouter()
-  const loading = useSelector((state: RootStateOrAny) => state.userInfo.loading)
+  const loading = useSelector((state: RootStateOrAny) => state.auth.loading)
 
   useEffect(() => {
     const token = getJwt()

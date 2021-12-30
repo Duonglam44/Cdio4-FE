@@ -1,13 +1,15 @@
 // all reducers no need to export with default option
 import { combineReducers } from 'redux'
-import { userInfo } from './login/reducers'
+import { auth } from './login/reducers'
 import { globalReducer } from './global/reducer'
 import { courseReducer } from './courses/reducer'
 import { lessonReducer } from './lesson/reducer'
 import { chapterReducer } from './chapter/reducer'
+import { user } from './user/reducer'
 
 const rootReducer = combineReducers({
-  userInfo,
+  auth,
+  user,
   globalReducer,
   courseReducer,
   lessonReducer,

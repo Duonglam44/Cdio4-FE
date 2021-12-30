@@ -1,10 +1,39 @@
+import { useMemo } from 'react'
 import { Paper, Button } from '@material-ui/core'
 import Link from 'next/link'
 import { logout } from 'redux/login/actions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 
 export const UserOption = () => {
   const dispatch = useDispatch()
+  const currentUser = useSelector((state: RootStateOrAny) => state.auth?.data)
+
+  const userOptionsMenu = useMemo(() => [
+    {
+      title: 'Profile',
+      path: `/user/${currentUser?._id}`,
+    },
+    {
+      title: 'Course',
+      path: '/user/course',
+    },
+    {
+      title: 'LiveStreams',
+      path: '/user/livestreams',
+    },
+    {
+      title: 'Payment',
+      path: '/user/payment',
+    },
+    {
+      title: 'Insights',
+      path: '/user/insights',
+    },
+    {
+      title: 'Draft',
+      path: '/user/draft',
+    },
+  ], [currentUser])
 
   return (
     <Paper elevation={3} className='userOptions'>
@@ -26,30 +55,3 @@ export const UserOption = () => {
     </Paper>
   )
 }
-
-const userOptionsMenu = [
-  {
-    title: 'Profile',
-    path: '/profile',
-  },
-  {
-    title: 'Course',
-    path: '/user/course',
-  },
-  {
-    title: 'LiveStreams',
-    path: '/user/livestreams',
-  },
-  {
-    title: 'Payment',
-    path: '/user/payment',
-  },
-  {
-    title: 'Insights',
-    path: '/user/insights',
-  },
-  {
-    title: 'Draft',
-    path: '/user/draft',
-  },
-]

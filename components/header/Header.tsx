@@ -50,16 +50,16 @@ export const Header: React.FC = () => {
               <div key={index} className='header__menu-item'>
                 <div key={index} className='header__menu-link'>
                   <Link href={`${item.path}`}>{item.title}</Link>
-                  <div
+                  {/* <div
                     className='nav-link-menu'
                     style={{ display: `${item.subItems ?? 'none'}` }}
                   >
-                    {/* {item.subItems?.map((item, index) => (
+                    {item.subItems?.map((item, index) => (
                       <Link to={item.path} className='nav-link-sub' key={index}>
                         {item.title}
                       </Link>
-                    ))} */}
-                  </div>
+                    ))}
+                  </div> */}
                 </div>
               </div>
             ))}
@@ -102,9 +102,8 @@ export const Header: React.FC = () => {
 
 const headerItems = [
   {
-    title: 'Category',
-    path: '/category',
-    subItems: [],
+    title: 'Home',
+    path: '/',
   },
   {
     title: 'Course',

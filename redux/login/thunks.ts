@@ -4,7 +4,9 @@ import { MethodTypes } from '../../types/MethodTypes'
 import { loginWithJwt } from '../../utils/Auth'
 import { toast } from 'react-toastify'
 import {
-  GetUserData,
+  GetUseSucceeded,
+  GetUserRequest,
+  GetUserFailed,
   SignUpRequest,
   SignUpSucceeded,
   SignUpFailed,
@@ -15,19 +17,19 @@ import {
 
 export const GetUserDataThunkAction =
   (token: string | null) => async (dispatch: any) => {
-    try {
-      if (!token) {
-        return
-      }
-      const res: any = await api({
-        path: '/users/all-info',
-        method: MethodTypes.GET,
-        needThrowError: false,
-      })
-      dispatch(GetUserData({ ...res?.data.user }))
-    } catch (error: any) {
-      throw error
+    dispatch(GetUserRequest())
+    if (!token) {
+      return
     }
+    const res: any = await api({
+      path: '/users/all-info',
+      method: MethodTypes.GET,
+      needThrowError: false,
+      errorHandler: (error) => {
+        dispatch(GetUserFailed())
+      },
+    })
+    dispatch(GetUseSucceeded(res.data.user))
   }
 
 export const LoginThunkAction =
@@ -46,7 +48,7 @@ export const LoginThunkAction =
     toast.success(res.message)
     loginWithJwt(res?.data.token)
     dispatch(GetUserDataThunkAction(res?.data.token))
-    dispatch(LoginSucceeded())
+    dispatch(LoginSucceeded(res?.data.data))
   }
 
 export const SignUpThunkAction =

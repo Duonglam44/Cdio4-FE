@@ -28,7 +28,7 @@ const getPaths = (paths: string[]) => {
 }
 
 const publicPages = getPaths(['/', '/login', '/signup'])
-const withoutLayoutPaths = getPaths([])
+const withoutLayoutPaths = getPaths(['/user'])
 
 function myApp({ Component, pageProps, store }: any) {
   return (
