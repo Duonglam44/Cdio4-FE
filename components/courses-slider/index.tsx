@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { makeStyles, createStyles } from '@material-ui/core'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -18,8 +17,6 @@ export const CourseSlider: React.FC<ISlider> = ({
   className,
 }) => {
   const classes = useStyles()
-  const prevRef = useRef<HTMLDivElement>(null!)
-  const nextRef = useRef<HTMLDivElement>(null!)
 
   return (
     <div className={className}>
@@ -36,8 +33,8 @@ export const CourseSlider: React.FC<ISlider> = ({
         slidesPerView={4}
         loop={true}
         navigation={{
-          nextEl: prevRef?.current,
-          prevEl: nextRef?.current,
+          nextEl: '.slide-next-btn',
+          prevEl: '.slider-prev-btn',
         }}
         pagination={{ clickable: true }}
       >
@@ -53,14 +50,12 @@ export const CourseSlider: React.FC<ISlider> = ({
           </SwiperSlide>
         ))}
         <div
-          ref={prevRef}
-          className={`${classes.controlButton} ${classes.prev}`}
+          className={`${classes.controlButton} ${classes.prev} slider-prev-btn`}
         >
           <GrPrevious />
         </div>
         <div
-          ref={nextRef}
-          className={`${classes.controlButton} ${classes.next}`}
+          className={`${classes.controlButton} ${classes.next} slider-next-btn`}
         >
           <GrNext />
         </div>

@@ -10,11 +10,11 @@ import { AiTwotoneVideoCamera, AiFillDelete } from 'react-icons/ai'
 import { TiDocumentText } from 'react-icons/ti'
 import { IoMdAttach } from 'react-icons/io'
 import { HiPlus } from 'react-icons/hi'
-import { uploadFile } from '../../../redux/global/thunks'
+import { uploadFile } from 'redux/global/thunks'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
-import { createChapter, updateLesson, deleteLesson } from '../../../redux/lesson/thunks'
+import { createChapter, updateLesson, deleteLesson } from 'redux/lesson/thunks'
 
 const validationSchema = yup.object().shape({
   title: yup.string().required('Title is required!'),

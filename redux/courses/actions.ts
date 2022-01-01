@@ -1,4 +1,4 @@
-import { CreateCourse, GetCourseById, GetCourses, SearchCourses } from './types'
+import { CreateCourse, GetCourseById, GetCourses, SearchCourses, UpdateCourse, DeleteCourse } from './types'
 
 // create course actions
 export const createCourseRequest = () => {
@@ -115,5 +115,50 @@ export const searchCoursesFailed = () => {
   return {
     type: GetCourses.GET_COURSES_FAILED,
     loading: false,
+  }
+}
+
+// update a course
+
+export const updateCourseRequest = () => {
+  return {
+    type: UpdateCourse.UPDATE_COURSE_REQUEST,
+    sideLoading: true
+  }
+}
+
+export const updateCourseSucceeded = () => {
+  return {
+    type: UpdateCourse.UPDATE_COURSE_SUCCEEDED,
+    sideLoading: false,
+  }
+}
+
+export const updateCourseFailed = () => {
+  return {
+    type: UpdateCourse.UPDATE_COURSE_FAILED,
+    sideLoading: false
+  }
+}
+// delete a course
+
+export const deleteCourseRequest = () => {
+  return {
+    type: DeleteCourse.DELETE_COURSE_REQUEST,
+    sideLoading: true
+  }
+}
+
+export const deleteCourseSucceeded = () => {
+  return {
+    type: DeleteCourse.DELETE_COURSE_SUCCEEDED,
+    sideLoading: false
+  }
+}
+
+export const deleteCourseFailed = () => {
+  return {
+    type: DeleteCourse.DELETE_COURSE_FAILED,
+    sideLoading: false
   }
 }

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
-import { CoursesLoading } from '@components/loading/courses-loading'
+import { CoursesLoading } from './components/CoursesLoading'
 import { getCoursesPagination } from 'redux/courses/thunks'
 import { CourseSlider } from '@components/courses-slider'
 import { PaginationItem } from '@components/pagination'
@@ -33,7 +33,7 @@ const Courses = () => {
     <div className='courses'>
       <div className='container'>
         <div>
-          <Grid container spacing={4} className='courses-list'>
+          <Grid container spacing={2} className='courses-list'>
             {courses.map(course => (
               <Grid item xs={12} sm={6} md={3} key={course._id}>
                 <CourseCard

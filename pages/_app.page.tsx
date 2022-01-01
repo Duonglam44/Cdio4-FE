@@ -28,6 +28,7 @@ const getPaths = (paths: string[]) => {
 }
 
 const publicPages = getPaths(['/', '/login', '/signup'])
+const privatePage = getPaths(['/courses/management', '/courses/management/[courseId]'])
 const withoutLayoutPaths = getPaths(['/user'])
 
 function myApp({ Component, pageProps, store }: any) {
@@ -37,7 +38,7 @@ function myApp({ Component, pageProps, store }: any) {
         <NoSsr>
           <ToastContainer />
           <Header />
-          <Layout withoutPaths={withoutLayoutPaths} publicPages={publicPages}>
+          <Layout withoutPaths={withoutLayoutPaths} publicPages={publicPages} privatePage={privatePage}>
             <Component {...pageProps} />
           </Layout>
           <Footer />

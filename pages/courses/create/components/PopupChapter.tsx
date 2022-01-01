@@ -3,8 +3,8 @@ import { Paper, Button } from '@material-ui/core'
 import { AiFillPlusSquare, AiFillDelete } from 'react-icons/ai'
 import { HiPlus } from 'react-icons/hi'
 import { useDispatch } from 'react-redux'
-import { createLesson } from '../../../redux/lesson/thunks'
-import { deleteChapter } from '../../../redux/chapter/thunks'
+import { createLesson } from 'redux/lesson/thunks'
+import { deleteChapter } from 'redux/chapter/thunks'
 
 interface IPopupChapter {
   chapterId: string

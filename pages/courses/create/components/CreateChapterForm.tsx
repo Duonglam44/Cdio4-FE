@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { CgMenuGridR } from 'react-icons/cg'
 import { Button } from '@material-ui/core'
 import { FormButton } from '@components/Form-Button'
-import { ButtonType } from '../../../types/componentTypes'
+import { ButtonType } from 'types/componentTypes'
 import { ChapterItem } from './ChapterItem'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
-import { createChapter } from '../../../redux/chapter/thunks'
-import { FixedLoading } from '../../../components/fixed-loading'
+import { createChapter } from 'redux/chapter/thunks'
+import { FixedLoading } from 'components/fixed-loading'
 
 interface ICreate {
   setTab: (value: number) => void

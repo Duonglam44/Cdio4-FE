@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
-import { CreateCourseForm } from '../component/CreateCourseForm'
-import { ChapterCreate } from '../component/CreateChapterForm'
+import { CreateCourseForm } from './components/CreateCourseForm'
+import { ChapterCreate } from './components/CreateChapterForm'
 
 const CourseCreate = () => {
   const [tab, setTab] = useState(1)

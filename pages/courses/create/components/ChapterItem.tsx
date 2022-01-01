@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import { LessonItem } from './LessonItem'
 import { PopupChapter } from './PopupChapter'
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
-import { updateChapter } from '../../../redux/chapter/thunks'
+import { updateChapter } from 'redux/chapter/thunks'
 import { BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs'
 
 interface IChapter {

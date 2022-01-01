@@ -10,7 +10,13 @@ import {
   getCoursesFailed,
   getCoursesPaginationRequest,
   getCoursesPaginationSucceeded,
-  getCoursesPaginationFailed
+  getCoursesPaginationFailed,
+  updateCourseRequest,
+  updateCourseSucceeded,
+  updateCourseFailed,
+  deleteCourseRequest,
+  deleteCourseSucceeded,
+  deleteCourseFailed
 } from './actions'
 import { toast } from 'react-toastify'
 import { api } from '../../utils/api'
@@ -81,7 +87,7 @@ export const getCoursesPagination = ({ page, limit }) => async (dispatch: any) =
 export const searchCourses = ({ page, limit }) => async (dispatch: any) => {
   dispatch(getCoursesPaginationRequest())
   const res: any = await api({
-    path: `search/?s=react&page=${page}&count=${limit}`,
+    path: `/search/?s=react&page=${page}&count=${limit}`,
     method: 'GET',
     needThrowError: false,
     errorHandler: (res) => {
@@ -90,4 +96,38 @@ export const searchCourses = ({ page, limit }) => async (dispatch: any) => {
     },
   })
   dispatch(getCoursesPaginationSucceeded(res.data.courses, res.data.totalCourses))
+}
+// update a course
+export const updateCourse = (id: string, params: any, succeededFn: () => void) => async (dispatch: any) => {
+  dispatch(updateCourseRequest())
+  await api({
+    path: `/courses/${id}`,
+    method: 'PUT',
+    needThrowError: false,
+    data: params,
+    errorHandler: (res) => {
+      toast.error(res)
+      dispatch(updateCourseFailed())
+    },
+  })
+  dispatch(updateCourseSucceeded())
+  toast.success('Update course successfully!')
+  succeededFn()
+}
+
+// delete a course
+export const deleteCourse = (id: string, succeededFn: () => void) => async (dispatch: any) => {
+  dispatch(deleteCourseRequest())
+  await api({
+    path: `/courses/${id}`,
+    method: 'DELETE',
+    needThrowError: false,
+    errorHandler: (res) => {
+      toast.error(res)
+      dispatch(deleteCourseFailed())
+    },
+  })
+  dispatch(deleteCourseSucceeded())
+  toast.success('Delete course successfully!')
+  succeededFn()
 }
