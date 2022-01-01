@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme: any) =>
       position: 'relative',
       cursor: 'pointer',
       '&.active::after': {
-        content: '''',
+        content: '""',
         marginRight: 2,
         position: 'absolute',
         bottom: 0,

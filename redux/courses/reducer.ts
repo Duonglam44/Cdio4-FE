@@ -4,14 +4,17 @@ import {
   GetCourses,
   GetCoursesPagination,
   SearchCourses,
+  UpdateCourse,
+  DeleteCourse,
 } from './types'
 
 const initialState = {
   courses: [],
   totalCourses: 0,
-  loading: null!,
+  loading: false,
   currentCreateCourseId: '',
   courseItem: null!,
+  sideLoading: false,
 }
 
 export const courseReducer = (state = initialState, action: any) => {
@@ -103,6 +106,38 @@ export const courseReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: action.loading,
+      }
+    // update a course
+    case UpdateCourse.UPDATE_COURSE_REQUEST:
+      return {
+        ...state,
+        sideLoading: action.sideLoading,
+      }
+    case UpdateCourse.UPDATE_COURSE_SUCCEEDED:
+      return {
+        ...state,
+        sideLoading: action.sideLoading,
+      }
+    case UpdateCourse.UPDATE_COURSE_FAILED:
+      return {
+        ...state,
+        sideLoading: action.sideLoading,
+      }
+    // delete a course
+    case DeleteCourse.DELETE_COURSE_REQUEST:
+      return {
+        ...state,
+        sideLoading: action.sideLoading,
+      }
+    case DeleteCourse.DELETE_COURSE_SUCCEEDED:
+      return {
+        ...state,
+        sideLoading: action.sideLoading,
+      }
+    case DeleteCourse.DELETE_COURSE_FAILED:
+      return {
+        ...state,
+        sideLoading: action.sideLoading,
       }
     default:
       return state

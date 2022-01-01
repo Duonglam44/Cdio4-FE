@@ -6,6 +6,7 @@ import Auth from '../auth/auth'
 interface ILayout {
   withoutPaths: string[],
   publicPages: string[]
+  privatePage: string[]
 }
 
 const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
@@ -26,7 +27,7 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
   }
 
   return (
-    <Auth publicPages={publicPages} >
+    <Auth publicPages={publicPages}>
       <div className={`${classes.layout}`}>
         <CssBaseline />
           <div className={classes.mainLayoutChild}>

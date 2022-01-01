@@ -6,10 +6,12 @@ import { courseReducer } from './courses/reducer'
 import { lessonReducer } from './lesson/reducer'
 import { chapterReducer } from './chapter/reducer'
 import { user } from './user/reducer'
+import { filesReducers as files } from './files/reducers'
 
 const rootReducer = combineReducers({
   auth,
   user,
+  files,
   globalReducer,
   courseReducer,
   lessonReducer,

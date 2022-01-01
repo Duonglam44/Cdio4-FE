@@ -1,0 +1,36 @@
+.courseManagement {
+  &-wrap{
+    background: #fff;
+    padding: 30px 0;
+  }
+  &-context-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    & > button {
+      color: #38B6FF;
+    }
+  }
+  &-editModal{
+    width: 100%;
+    max-width: 1000px;
+    max-height: 80vh;
+    height: fit-content;
+    margin-top: 10vh;
+    margin: 10vh auto;
+    border-radius: 20px;
+    overflow: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+.modal-main__footer {
+  width: 100%;
+  padding: 30px;
+}
+.modal-main__footer {
+  box-sizing: border-box;
+  background: #fff;
+}

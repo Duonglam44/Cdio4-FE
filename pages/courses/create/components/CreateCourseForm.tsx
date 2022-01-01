@@ -1,14 +1,14 @@
 import { useMemo, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Input } from '../../../components/input'
+import { Input } from 'components/input'
 import { TextareaAutosize } from '@material-ui/core'
 import { FormButton } from '@components/Form-Button'
-import { ButtonType } from '../../../types/componentTypes'
+import { ButtonType } from 'types/componentTypes'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import { BsUpload } from 'react-icons/bs'
-import { createCourse } from '../../../redux/courses/thunks'
-import { uploadFile } from '../../../redux/global/thunks'
+import { createCourse } from 'redux/courses/thunks'
+import { uploadFile } from 'redux/global/thunks'
 
 const validationSchema = yup.object().shape({
   title: yup.string().required(),
