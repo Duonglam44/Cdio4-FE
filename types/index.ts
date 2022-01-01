@@ -13,3 +13,12 @@ export interface UserInfo {
   createdAt: string,
   loading: boolean,
 }
+
+export interface IBlogs {
+  name: string,
+  description: string,
+  createdAt:  string,
+  imageUrl: string,
+  createdBy: string,
+  authorAvt: string
+}
