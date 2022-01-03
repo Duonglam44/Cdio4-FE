@@ -6,6 +6,7 @@ import { GetUser } from '../../redux/user/thunks'
 import router from 'next/router'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { UserIdLoading } from './components/loading/UserIdLoading'
+import { ErrorModal } from '@components/error-modal'
 
 const UserPage = () => {
   const classes = useStyles()
@@ -27,6 +28,8 @@ const UserPage = () => {
   }, [router.query?.userId])
 
   if (loading || authLoading) return <UserIdLoading />
+
+  if (!thisUserData) return <ErrorModal title={'This user is not exists!'} />
 
   // if(!thisUserData) return router.push('/')
 
@@ -50,7 +53,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       padding: '30px 0',
-      background: '#f1f1f1',
+      background: '#64b7e11f',
       minHeight: 'calc(100vh - 370px)',
     },
   })

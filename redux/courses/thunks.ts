@@ -46,7 +46,6 @@ export const getCourseById = (id: string) => async (dispatch: any) => {
     method: 'GET',
     needThrowError: false,
     errorHandler: (res) => {
-      toast.error(res)
       dispatch(getCourseByIdFailed())
     },
   })

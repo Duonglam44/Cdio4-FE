@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Header } from '../components/header/Header'
 import { Footer } from '../components/footer/Footer'
 import 'swiper/css'
+import 'swiper/css/navigation';
+import Head from 'next/head'
 
 const getPaths = (paths: string[]) => {
   const newPaths: string[] = []
@@ -34,6 +36,11 @@ const withoutLayoutPaths = getPaths(['/user'])
 function myApp({ Component, pageProps, store }: any) {
   return (
     <Provider store={store}>
+      <Head>
+        <title>GuruAcademy</title>
+        <link rel='shortcut icon' href='https://firebasestorage.googleapis.com/v0/b/guru-academy-297d3.appspot.com/o/files%2FLogo.png?alt=media&token=57e9e751-4e63-4475-95d5-79c8ceccfd9f' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <ThemeProvider theme={theme}>
         <NoSsr>
           <ToastContainer />

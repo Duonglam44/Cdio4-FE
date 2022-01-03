@@ -42,7 +42,7 @@ const Login: React.FC = () => {
               Forgot Password
             </FormButton>
             <FormButton type={ButtonType.SUBMIT}
-              onClick={() => { router.replace('/signin') }}
+              onClick={() => { router.replace('/signup') }}
             >Create New Account</FormButton>
           </div>
         </div>

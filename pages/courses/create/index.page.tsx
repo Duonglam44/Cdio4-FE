@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import { CreateCourseForm } from './components/CreateCourseForm'
 import { ChapterCreate } from './components/CreateChapterForm'
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
+import { CourseInfo } from '../management/components/courseInfo'
+import { getCourseById } from 'redux/courses/thunks'
 
 const CourseCreate = () => {
+  const dispatch = useDispatch()
   const [tab, setTab] = useState(1)
+  const currentCourses = useSelector((state: RootStateOrAny) => state.courseReducer?.courseItem)
+  const currentCreatedCourse = useSelector((state: RootStateOrAny) => state.courseReducer?.currentCreateCourseId)
+
+  useEffect(() => {
+    dispatch(getCourseById(currentCreatedCourse))
+  }, [currentCreatedCourse])
 
   return (
     <div className='course'>
@@ -37,6 +47,9 @@ const CourseCreate = () => {
               <div style={{ display: `${tab === 2 ? 'block' : 'none'}` }}>
                 <ChapterCreate setTab={setTab} tab={tab} />
               </div>
+              {
+                tab === 3 && currentCourses && <CourseInfo selectedCourse={currentCourses}/>
+              }
             </Grid>
           </Grid>
         </div>

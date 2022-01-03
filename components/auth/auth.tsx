@@ -37,11 +37,6 @@ const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children, publ
 
   // const checkAccessUser = () => {
   //   if (publicPages.includes(path)) return
-
-  // }
-
-  // if (loading) {
-  //   return <>loading...</>
   // }
 
   return (
