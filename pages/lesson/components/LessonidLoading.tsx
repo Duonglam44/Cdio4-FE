@@ -18,7 +18,7 @@ export const LessonIdLoading = () => {
         </Grid>
         <Grid item sm={12} md={4} className='lessonItem-sidebar'>
           <Grid container className={classes.chapterBar}>
-            {Array.from({ length: 2 }).map((_, index) => (
+            {Array.from({ length: 4 }).map((_, index) => (
               <Grid item xs={12} className={classes.chapterItem} key={index}>
                 <SkeletonLoading />
               </Grid>

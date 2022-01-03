@@ -3,11 +3,10 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
 import { CourseCard } from '@components/course-card'
-import { GrNext, GrPrevious } from 'react-icons/gr'
 
 interface ISlider {
   title?: string
-  courses?: []
+  courses: []
   className?: string
 }
 
@@ -19,23 +18,22 @@ export const CourseSlider: React.FC<ISlider> = ({
   const classes = useStyles()
 
   return (
-    <div className={className}>
-      <div className={classes.slideHeader}>
-        <h1 className={classes.title}>{title}</h1>
-        <span className={classes.link}>
-          <Link href={'/courses'}>more courses</Link>
-        </span>
-      </div>
+    <div className={`${className}`}>
+      {title && (
+        <div className={classes.slideHeader}>
+          <h1 className={classes.title}>{title}</h1>
+          <span className={classes.link}>
+            <Link href={'/courses'}>more courses</Link>
+          </span>
+        </div>
+      )}
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         className={classes.slide}
         spaceBetween={50}
         slidesPerView={4}
         loop={true}
-        navigation={{
-          nextEl: '.slide-next-btn',
-          prevEl: '.slider-prev-btn',
-        }}
+        navigation
         pagination={{ clickable: true }}
       >
         {courses?.map((course: any) => (
@@ -49,16 +47,6 @@ export const CourseSlider: React.FC<ISlider> = ({
             />
           </SwiperSlide>
         ))}
-        <div
-          className={`${classes.controlButton} ${classes.prev} slider-prev-btn`}
-        >
-          <GrPrevious />
-        </div>
-        <div
-          className={`${classes.controlButton} ${classes.next} slider-next-btn`}
-        >
-          <GrNext />
-        </div>
       </Swiper>
     </div>
   )
@@ -75,6 +63,50 @@ const useStyles = makeStyles((theme: any) =>
       width: 'calc(100% + 20px)',
       marginLeft: -10,
       padding: '10px',
+      '& .swiper-button-next': {
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 10,
+        borderRadius: '50%',
+        border: '1px solid',
+        height: 40,
+        width: 40,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backdropFilter: 'blur(5px)',
+        cursor: 'pointer',
+        background: '#fff',
+        color: '#000',
+        right: 15,
+        '&::after': {
+          fontSize: 20,
+          fontWeight: 600,
+        },
+      },
+      '& .swiper-button-prev': {
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 10,
+        borderRadius: '50%',
+        border: '1px solid',
+        height: 40,
+        width: 40,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backdropFilter: 'blur(5px)',
+        cursor: 'pointer',
+        background: '#fff',
+        color: '#000',
+        left: 15,
+        '&::after': {
+          fontSize: 20,
+          fontWeight: 600,
+        },
+      },
     },
     link: {
       '& > a': {
@@ -86,24 +118,7 @@ const useStyles = makeStyles((theme: any) =>
       fontWeight: 500,
       padding: '5px 0',
     },
-    controlButton: {
-      fontSize: 20,
-      color: '#fff',
-      position: 'absolute',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      zIndex: 10,
-      borderRadius: '50%',
-      border: '1px solid',
-      height: 40,
-      width: 40,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backdropFilter: 'blur(5px)',
-      cursor: 'pointer',
-      background: '#fff'
-    },
+    controlButton: {},
     prev: {
       left: 15,
     },

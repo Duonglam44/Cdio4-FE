@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Grid, makeStyles, createStyles } from '@material-ui/core'
 import { CourseCard } from '@components/course-card'
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -11,20 +11,55 @@ export const UserCourses = () => {
     (state: RootStateOrAny) => state.user.userData?.role
   )
   const teachingCourse = useSelector(
-    (state: RootStateOrAny) => state.auth?.data?.teachingCourses
+    (state: RootStateOrAny) => state.user.userData?.teachingCourses
   )
   const learningCourses = useSelector(
-    (state: RootStateOrAny) => state.auth?.data?.learningCourses
+    (state: RootStateOrAny) => state.user.userData?.learningCourses
   )
 
-  useEffect(() => {
+  const allCourses = useMemo(() => {
     if (userRole?.id !== 3) {
       setCourses(learningCourses)
 
-      return
+      return learningCourses
     }
     setCourses(teachingCourse)
+
+    return teachingCourse
   }, [teachingCourse, learningCourses, userRole])
+
+  const handleFilterCourses = (id: number) => {
+    switch (id) {
+      case 0: {
+        const tempCourses = allCourses.filter(course => course.status === 0)
+        setCourses(tempCourses)
+
+        return
+      }
+      case 1: {
+        const tempCourses = allCourses.filter(course => course.status === 1)
+        setCourses(tempCourses)
+
+        return
+      }
+      case 2: {
+        const tempCourses = allCourses.filter(course => course.status === 2)
+        setCourses(tempCourses)
+
+        return
+      }
+      case 20: {
+        const tempCourses = allCourses.filter(course => course.status === 20)
+        setCourses(tempCourses)
+
+        return
+      }
+
+      default: {
+        setCourses(allCourses)
+      }
+    }
+  }
 
   return (
     <div className={classes.wrap}>
@@ -34,10 +69,11 @@ export const UserCourses = () => {
           <span className={classes.filterTitle}>Filter :</span>
           <div className={classes.filterContext}>
             {Object.values(CourseFilterArray).map((filter, idx) => (
-              <span key={idx} className={`${classes.filterTag} ${filterId === idx ? 'active' : '' }`}
-                style={{ color: `${filterId === idx ? `${filter.color}` :  '' }` }}
+              <span key={idx} className={`${classes.filterTag} ${filterId === filter.id ? 'active' : '' }`}
+                style={{ color: `${filterId === filter.id ? `${filter.color}` :  '' }` }}
                 onClick={() => {
-                  setFilterId(idx)
+                  setFilterId(filter.id)
+                  handleFilterCourses(filter.id)
                 }}
               >
                 {filter.name}{' '}
@@ -69,18 +105,27 @@ export const UserCourses = () => {
 
 const CourseFilterArray = {
   all: {
+    id: null!,
     name: 'All Course',
     color: '#66cc00',
   },
   active: {
+    id: 0,
     name: 'Active',
     color: '#00CCCC',
   },
   inactive: {
+    id: 1,
     name: 'Inactive',
     color: '#FF0000',
   },
+  pending: {
+    id: 2,
+    name: 'Pending',
+    color: 'orange',
+  },
   draft: {
+    id: 20,
     name: 'in Draft',
     color: '#202020',
   },

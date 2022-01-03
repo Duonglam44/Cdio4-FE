@@ -6,6 +6,7 @@ import { getCategories } from '../../redux/global/thunks'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import { UserOption } from './components/userOptions'
 import { getJwt } from 'utils/Auth'
+import { execPath } from 'process'
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch()
@@ -80,7 +81,11 @@ export const Header: React.FC = () => {
                 <div
                   className='header__avatar-wrap'
                   onClick={(e) => {
+                    e.stopPropagation()
                     setIsShowOption(!isShowOption)
+                    window.addEventListener('click', () => {
+                      setIsShowOption(false)
+                    })
                   }}
                 >
                   <div className='header__avatar'>
@@ -110,15 +115,11 @@ const headerItems = [
     path: '/courses',
   },
   {
-    title: 'About',
-    path: '/about',
-  },
-  {
     title: 'Blogs',
     path: '/blogs',
   },
   {
-    title: 'Forums',
-    path: '/forums',
+    title: 'About',
+    path: '/about',
   },
 ]

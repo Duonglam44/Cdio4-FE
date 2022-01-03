@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { AiFillPlayCircle } from 'react-icons/ai'
 import { HiOutlinePlus } from 'react-icons/hi'
@@ -8,12 +8,17 @@ import { BiTime } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { getCourseById } from '../../redux/courses/thunks'
+import { CourseIdxLoading } from './management/components/loading/CourseIdxLoading'
+import { ErrorModal } from '@components/error-modal'
 
 const CourseDetail = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const courseItem = useSelector(
     (state: RootStateOrAny) => state.courseReducer.courseItem
+  )
+  const loading = useSelector(
+    (state: RootStateOrAny) => state.courseReducer.loading
   )
 
   const { title, chapters, description, price } = courseItem || {}
@@ -29,6 +34,12 @@ const CourseDetail = () => {
 
     return total
   }, [courseItem])
+
+  if (loading) return <CourseIdxLoading />
+
+  if (!courseItem) {
+    return <ErrorModal title='Can not found this course!' returnUrl='/' />
+  }
 
   return (
     <div id='courseDetail' className='courseDetail'>
@@ -59,9 +70,11 @@ const CourseDetail = () => {
                         key={lesson._id}
                       >
                         <AiFillPlayCircle />
-                        <a onClick={() => {
-                          router.push(`/lesson/${lesson._id}`)
-                        }}>{`${idx} ${lesson.title}`}</a>
+                        <a
+                          onClick={() => {
+                            router.push(`/lesson/${lesson._id}`)
+                          }}
+                        >{`${idx} ${lesson.title}`}</a>
                         <span>2:25</span>
                       </div>
                     ))}
@@ -71,9 +84,14 @@ const CourseDetail = () => {
             </div>
           </Grid>
           <Grid item lg={5} className='courseDetail-leftSide'>
-            <a href='123' className='courseDetail-video'>
-              <video src='https://firebasestorage.googleapis.com/v0/b/guru-academy-297d3.appspot.com/o/files%2Fvideoplayback.mp4?alt=media&token=d9981d54-daf0-4cc2-bede-f2686f715b35' />
-            </a>
+            <div className='courseDetail-video'>
+              <img
+                src={
+                  'https://firebasestorage.googleapis.com/v0/b/guru-academy-297d3.appspot.com/o/files%2Freactjs.png?alt=media&token=36eb4497-7213-4315-8d62-c115caf94031'
+                }
+                alt='course image'
+              />
+            </div>
             <h3>{price ? `${price} $` : 'Free'}</h3>
             <Button variant='contained' className='courseDetail-subBtn'>
               Dang Ky Hoc

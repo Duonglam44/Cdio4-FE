@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: any) =>
     content: {
       background: '#fff',
       padding: 20,
+      paddingBottom: 30,
     },
   })
 )

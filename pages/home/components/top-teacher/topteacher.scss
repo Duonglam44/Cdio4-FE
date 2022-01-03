@@ -1,7 +1,7 @@
-@import "../../../styles/sass/variable.scss";
+@import "styles/sass/variable.scss";
 .topTeacher {
     padding: 30px 0;
-    border-bottom: 1px solid $gray-text-color;
+    border-bottom: 1px solid #ccc;
     &__header {
         font-size: 25px;
         margin: 0 auto 50px;

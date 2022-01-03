@@ -3,6 +3,7 @@ import { Paper, Button } from '@material-ui/core'
 import Link from 'next/link'
 import { logout } from 'redux/login/actions'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import router from 'next/router'
 
 export const UserOption = () => {
   const dispatch = useDispatch()
@@ -15,7 +16,7 @@ export const UserOption = () => {
     },
     {
       title: 'Course',
-      path: '/user/course',
+      path: '/courses/management',
     },
     {
       title: 'LiveStreams',
@@ -48,6 +49,7 @@ export const UserOption = () => {
         key='logout'
         onClick={(_) => {
           dispatch(logout())
+          router.push('/')
         }}
       >
         Logout

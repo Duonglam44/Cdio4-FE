@@ -18,11 +18,11 @@ const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
     return <>{children}</>
   }
 
-  if (path.includes('/login')) {
+  if (publicPages.includes(path)) {
     return (
       <div className={`${classes.layout}`}>
         {children}
-      </div>
+    </div>
     )
   }
 

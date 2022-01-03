@@ -24,14 +24,15 @@ const commentList = [
 export const ShareSkill = () => {
   return (
     <div className='share-skill'>
-      <Grid container>
-        <Grid container item lg direction='column' alignItems='center'>
+      <div className='share-skill-container'>
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
           <p className='share-skill__title'>follow us</p>
           <h2 className='share-skill__header'>Share Your Skill</h2>
-        </Grid>
-        <Grid container item spacing={2} justifyContent='center'>
+        </div>
+        <Grid container spacing={2} justifyContent='center'>
           {commentList.map((item, index) => (
-            <Grid item lg={3.5} key={index}>
+            <Grid item xs={12} md={4} key={index}>
               <div className='share-skill__card'>
                 <div className='share-skill__card-title d-flex justify-content-flex-start'>
                   <div className='share-skill__card-img'>
@@ -49,7 +50,8 @@ export const ShareSkill = () => {
             </Grid>
           ))}
         </Grid>
-      </Grid>
+      </div>
+      </div>
     </div>
   );
 };

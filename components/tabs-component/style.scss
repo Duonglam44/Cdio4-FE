@@ -4,6 +4,9 @@
   justify-content: flex-start;
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   & .title {
     font-size: 20px;
     font-weight: 500;
@@ -17,4 +20,8 @@
     font-weight: 600;
     border-bottom: 2px solid;
   }
+}
+.tabs-left {
+  display: flex;
+  align-items: center;
 }

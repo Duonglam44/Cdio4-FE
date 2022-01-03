@@ -123,7 +123,7 @@ export const getLessonByIdRequest = () => {
 
 export const getLessonByIdSucceeded = (res: any) => {
   return {
-    type: GetLessonById.GET_LESSON_REQUEST,
+    type: GetLessonById.GET_LESSON_SUCCEEDED,
     loading: false,
     currentLesson: res
   }
@@ -131,7 +131,7 @@ export const getLessonByIdSucceeded = (res: any) => {
 
 export const getLessonByIdFailed = () => {
   return {
-    type: GetLessonById.GET_LESSON_REQUEST,
+    type: GetLessonById.GET_LESSON_FAILED,
     loading: false,
   }
 }

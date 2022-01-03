@@ -1,7 +1,12 @@
-@import "../../../styles/sass/variable.scss";
+@import "styles/sass/variable.scss";
 .keep-up {
     padding: 50px 0;
-    border-bottom: 1px solid $gray-text-color;
+    border-bottom: 1px solid #ccc;
+    &-container {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+    }
     &__header {
         font-size: 20px;
         text-transform: uppercase;

@@ -135,9 +135,7 @@ export const ChaptersInfo = ({ data }: Props) => {
                         label={'View'}
                         value={
                           <Link
-                            href={`/manage-courses/chapter/${chapter._id}?n=${
-                              index + 1
-                            }`}
+                            href={''}
                             passHref
                           >
                             <span

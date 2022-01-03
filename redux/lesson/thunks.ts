@@ -16,9 +16,10 @@ import {
   deleteAttachmentFailed,
   getLessonByIdRequest,
   getLessonByIdSucceeded,
-  getLessonByIdFailed,
+  getLessonByIdFailed
 } from './actions'
 import { api } from '../../utils/api'
+import { getCourseById } from '../courses/thunks'
 
 export const createLesson = (params: any) => async (dispatch: any) => {
   dispatch(createLessonRequest())
@@ -34,7 +35,7 @@ export const createLesson = (params: any) => async (dispatch: any) => {
   dispatch(createLessonSucceeded(res.data.lesson))
 }
 
-export const createChapter = (params: any) => async (dispatch: any) =>  {
+export const createChapter = (params: any) => async (dispatch: any) => {
   dispatch(createAttachmentRequest())
   const res: any = await api({
     path: '/attachments',
@@ -48,19 +49,20 @@ export const createChapter = (params: any) => async (dispatch: any) =>  {
   dispatch(createAttachmentSucceeded(res.data.attachment))
 }
 
-export const updateLesson = (params: any, id: string) => async (dispatch: any) => {
-  dispatch(updateLessonRequest())
-  await api({
-    path: `/lessons/${id}`,
-    method: 'PUT',
-    data: params,
-    needThrowError: false,
-    errorHandler: (_) => {
-      dispatch(updateLessonFailed())
-    },
-  })
-  dispatch(updateLessonSucceeded())
-}
+export const updateLesson =
+  (params: any, id: string) => async (dispatch: any) => {
+    dispatch(updateLessonRequest())
+    await api({
+      path: `/lessons/${id}`,
+      method: 'PUT',
+      data: params,
+      needThrowError: false,
+      errorHandler: (_) => {
+        dispatch(updateLessonFailed())
+      },
+    })
+    dispatch(updateLessonSucceeded())
+  }
 
 export const deleteLesson = (id: string) => async (dispatch: any) => {
   dispatch(deleteLessonRequest())
@@ -75,7 +77,7 @@ export const deleteLesson = (id: string) => async (dispatch: any) => {
   dispatch(deleteLessonSucceeded(id))
 }
 
-export const deleteAttachment =  (id: string) => async (dispatch: any) => {
+export const deleteAttachment = (id: string) => async (dispatch: any) => {
   dispatch(deleteAttachmentRequest())
   await api({
     path: `/attachments/${id}`,
@@ -88,15 +90,21 @@ export const deleteAttachment =  (id: string) => async (dispatch: any) => {
   dispatch(deleteAttachmentSucceeded(id))
 }
 
-export const GetLessonById = (id: string) => async(dispatch: any) => {
+export const GetLessonById = (id: string) => async (dispatch: any) => {
   dispatch(getLessonByIdRequest())
   const res: any = await api({
     path: `/lessons/${id}`,
     method: 'get',
     needThrowError: false,
     errorHandler: (_) => {
-      dispatch(getLessonByIdSucceeded(res?.data))
-    }
+      dispatch(getLessonByIdFailed())
+    },
   })
-  dispatch(getLessonByIdFailed())
+  Promise.resolve(res)
+    .then(async () => {
+      await dispatch(getCourseById(res?.data.lesson.chapter?.courseId?._id))
+    })
+    .finally(() => {
+      dispatch(getLessonByIdSucceeded(res?.data.lesson))
+    })
 }

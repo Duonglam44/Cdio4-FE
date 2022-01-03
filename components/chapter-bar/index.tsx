@@ -34,13 +34,15 @@ export const ChapterBar: React.FC<Props> = ({ chapters, className }) => {
                     direction='row'
                     alignItems='center'
                   >
-                    <Grid item xs={9} className={classes.flex}>
+                    <Grid item xs={10} className={classes.flex}
+                      title={chapter.title}
+                    >
                       <StatusDot status={chapter?.status} />
-                      <Box className='my-8'>{`Chapter ${index + 1}: ${
+                      <Box className={`my-8 ${classes.chapterTitle}`}>{`Chapter ${index + 1}: ${
                         chapter.title
                       }`}</Box>
                     </Grid>
-                    <Grid item xs={3} className={classes.chapterLesson}>
+                    <Grid item xs={2} className={classes.chapterLesson}>
                       {chapter.lessons?.length} lessons
                     </Grid>
                   </Grid>
@@ -60,8 +62,14 @@ const useStyles = makeStyles((theme: any) =>
   createStyles({
     chapterBar: {
       margin: '0 15px',
+      '& .MuiAccordion-root': {
+        marginTop: '0!important',
+      }
     },
     lesson: {
+      '&:firstChild': {
+        paddingTop: 0,
+      },
       padding: '5px 10px',
       backgroundColor: 'none',
     },
@@ -71,6 +79,14 @@ const useStyles = makeStyles((theme: any) =>
       '&:hover': {
         color: '#333',
       },
+    },
+    chapterTitle: {
+      fontWeight: 500,
+      fontSize: 16,
+      display: '-webkit-box',
+      '-webkit-box-orient': 'vertical',
+      '-webkit-line-clamp': 1,
+      overflow: 'hidden',
     },
     flex: {
       display: 'flex',

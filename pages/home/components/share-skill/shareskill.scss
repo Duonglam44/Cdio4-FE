@@ -1,6 +1,11 @@
-@import "../../../styles/sass/variable.scss";
+@import "styles/sass/variable.scss";
 .share-skill{
     padding: 40px 0;
+    &-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
     &__title{
         font-weight: normal;
         margin-bottom: 10px;

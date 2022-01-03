@@ -56,11 +56,13 @@ const Courses = () => {
           }}
         />
       </div>
-      <div className='container'>
-        <CourseSlider
-          title='Relative Courses'
-          courses={courses.slice(0, 6)}
-        />
+      <div className='courses__sliderSection'>
+        <div className='container'>
+          <CourseSlider
+            title='Relative Courses'
+            courses={courses.slice(0, 6)}
+          />
+        </div>
       </div>
     </div>
   )
