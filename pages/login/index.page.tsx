@@ -5,6 +5,7 @@ import { LoginForm } from './components/loginForm'
 import { useRouter } from 'next/router'
 import { RootStateOrAny, useSelector } from 'react-redux'
 import { getJwt } from 'utils/Auth'
+import { FixedLoading } from 'components/fixed-loading'
 
 const Login: React.FC = () => {
   const router = useRouter()
@@ -25,10 +26,9 @@ const Login: React.FC = () => {
     router.replace('/')
   }
 
-  if (loading) return (<div>loading...</div>)
-
   return (
     <div className='signIn'>
+      {loading && <FixedLoading />}
       <div className='signIn__content'>
         <div className='signIn__logo'>
           <img src='./assets/images/Logo.png' alt='' />

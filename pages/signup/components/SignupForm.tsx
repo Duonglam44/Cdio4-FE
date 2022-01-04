@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Input } from '../../../components/input'
 import { FormButton } from '../../../components/Form-Button'
 import { ButtonType } from '../../../types/componentTypes'
 import { SignUpThunkAction } from '../../../redux/login/thunks'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { Checkbox, FormControlLabel, Button } from '@material-ui/core'
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
+import router from 'next/router'
+import { clearSucceededCreate } from 'redux/login/actions'
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -33,6 +35,7 @@ const validationSchema = Yup.object().shape({
 export const SignupForm = () => {
   const [isPopupCVField, setIsPopupCVField] = useState<boolean>(false)
   const dispatch = useDispatch()
+  const createCompleted = useSelector((state: RootStateOrAny) => state.auth.createCompleted)
   const formik = useFormik({
     validationSchema,
     initialValues: {
@@ -58,6 +61,15 @@ export const SignupForm = () => {
     }
     dispatch(SignUpThunkAction(values, errorFunc))
   }
+
+  useEffect(() => {
+    if (!createCompleted) return
+    router.push('/login')
+
+    return () => {
+      dispatch(clearSucceededCreate())
+    }
+  }, [createCompleted])
 
   return (
     <form

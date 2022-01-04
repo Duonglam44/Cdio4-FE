@@ -48,6 +48,12 @@ export const auth = (state = initialState, action: any) => {
         ...state,
         loading: action?.loading,
       }
+    case SignUpActions.REMOVE_SUCCEEDED_CREATE:
+      return {
+        ...state,
+        loading: action?.loading,
+        createCompleted: action?.createCompleted,
+      }
     // logout action
     case LogoutActions.LOGOUT_SUCCEEDED:
       logout()

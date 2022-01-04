@@ -7,8 +7,7 @@ import {
 import { GoLocation } from 'react-icons/go'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import dayjs from 'dayjs'
-
-const defaultAvatar = 'https://codelearn.io/CodeCamp/CodeCamp/Upload/Avatar/a76638850ecc4722b76d255e9cdd462f.jpg'
+import { defaultAvatar } from '../../../configs/constants'
 
 export const UserSideBar = () => {
   const classes = useStyles()
@@ -72,7 +71,7 @@ export const useStyles = makeStyles((theme: any) =>
       width: 130,
       height: 130,
       objectFit: 'cover',
-      border: '1px solid #838383',
+      border: '1px solid #c1c1c1',
       marginBottom: 10,
     },
     userName: {

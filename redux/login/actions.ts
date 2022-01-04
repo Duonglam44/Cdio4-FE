@@ -40,6 +40,13 @@ export const SignUpFailed = () => {
     loading: false
   }
 }
+export const clearSucceededCreate = () => {
+  return {
+    type: SignUpActions.REMOVE_SUCCEEDED_CREATE,
+    loading: false,
+    createCompleted: false,
+  }
+}
 //  logout action
 export const logout = () => {
   return {

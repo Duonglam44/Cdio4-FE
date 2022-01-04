@@ -1,25 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SignupForm } from './components/SignupForm'
-import { useRouter } from 'next/router'
-import { getJwt } from 'utils/Auth'
 import { RootStateOrAny, useSelector } from 'react-redux'
+import { FixedLoading } from 'components/fixed-loading'
 
 const SignUp = () => {
-  const router = useRouter()
   const loading = useSelector((state: RootStateOrAny) => state.auth.loading)
-
-  useEffect(() => {
-    const token = getJwt()
-    if (!token) return
-    router.replace('/')
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  if (loading) return (<div>loading</div>)
 
   return (
     <div className='signIn'>
+      { loading && <FixedLoading /> }
       <div className='signIn__content'>
         <div className='signIn__logo'>
           <img src='./assets/images/Logo.png' alt='' />

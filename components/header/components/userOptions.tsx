@@ -15,7 +15,7 @@ export const UserOption = () => {
       path: `/user/${currentUser?._id}`,
     },
     {
-      title: 'Course',
+      title: 'Courses',
       path: '/courses/management',
     },
     {

@@ -94,7 +94,7 @@ const CourseDetail = () => {
             </div>
             <h3>{price ? `${price} $` : 'Free'}</h3>
             <Button variant='contained' className='courseDetail-subBtn'>
-              Dang Ky Hoc
+              Register
             </Button>
             <div className='detail-tag'>
               <div>

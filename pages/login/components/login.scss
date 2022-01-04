@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     background-color: white;
+    min-height: calc(100vh - 362px);
     &__content {
         height: 100%;
         flex: 3;
