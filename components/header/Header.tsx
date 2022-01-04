@@ -6,14 +6,12 @@ import { getCategories } from '../../redux/global/thunks'
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import { UserOption } from './components/userOptions'
 import { getJwt } from 'utils/Auth'
-import { execPath } from 'process'
+import { defaultAvatar } from '../../configs/constants'
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch()
   const [isShowOption, setIsShowOption] = useState<boolean>(false)
-  const global = useSelector((state: RootStateOrAny) => state.globalReducer)
-
-  // headerItems[0]?.subItems?.push(...(global?.categories as []))
+  const user = useSelector((state: RootStateOrAny) => state.auth.data)
 
   window.onscroll = () => {
     const headerElement = document.getElementById('header')
@@ -51,16 +49,6 @@ export const Header: React.FC = () => {
               <div key={index} className='header__menu-item'>
                 <div key={index} className='header__menu-link'>
                   <Link href={`${item.path}`}>{item.title}</Link>
-                  {/* <div
-                    className='nav-link-menu'
-                    style={{ display: `${item.subItems ?? 'none'}` }}
-                  >
-                    {item.subItems?.map((item, index) => (
-                      <Link to={item.path} className='nav-link-sub' key={index}>
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div> */}
                 </div>
               </div>
             ))}
@@ -90,7 +78,7 @@ export const Header: React.FC = () => {
                 >
                   <div className='header__avatar'>
                     <img
-                      src='https://images.unsplash.com/photo-1638074645949-0f1383f6ccee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1965&q=80'
+                      src={user?.imageUrl || defaultAvatar}
                       alt=''
                     />
                   </div>
@@ -111,7 +99,7 @@ const headerItems = [
     path: '/',
   },
   {
-    title: 'Course',
+    title: 'Courses',
     path: '/courses',
   },
   {

@@ -7,6 +7,7 @@ import { FormButton } from '../../../components/Form-Button'
 import { ButtonType } from '../../../types/componentTypes'
 import { LoginThunkAction } from '../../../redux/login/thunks'
 import { toast } from 'react-toastify'
+import { FixedLoading } from 'components/fixed-loading'
 
 const validationSchema = yup.object().shape({
   email: yup

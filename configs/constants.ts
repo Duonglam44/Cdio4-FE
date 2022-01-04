@@ -1,6 +1,6 @@
 export const API_URL = 'https://guru-academy-api.herokuapp.com/'
 export const API_URL_V1 = 'https://guru-academy-api.herokuapp.com/api/v1'
-export const defaultAvatar = ''
+export const defaultAvatar = 'https://firebasestorage.googleapis.com/v0/b/guru-academy-297d3.appspot.com/o/files%2Favatar.png?alt=media&token=0246c300-4a0e-41fc-b3ce-71d4172ee0f5'
 
 export const COUNT_PER_PAGE = 20
 
