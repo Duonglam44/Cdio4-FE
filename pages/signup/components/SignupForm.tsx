@@ -20,10 +20,10 @@ const validationSchema = Yup.object().shape({
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('This field is required'),
-  email: Yup.string().email('Invalid email').required('This field is required'),
+  email: Yup.string().email('Invalid Email').required('This field is required'),
   password: Yup.string()
-    .min(8, 'password must be more than 8 characters')
-    .max(30, 'password must be less than 8 characters')
+    .min(8, 'Password must be more than 8 characters')
+    .max(30, 'Password must be less than 8 characters')
     .required('This field is required'),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref('password')],
@@ -82,7 +82,7 @@ export const SignupForm = () => {
         type='text'
         onChange={formik.handleChange}
         value={formik.values.firstName}
-        label='First name'
+        label='First Name'
         error={formik.errors.firstName}
       />
       <Input
@@ -90,7 +90,7 @@ export const SignupForm = () => {
         type='text'
         onChange={formik.handleChange}
         value={formik.values.lastName}
-        label='Last name'
+        label='Last Name'
         error={formik.errors.lastName}
       />
       <Input
@@ -114,7 +114,7 @@ export const SignupForm = () => {
         type='password'
         onChange={formik.handleChange}
         value={formik.values.confirmPassword}
-        label='Confirm password'
+        label='Confirm Password'
         error={formik.errors.confirmPassword}
       />
 
@@ -159,7 +159,7 @@ export const SignupForm = () => {
         }
       />
 
-      <FormButton type={ButtonType.SUBMIT}>Sign up</FormButton>
+      <FormButton type={ButtonType.SUBMIT}>Sign Up</FormButton>
     </form>
   )
 }
