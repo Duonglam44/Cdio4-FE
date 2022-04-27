@@ -18,7 +18,7 @@
         }
     }
     &__box {
-        width: 70%;
+        width: 65%;
         height: 200px;
         @include flex(flex-end, center);
         background: $secondary-text-color;
@@ -47,9 +47,9 @@
             }
         }
         &-img {
-            width: 130px;
-            height: 130px;
-            margin: 0 40px;
+            width: 150px;
+            height: 150px;
+            margin: 0px 28px;
             border-radius: 50%;
             overflow: hidden;
         }
