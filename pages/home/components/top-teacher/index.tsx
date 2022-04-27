@@ -2,23 +2,30 @@ import React from 'react';
 
 const teachersData = [
   {
-    name: 'Xuan Chien K58',
-    des: 'senior front-end engineer. co-founder GuguAcademy',
-    img: 'https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/269914350_3271491716429250_4183426382528319230_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=A0i2HyQr5XkAX8xvGgC&_nc_ht=scontent.fdad3-1.fna&oh=00_AT-G1oWdt9fIXqSN-V_Md29qZ5jKnDB7Ml_hB4UHvBy6xQ&oe=61D5E1C4',
+    name: 'Chien Xuan Dang',
+    des: 'Senior front-end engineer. co-founder GuguAcademy',
+    img: 'https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/275175732_3318540441724377_3024668989242226176_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=9v2UKiMg_hMAX_o16-c&_nc_ht=scontent.fdad3-4.fna&oh=00_AT_trX5rE_n3mzLvmkc8EiIOlDJjxyhvbuil7sYbYKNZ8Q&oe=626CFB40',
     subject: 'ReactJs',
     link: 'https://fb.com/xuan.chien.9022',
   },
   {
-    name: 'Do Vu Dung',
-    des: 'senior front-end engineer. co-founder GuguAcademy',
-    img: 'https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-1/p200x200/195153611_860134581292202_6728294779933579060_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=7206a8&_nc_ohc=hoESsb0a3JEAX-vW4yN&_nc_ht=scontent.fdad3-4.fna&oh=00_AT89QXz8MLJMOVQkPkl61hMSiXxA4bS6wyk7eRJEyfnhzA&oe=61F66807',
+    name: 'Dung Do Vu',
+    des: 'Senior front-end engineer. co-founder GuguAcademy',
+    img: 'https://scontent.fdad3-3.fna.fbcdn.net/v/t39.30808-6/277798502_1030336560938669_2799791749077267699_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=174925&_nc_ohc=gU-UAxggEgAAX-jEx-c&_nc_ht=scontent.fdad3-3.fna&oh=00_AT8BnP5fZVxMMq7-q0Wa4GPSJJzVPWj3B0eBWHkm2qqSWA&oe=626D1265',
     subject: 'JavaScript, Python',
     link: 'https://fb.com/chippopKiller',
   },
   {
-    name: 'Dang Quang Huy',
-    des: 'senior fullStack web developer. co-founder GuguAcademy',
-    img: 'https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-9/148397893_1918767138288358_6826919064066293838_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=1QQ4LtfePEoAX_cs67T&tn=jKb2njUD874y0rv_&_nc_ht=scontent.fdad3-4.fna&oh=00_AT8qh3i_rqgz5FzGo_7YUt3MoUrbBKKO48BInUEpUlDLjA&oe=61F69D35',
+    name: 'Huy Quang Dang',
+    des: 'Senior fullStack web developer. co-founder GuguAcademy',
+    img: 'https://scontent.fdad3-3.fna.fbcdn.net/v/t1.6435-9/148397893_1918767138288358_6826919064066293838_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=174925&_nc_ohc=MT7N733fyx4AX8t6GVv&_nc_ht=scontent.fdad3-3.fna&oh=00_AT-g4Mq6N1XUBRfa_4WFRjz57Z8jw4f98Z5GSfVINgH14Q&oe=628CE835',
+    subject: 'Fullstack js',
+    link: 'https://fb.com/huy15399',
+  },
+  {
+    name: 'Lam Le Quang Duong',
+    des: 'Senior fullStack web developer. co-founder GuguAcademy',
+    img: 'https://scontent.fdad3-1.fna.fbcdn.net/v/t1.6435-9/67779598_903148730044722_3435980992215515136_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=174925&_nc_ohc=QMVOhKT0O-EAX_lja2X&_nc_ht=scontent.fdad3-1.fna&oh=00_AT_wKiwaoshN-ugjRsIGyuMqeRmuF5kCQkWVmVTT2s-0mQ&oe=628C6282',
     subject: 'Fullstack js',
     link: 'https://fb.com/huy15399',
   },
@@ -26,7 +33,7 @@ const teachersData = [
 export const TopTeacher = () => {
   return (
     <div className='topTeacher'>
-      <h2 className='topTeacher__header'>Top teachers</h2>
+      <h2 className='topTeacher__header'>Top Teachers</h2>
       <div>
         {teachersData.map((item, index) => (
           <div
@@ -47,7 +54,7 @@ export const TopTeacher = () => {
             <div className='topTeacher__box-labels'>
               <div className='label'>{item.subject}</div>
               <div className='topTeacher__box-linkInfo label'>
-                <a href={item.link}>Click to view more information</a>
+                <a href={item.link} target='_blank' rel='noreferrer'>Click to view more information</a>
               </div>
             </div>
           </div>
