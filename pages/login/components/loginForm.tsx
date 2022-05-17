@@ -14,7 +14,7 @@ const validationSchema = yup.object().shape({
     .string()
     .email('Email is not correct!')
     .required('Email is required!'),
-  password: yup.string().required('You have to enter password!'),
+  password: yup.string().required('You need to enter password!'),
 })
 
 export const LoginForm: React.FC = () => {
@@ -46,7 +46,7 @@ export const LoginForm: React.FC = () => {
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.errors.email}
-        label='email'
+        label='Email'
       />
 
       <Input
@@ -55,7 +55,7 @@ export const LoginForm: React.FC = () => {
         value={formik.values.password}
         onChange={formik.handleChange}
         error={formik.errors.password}
-        label='password'
+        label='Password'
       />
 
       <FormButton type={ButtonType.SUBMIT}>Sign In</FormButton>
