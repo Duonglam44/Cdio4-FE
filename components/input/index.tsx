@@ -59,7 +59,7 @@ const useStyles = makeStyles(() =>
     },
     input: {
       width: '100%',
-      height: '30px',
+      height: '40px',
       border: '1px solid #000',
       outline: 'none',
       borderRadius: '10px',
