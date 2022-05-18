@@ -13,35 +13,42 @@ export const UserOption = () => {
     {
       title: 'Profile',
       path: `/user/${currentUser?._id}`,
+      show: true,
     },
     {
       title: 'Courses',
       path: '/courses/management',
+      show: currentUser?.role?.id === 2 ? false : true,
     },
     {
       title: 'LiveStreams',
       path: '/user/livestreams',
+      show: true,
     },
     {
       title: 'Payment',
       path: '/user/payment',
+      show: true,
     },
     {
       title: 'Insights',
       path: '/user/insights',
+      show: true,
     },
     {
       title: 'Draft',
       path: '/user/draft',
+      show: currentUser?.role?.id === 2 ? false : true,
     },
   ], [currentUser])
 
   return (
     <Paper elevation={3} className='userOptions'>
       {userOptionsMenu.map((item, index) => (
-        <Button className='userOption' key={index}>
-          <Link href={item.path}>{item.title}</Link>
-        </Button>
+        item.show && (
+          <Button className='userOption' key={index}>
+            <Link href={item.path}>{item.title}</Link>
+          </Button>)
       ))}
       <Button
         className='userOption'

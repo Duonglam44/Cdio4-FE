@@ -7,6 +7,7 @@ import { PaginationItem } from '@components/pagination'
 import { CourseManagementLoading } from './components/loading/CourseManagementLoading'
 import { TabsComponent } from '@components/tabs-component'
 import router from 'next/router'
+import { ErrorModal } from '@components/error-modal'
 
 const CoursesManagement = () => {
   const [page, setPage] = useState<number>(1)
@@ -21,6 +22,8 @@ const CoursesManagement = () => {
     (state: RootStateOrAny) => state.courseReducer.loading
   )
   const limit = 12
+  const currentUser = useSelector((state: RootStateOrAny) => state.auth?.data)
+  const isCheckRole = (currentUser?.role?.id === 1 || currentUser?.role?.id === 3) ? true : false;
 
   useEffect(() => {
     dispatch(getCoursesPagination({ page, limit }))
@@ -33,7 +36,7 @@ const CoursesManagement = () => {
 
   if (loading) return <CourseManagementLoading />
 
-  return (
+  return (isCheckRole ? (
     <div className='courseManagement-wrap'>
       <div className='container'>
         <div className='courseManagement-headerControl'>
@@ -70,7 +73,7 @@ const CoursesManagement = () => {
           }}
         />
       </div>
-    </div>
+      </div>) : <ErrorModal title='You cannot access the page!!!' returnUrl='/' />
   )
 }
 
