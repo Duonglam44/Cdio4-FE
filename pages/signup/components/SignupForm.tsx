@@ -43,7 +43,7 @@ export const SignupForm = () => {
       firstName: '',
       lastName: '',
       email: '',
-      role: 1,
+      role: 2,
       password: '',
       confirmPassword: '',
     },
@@ -146,13 +146,13 @@ export const SignupForm = () => {
             name='role'
             onChange={(e) => {
               if (e.target.checked) {
-                formik.setFieldValue('role', 2)
+                formik.setFieldValue('role', 3)
                 setIsPopupCVField(true)
 
                 return
               }
               setIsPopupCVField(false)
-              formik.setFieldValue('role', 1)
+              formik.setFieldValue('role', 2)
             }}
             value={formik.values.role}
           />
