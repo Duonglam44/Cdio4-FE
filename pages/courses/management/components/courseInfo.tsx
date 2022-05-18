@@ -2,6 +2,8 @@ import ViewItem from '@components/view-item'
 import { Grid } from '@material-ui/core'
 import { getCourseStatusText } from '../../../../utils/helpers'
 import React from 'react'
+import { FormButton } from '@components/Form-Button'
+import router from 'next/router'
 
 interface Props {
   selectedCourse: any | null
@@ -24,6 +26,10 @@ export const CourseInfo = ({ selectedCourse }: Props) => {
         <p>No data</p>
       </Grid>
     )
+  }
+
+  const handleCancel = () => {
+    router.push('management')
   }
 
   return (
@@ -152,6 +158,13 @@ export const CourseInfo = ({ selectedCourse }: Props) => {
             />
           </Grid>
         </Grid>
+        <div className='controls'>
+          <FormButton className='button button--save'
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </FormButton>
+        </div>
       </Grid>
     </Grid>
   )

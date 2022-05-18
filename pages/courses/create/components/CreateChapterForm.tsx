@@ -7,6 +7,7 @@ import { ChapterItem } from './ChapterItem'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { createChapter } from 'redux/chapter/thunks'
 import { FixedLoading } from 'components/fixed-loading'
+import router from 'next/router'
 
 interface ICreate {
   setTab: (value: number) => void
@@ -55,6 +56,10 @@ export const ChapterCreate: React.FC<ICreate> = ({ setTab, tab }) => {
     dispatch(createChapter(params))
   }
 
+  const handleCancel = () => {
+    router.push('management')
+  }
+
   return (
     <>
       {(loading  || lessonLoading) && <FixedLoading />}
@@ -74,6 +79,11 @@ export const ChapterCreate: React.FC<ICreate> = ({ setTab, tab }) => {
         </Button>
 
         <div className='controls'>
+          <FormButton className='button button--save'
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </FormButton>
           <FormButton
             className='button button--next'
             type={ButtonType.SUBMIT}
