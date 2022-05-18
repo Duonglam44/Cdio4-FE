@@ -12,9 +12,9 @@ import { ErrorModal } from '@components/error-modal'
 const CoursesManagement = () => {
   const [page, setPage] = useState<number>(1)
   const dispatch = useDispatch()
-  const courses = useSelector(
-    (state: RootStateOrAny) => state.courseReducer.courses
-  )
+  // const courses = useSelector(
+  //   (state: RootStateOrAny) => state.courseReducer.courses
+  // )
   const totalCourses = useSelector(
     (state: RootStateOrAny) => state.courseReducer.totalCourses
   )
@@ -23,7 +23,9 @@ const CoursesManagement = () => {
   )
   const limit = 12
   const currentUser = useSelector((state: RootStateOrAny) => state.auth?.data)
-  const isCheckRole = (currentUser?.role?.id === 1 || currentUser?.role?.id === 3) ? true : false;
+  const isCheckRole = (currentUser?.role?.id !== 2) ? true : false;
+  // const teachingCourses = currentUser?.teachingCourses
+  const courses = currentUser?.teachingCourses;
 
   useEffect(() => {
     dispatch(getCoursesPagination({ page, limit }))

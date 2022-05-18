@@ -9,6 +9,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux'
 import { BsUpload } from 'react-icons/bs'
 import { createCourse } from 'redux/courses/thunks'
 import { uploadFile } from 'redux/global/thunks'
+import router from 'next/router'
 
 const validationSchema = yup.object().shape({
   title: yup.string().required(),
@@ -64,6 +65,10 @@ export const CreateCourseForm: React.FC<ICreate> = ({ setTab, tab }) => {
     () => categories[values.categoryId]?.topics,
     [categories, values.categoryId]
   )
+
+  const handleCancel = () => {
+    router.push('management')
+  }
 
   return (
     <div className='newCourse'>
@@ -206,6 +211,11 @@ export const CreateCourseForm: React.FC<ICreate> = ({ setTab, tab }) => {
         />
 
         <div className='controls'>
+          <FormButton className='button button--save'
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </FormButton>
           <FormButton className='button button--save' type={ButtonType.SUBMIT}>
             save
           </FormButton>
