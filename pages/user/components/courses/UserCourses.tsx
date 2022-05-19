@@ -28,7 +28,7 @@ export const UserCourses = () => {
   useEffect(() => {
     dispatch(getCoursesPagination({ page: 1, limit: 100 }))
   }, [])
-
+  // conver array id course to array object course
   useEffect(() => {
     const listCourseTemp = []
     let listLearningCoursesId = []

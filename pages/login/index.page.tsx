@@ -47,7 +47,7 @@ const Login: React.FC = () => {
           </div>
         </div>
         <div className='signIn__copyright'>
-          <p>copyright © 2021 GuruAcademy LLC.All rights reversed.</p>
+          <p>copyright © 2022 GuruAcademy LLC.All rights reversed.</p>
           <p>Terms of Use| privacy Policy</p>
         </div>
       </div>
