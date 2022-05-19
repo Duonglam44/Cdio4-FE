@@ -48,7 +48,7 @@ export const Footer = () => {
       <div className='footer-bottom'>
         <div className='container'>
           <p className='footer-bottom-inc' style={{ marginLeft: 0 }}>
-            @GuruAcademy, Inc, 2021
+            @GuruAcademy, Inc, 2022
           </p>
           <div
             className='footer_subMenu'
