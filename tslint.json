@@ -57,6 +57,8 @@
     "trailing-comma": false,
     "object-literal-key-quotes": [false, "as-needed"],
     "no-string-literal": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    "early-exit": false,
+    "no-trailing-whitespace": false
   }
 }

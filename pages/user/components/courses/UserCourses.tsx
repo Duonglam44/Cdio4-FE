@@ -1,21 +1,56 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Grid, makeStyles, createStyles } from '@material-ui/core'
 import { CourseCard } from '@components/course-card'
-import { useSelector, RootStateOrAny } from 'react-redux'
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
+import { getCoursesPagination } from 'redux/courses/thunks'
 
 export const UserCourses = () => {
   const classes = useStyles()
   const [filterId, setFilterId] = useState<number>(null!)
   const [courses, setCourses] = useState<any>(null!)
+  const [learningCourses, setLearningCourses] = useState<any>([])
+  const dispatch = useDispatch();
+
   const userRole = useSelector(
     (state: RootStateOrAny) => state.user.userData?.role
   )
   const teachingCourse = useSelector(
     (state: RootStateOrAny) => state.user.userData?.teachingCourses
   )
-  const learningCourses = useSelector(
-    (state: RootStateOrAny) => state.user.userData?.learningCourses
+  const listLearningCourses = useSelector(
+    (state: RootStateOrAny) => state.auth.data?.learningCourses
   )
+
+  const listAllCourse = useSelector(
+    (state: RootStateOrAny) => state.courseReducer.courses
+  )
+
+  useEffect(() => {
+    dispatch(getCoursesPagination({ page: 1, limit: 100 }))
+  }, [])
+
+  useEffect(() => {
+    const listCourseTemp = []
+    let listLearningCoursesId = []
+    if (listLearningCourses){
+      listLearningCoursesId = listLearningCourses.map((item) => {
+        return item?.courseId
+      })
+    }   
+    if (listLearningCoursesId){
+      listLearningCoursesId.forEach((item) => {
+        const findTemp = listAllCourse.find((course) => {
+          if (course?._id === item){
+            return course;
+          }
+        })
+        if (findTemp){
+          listCourseTemp.push(findTemp)
+        }
+      })
+    }
+    setLearningCourses(listCourseTemp)
+  }, [listLearningCourses, listAllCourse])
 
   const allCourses = useMemo(() => {
     if (userRole?.id !== 3) {
@@ -94,7 +129,7 @@ export const UserCourses = () => {
               title={course.title}
               img={course.imageUrl}
               description={course.description}
-              totalChapter={123}
+              totalChapter={course?.chapters.length}
             />
           </Grid>
         ))}
