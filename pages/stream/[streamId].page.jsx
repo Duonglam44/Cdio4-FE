@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import io from 'socket.io-client'
 import { silence, black } from '../../helpers/BlackAndSilence'
 import { peerConnectionConfig } from '../../configs/socket'
@@ -9,11 +9,15 @@ let vid = false
 let connections = {}
 let socketId = ''
 let socket = null
-
+let outSideMessageList = []
+let outSideUnreadMessage = 0
 function Stream() {
-  const [isShowUsers, setShowUsers] = useState(true)
   const [isConnect, setConnect] = useState()
   const [isShareScreen, setShareScreen] = useState()
+  const [messageList1, setMessageList1] = useState([])
+  const [showListNumber, setShowListNumber] = useState(1)
+  const [unReadMessage, setUnReadMessage] = useState()
+  const inputMessageRef = useRef()
   const videoRef = useRef()
 
   const getPermissions = async () => {
@@ -54,9 +58,7 @@ function Stream() {
   const getUserMediaSuccess = (stream) => {
     try {
       window.localStream.getTracks().forEach((track) => track.stop())
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
 
     window.localStream = stream
     videoRef.current.srcObject = stream
@@ -76,43 +78,64 @@ function Stream() {
               JSON.stringify({ sdp: connections[id].localDescription })
             )
           })
-          .catch((e) => console.log(e))
+          .catch((e) => {})
       })
     }
   }
 
   const gotMessageFromServer = (fromId, message) => {
-    if (fromId === socketId) return
-
+    if (fromId === socket.id) return
     var signal = JSON.parse(message)
     if (signal.sdp) {
       connections[fromId]
         .setRemoteDescription(new RTCSessionDescription(signal.sdp))
         .then(() => {
           if (signal.sdp.type === 'offer') {
-            connections[fromId]
-              .createAnswer()
-              .then((description) => {
-                connections[fromId]
-                  .setLocalDescription(description)
-                  .then(() => {
-                    socket.emit(
-                      'signal',
-                      fromId,
-                      JSON.stringify({
-                        sdp: connections[fromId].localDescription,
-                      })
-                    )
+            connections[fromId].createAnswer().then((description) => {
+              connections[fromId].setLocalDescription(description).then(() => {
+                socket.emit(
+                  'signal',
+                  fromId,
+                  JSON.stringify({
+                    sdp: connections[fromId].localDescription,
                   })
+                )
               })
+            })
           }
         })
     }
 
     if (signal.ice) {
-      connections[fromId]
-        .addIceCandidate(new RTCIceCandidate(signal.ice))
+      connections[fromId].addIceCandidate(new RTCIceCandidate(signal.ice))
     }
+  }
+
+  const onAddMessage = (message, user, senderId) => {
+    let tempMessageList = [
+      ...outSideMessageList,
+      {
+        user,
+        message,
+        senderId,
+      },
+    ]
+    setMessageList1(tempMessageList)
+    outSideMessageList = tempMessageList
+    if (senderId === socketId) return
+    outSideUnreadMessage++
+    setUnReadMessage(outSideUnreadMessage)
+  }
+
+  const onSendMessage = () => {
+    socket.emit(
+      'chat-message',
+      inputMessageRef.current.value,
+      'Duong lam',
+      window.location.href,
+      socketId
+    )
+    inputMessageRef.current.value = ''
   }
 
   const connectSocket = () => {
@@ -123,13 +146,14 @@ function Stream() {
     socket.on('signal', gotMessageFromServer)
 
     socket.on('connect', () => {
+      socket.on('chat-message', onAddMessage)
       socket.emit('join-call', window.location.href)
       socketId = socket.id
 
       socket.on('user-left', (id) => {
         let video = document.querySelector(`[data-socket="${id}"]`)
         if (video !== null) {
-          video.parentNode.removeChild(video)
+          video.parentNode.remove()
         }
       })
 
@@ -173,12 +197,12 @@ function Stream() {
 
           if (window.localStream !== undefined && window.localStream !== null) {
             connections[clientId].addStream(window.localStream)
-          } else {
-            let blackSilence = (...args) =>
-              new MediaStream([black(...args), silence()])
-            window.localStream = blackSilence()
-            connections[clientId].addStream(window.localStream)
+            return
           }
+          let blackSilence = (...args) =>
+            new MediaStream([black(...args), silence()])
+          window.localStream = blackSilence()
+          connections[clientId].addStream(window.localStream)
         })
 
         if (id === socket.id) {
@@ -190,15 +214,13 @@ function Stream() {
             } catch (e) {}
 
             connections[id2].createOffer().then((description) => {
-              connections[id2]
-                .setLocalDescription(description)
-                .then(() => {
-                  socket.emit(
-                    'signal',
-                    id2,
-                    JSON.stringify({ sdp: connections[id2].localDescription })
-                  )
-                })
+              connections[id2].setLocalDescription(description).then(() => {
+                socket.emit(
+                  'signal',
+                  id2,
+                  JSON.stringify({ sdp: connections[id2].localDescription })
+                )
+              })
             })
           }
         }
@@ -294,13 +316,25 @@ function Stream() {
           >
             <span className='icon-upload' />
           </div>
-          <div className='cs-icon'>
+          <div
+            className={`cs-icon message-icon ${
+              showListNumber === 2 ? 'active' : ''
+            }`}
+            onClick={() => {
+              setShowListNumber(2)
+              outSideUnreadMessage = 0
+              setUnReadMessage(0)
+            }}
+          >
             <span className='icon-bubbles' />
+            {!!unReadMessage && (
+              <span className='message-badge'>{unReadMessage}</span>
+            )}
           </div>
           <div
-            className='cs-icon'
+            className={`cs-icon ${showListNumber === 1 ? 'active' : ''}`}
             onClick={() => {
-              setShowUsers(!isShowUsers)
+              setShowListNumber(1)
             }}
           >
             <span className='icon-users' />
@@ -308,11 +342,49 @@ function Stream() {
         </div>
       </div>
       <div
-        className={`streamList ${isShowUsers ? 'show' : 'hide'} ${
+        className={`streamList ${showListNumber === 1 ? 'show' : 'hide'} ${
           isConnect ? '' : 'hide'
         }`}
         id='streamList'
       />
+      <div
+        className={`streamList chat ${showListNumber === 2 ? 'show' : 'hide'} ${
+          isConnect ? '' : 'hide'
+        }`}
+        id='chatList'
+      >
+        <div className='chat-list'>
+          {messageList1?.map((message) => (
+            <div
+              className={`${
+                message.senderId === socket.id ? 'chat-message--me' : ''
+              } chat-message`}
+              key={message.senderId}
+            >
+              <h4>{message.user}</h4>
+              <p>{message.message}</p>
+            </div>
+          ))}
+        </div>
+        <div
+          className='chat-box_wrap'
+          onKeyDown={(e) => {
+            if (e.keyCode !== 13) return
+            onSendMessage()
+          }}
+        >
+          <textarea
+            ref={inputMessageRef}
+            onFocus={() => {
+              outSideUnreadMessage = 0
+              setUnReadMessage(0)
+            }}
+            rows='2'
+            className='chat-box'
+          />
+          <span className='icon-send cs-icon' onClick={onSendMessage} />
+        </div>
+      </div>
     </div>
   )
 }

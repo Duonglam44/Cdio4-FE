@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { AiFillPlayCircle } from 'react-icons/ai'
 import { HiOutlinePlus } from 'react-icons/hi'
@@ -10,6 +10,7 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { getCourseById } from '../../redux/courses/thunks'
 import { CourseIdxLoading } from './management/components/loading/CourseIdxLoading'
 import { ErrorModal } from '@components/error-modal'
+import Link from 'next/link'
 
 const CourseDetail = () => {
   const dispatch = useDispatch()
@@ -93,9 +94,16 @@ const CourseDetail = () => {
               />
             </div>
             <h3>{price ? `${price} $` : 'Free'}</h3>
-            <Button variant='contained' className='courseDetail-subBtn'>
-              Register
-            </Button>
+            <div>
+              <Button variant='contained' className='courseDetail-subBtn'>
+                Register
+              </Button>
+              <Link href={`/stream/${courseItem._id}`} passHref={true}>
+                <Button variant='contained' className='courseDetail-streamBtn'>
+                  Go stream
+                </Button>
+              </Link>
+            </div>
             <div className='detail-tag'>
               <div>
                 <FaPhotoVideo />

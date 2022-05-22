@@ -1,4 +1,4 @@
-@import "../../../styles/sass/variable.scss";
+@import '../../../styles/sass/variable.scss';
 
 .courseDetail {
   min-height: calc(100vh - 367px);
@@ -74,5 +74,11 @@
   }
   .svg-color {
     color: $secondary-text-color;
+  }
+  &-streamBtn {
+    margin-left: 10px !important;
+    background-color: $secondary-text-color !important;
+    color: white !important;
+    margin-bottom: 20px !important;
   }
 }
