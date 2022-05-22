@@ -8,7 +8,7 @@ export const GetUser =
       path: `/users/${id}/profile`,
       method: 'GET',
       needThrowError: false,
-      errorHandler: (error) => {
+      errorHandler: () => {
         dispatch(getUserFailed())
       }
     })

@@ -93,7 +93,7 @@ export const ChapterItem: React.FC<IChapter> = ({ chapterId, idx }) => {
                 setIsChangeName(false)
                 dispatch(updateChapter({ title: currentTitle }, chapterId))
               }}
-              onBlur={(e) => {
+              onBlur={() => {
                 setIsChangeName(false)
                 dispatch(updateChapter({ title: currentTitle }, chapterId))
               }}

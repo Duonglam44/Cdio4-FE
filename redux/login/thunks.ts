@@ -25,7 +25,7 @@ export const GetUserDataThunkAction =
       path: '/users/all-info',
       method: MethodTypes.GET,
       needThrowError: false,
-      errorHandler: (error) => {
+      errorHandler: () => {
         dispatch(GetUserFailed())
       },
     })

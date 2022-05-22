@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { getJwt } from '../../utils/Auth'
@@ -6,10 +6,8 @@ import { GetUserDataThunkAction } from '../../redux/login/thunks'
 
 type Token = string | null | undefined
 
-const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children, publicPages }) => {
-  const path = window.location.pathname
+const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children }) => {
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {

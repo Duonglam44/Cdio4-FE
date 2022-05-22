@@ -64,7 +64,7 @@ export const LessonItem: React.FC<{ lessonId: string; index: number }> = ({
               setIsChangeName(false)
               dispatch(updateLesson({ title: currentTitle }, lessonId))
             }}
-            onBlur={(e) => {
+            onBlur={() => {
               setIsChangeName(false)
               dispatch(updateLesson({ title: currentTitle }, lessonId))
             }}

@@ -1,17 +1,17 @@
 import { Button, createStyles, makeStyles } from '@material-ui/core'
 
 interface IProps {
-  tabs: []
+  tabs: { name: string }[]
   tab: number
   setTab: (tab: number) => void
 }
 
-export const UserTabs = ({ tabs, tab, setTab }) => {
+export const UserTabs: React.FC<IProps> = ({ tabs, setTab }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.wrap}>
-      {tabs.map((tab, idx) => (
+      {tabs.map((tab: any, idx) => (
         <Button
           variant='outlined'
           className={classes.tab}
@@ -20,14 +20,14 @@ export const UserTabs = ({ tabs, tab, setTab }) => {
             setTab(idx)
           }}
         >
-          {tab.name}
+          {tab?.name}
         </Button>
       ))}
     </div>
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       background: '#fff',

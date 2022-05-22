@@ -1,4 +1,4 @@
-import { Box, Grid, Button, createStyles, makeStyles } from '@material-ui/core'
+import { Box, Grid, createStyles, makeStyles } from '@material-ui/core'
 import { AiOutlineFileText } from 'react-icons/ai'
 import { BiBook } from 'react-icons/bi'
 import { StatusDot } from '../status-dot'
@@ -70,7 +70,7 @@ export const LessonPreview: React.FC<ILessonPreview> = ({ lessons }) => {
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       margin: '10px 0',

@@ -18,7 +18,7 @@ export const FixedLoading: React.FC<ILoading> = ({ type = 'spinningBubbles', col
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     loading: {
       position: 'fixed',

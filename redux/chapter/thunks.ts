@@ -27,7 +27,7 @@ export const createChapter = (params: any) => async (dispatch: any) => {
 
 export const updateChapter = (params: any, chapterId: string) => async (dispatch: any) => {
   dispatch(updateChapterRequest())
-  const res: any = await api({
+  await api({
     path: `/chapters/${chapterId}`,
     method: 'PUT',
     data: params,
@@ -36,7 +36,7 @@ export const updateChapter = (params: any, chapterId: string) => async (dispatch
       dispatch(updateChapterFailed())
     },
   })
-  dispatch(updateChapterSucceeded(res.data.chapter._id))
+  dispatch(updateChapterSucceeded())
 }
 
 export const deleteChapter = (id: string) => async (dispatch: any) => {

@@ -16,7 +16,7 @@ export const getCategories = () => async (dispatch: any) => {
     path: '/course-categories',
     method: 'GET',
     needThrowError: false,
-    errorHandler: (error) => {
+    errorHandler: () => {
       dispatch(getCategoriesFailed())
     },
   })
@@ -44,7 +44,7 @@ export const uploadFile =
           Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
         )
       },
-      (err) => {
+      () => {
         dispatch(uploadFileFailed())
       },
       () => {

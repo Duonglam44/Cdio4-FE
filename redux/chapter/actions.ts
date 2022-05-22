@@ -27,7 +27,7 @@ export const updateChapterRequest = () => {
     updateLoading: true,
   }
 }
-export const updateChapterSucceeded = (res) => {
+export const updateChapterSucceeded = () => {
   return {
     type: UpdateChapter.UPDATE_CHAPTER_SUCCEEDED,
     updateLoading: false,

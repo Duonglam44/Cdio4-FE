@@ -25,7 +25,7 @@ export const UserIdLoading = () => {
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       padding: '30px 0',

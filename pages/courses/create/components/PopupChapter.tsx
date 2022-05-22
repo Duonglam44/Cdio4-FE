@@ -53,7 +53,7 @@ export const PopupChapter: React.FC<IPopupChapter> = ({ chapterId }) => {
             className='popup_item'
             variant='contained'
             style={{ background: '#cd1010', color: '#fff' }}
-            onClick={(e) => {
+            onClick={() => {
               setIsPopup(false)
               dispatch(deleteChapter(chapterId))
             }}

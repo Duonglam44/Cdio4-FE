@@ -9,7 +9,7 @@ export const UserCourses = () => {
   const [filterId, setFilterId] = useState<number>(null!)
   const [courses, setCourses] = useState<any>(null!)
   const [learningCourses, setLearningCourses] = useState<any>([])
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const userRole = useSelector(
     (state: RootStateOrAny) => state.user.userData?.role
@@ -30,21 +30,21 @@ export const UserCourses = () => {
   }, [])
   // conver array id course to array object course
   useEffect(() => {
-    const listCourseTemp = []
+    const listCourseTemp: any = []
     let listLearningCoursesId = []
-    if (listLearningCourses){
+    if (listLearningCourses) {
       listLearningCoursesId = listLearningCourses.map((item) => {
         return item?.courseId
       })
-    }   
-    if (listLearningCoursesId){
+    }
+    if (listLearningCoursesId) {
       listLearningCoursesId.forEach((item) => {
         const findTemp = listAllCourse.find((course) => {
-          if (course?._id === item){
-            return course;
+          if (course?._id === item) {
+            return course
           }
         })
-        if (findTemp){
+        if (findTemp) {
           listCourseTemp.push(findTemp)
         }
       })
@@ -104,8 +104,14 @@ export const UserCourses = () => {
           <span className={classes.filterTitle}>Filter :</span>
           <div className={classes.filterContext}>
             {Object.values(CourseFilterArray).map((filter, idx) => (
-              <span key={idx} className={`${classes.filterTag} ${filterId === filter.id ? 'active' : '' }`}
-                style={{ color: `${filterId === filter.id ? `${filter.color}` :  '' }` }}
+              <span
+                key={idx}
+                className={`${classes.filterTag} ${
+                  filterId === filter.id ? 'active' : ''
+                }`}
+                style={{
+                  color: `${filterId === filter.id ? `${filter.color}` : ''}`,
+                }}
                 onClick={() => {
                   setFilterId(filter.id)
                   handleFilterCourses(filter.id)
@@ -166,7 +172,7 @@ const CourseFilterArray = {
   },
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {},
     head: {
@@ -210,7 +216,7 @@ const useStyles = makeStyles((theme: any) =>
         width: '70%',
         border: '1px solid',
         borderBottom: '1px solid',
-      }
+      },
     },
     filterHint: {
       display: 'inline-block',

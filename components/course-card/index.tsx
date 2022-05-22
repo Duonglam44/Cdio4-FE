@@ -1,6 +1,5 @@
 import { makeStyles, Button } from '@material-ui/core'
 import { IoMdSettings, IoMdDocument } from 'react-icons/io'
-import Link from 'next/link'
 import router from 'next/router'
 
 interface ICourseCard {

@@ -47,7 +47,7 @@ const tabs = [
   },
 ]
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       padding: '0 30px 20px',

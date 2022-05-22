@@ -13,7 +13,7 @@ const PaginationLink: React.FC<Props> = ({
 
   const router = useRouter()
 
-  const handleChange = async (event: React.ChangeEvent<any>, value: number) => {
+  const handleChange = async (_: React.ChangeEvent<any>, value: number) => {
     query.set('page', value.toString())
     query.set('count', count.toString())
     const url = `${location.pathname}?${query.toString()}`
