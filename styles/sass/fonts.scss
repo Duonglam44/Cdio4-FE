@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../../public/assets/fonts/icomoon.eot?bakn8k');
-  src:  url('../../public/assets/fonts/icomoon.eot?bakn8k#iefix') format('embedded-opentype'),
+  src: url('../../public/assets/fonts/icomoon.eot?bakn8k');
+  src: url('../../public/assets/fonts/icomoon.eot?bakn8k#iefix')
+      format('embedded-opentype'),
     url('../../public/assets/fonts/icomoon.ttf?bakn8k') format('truetype'),
     url('../../public/assets/fonts/icomoon.woff?bakn8k') format('woff'),
     url('../../public/assets/fonts/icomoon.svg?bakn8k#icomoon') format('svg');
@@ -10,7 +11,8 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^='icon-'],
+[class*=' icon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: never;
@@ -26,40 +28,40 @@
 }
 
 .icon-paper-plane:before {
-  content: "\f1d8";
+  content: '\f1d8';
 }
 .icon-send:before {
-  content: "\f1d8";
+  content: '\f1d8';
 }
 .icon-paper-plane-o:before {
-  content: "\f1d9";
+  content: '\f1d9';
 }
 .icon-send-o:before {
-  content: "\f1d9";
+  content: '\f1d9';
 }
 .icon-commenting-o:before {
-  content: "\f27b";
+  content: '\f27b';
 }
 .icon-mic:before {
-  content: "\e91e";
+  content: '\e91e';
 }
 .icon-phone:before {
-  content: "\e942";
+  content: '\e942';
 }
 .icon-pushpin:before {
-  content: "\e946";
+  content: '\e946';
 }
 .icon-box-remove:before {
-  content: "\e95f";
+  content: '\e95f';
 }
 .icon-upload:before {
-  content: "\e961";
+  content: '\e961';
 }
 .icon-bubbles:before {
-  content: "\e96c";
+  content: '\e96c';
 }
 .icon-users:before {
-  content: "\e972";
+  content: '\e972';
 }
 
 .cs-icon {
@@ -73,7 +75,19 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  &:hover, &.active {
+  position: relative;
+  &:hover,
+  &.active {
     color: $secondary-text-color;
+  }
+  &.slash::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    width: 85%;
+    height: 2px;
+    background-color: #bb2323;
+    transform: rotateZ(59deg);
   }
 }
