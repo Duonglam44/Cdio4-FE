@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../../public/assets/fonts/icomoon.eot?5j0qvv');
-  src:  url('../../public/assets/fonts/icomoon.eot?5j0qvv#iefix') format('embedded-opentype'),
-    url('../../public/assets/fonts/icomoon.ttf?5j0qvv') format('truetype'),
-    url('../../public/assets/fonts/icomoon.woff?5j0qvv') format('woff'),
-    url('../../public/assets/fonts/icomoon.svg?5j0qvv#icomoon') format('svg');
+  src:  url('../../public/assets/fonts/icomoon.eot?bakn8k');
+  src:  url('../../public/assets/fonts/icomoon.eot?bakn8k#iefix') format('embedded-opentype'),
+    url('../../public/assets/fonts/icomoon.ttf?bakn8k') format('truetype'),
+    url('../../public/assets/fonts/icomoon.woff?bakn8k') format('woff'),
+    url('../../public/assets/fonts/icomoon.svg?bakn8k#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-paper-plane:before {
+  content: "\f1d8";
+}
+.icon-send:before {
+  content: "\f1d8";
+}
+.icon-paper-plane-o:before {
+  content: "\f1d9";
+}
+.icon-send-o:before {
+  content: "\f1d9";
+}
 .icon-commenting-o:before {
   content: "\f27b";
 }
@@ -61,7 +73,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  &:hover {
-    color: red;
+  &:hover, &.active {
+    color: $secondary-text-color;
   }
 }
