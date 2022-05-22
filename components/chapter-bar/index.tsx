@@ -1,6 +1,6 @@
 // tslint:disable ter-func-call-spacing
 import React from 'react'
-import { Grid, createStyles, makeStyles, Box } from '@material-ui/core'
+import { Grid, createStyles, makeStyles } from '@material-ui/core'
 import { AccordionSection } from '../accordion-main'
 import { StatusDot } from '../status-dot'
 import { LessonPreview } from '../lesson-preview'
@@ -20,7 +20,7 @@ export const ChapterBar: React.FC<Props> = ({ chapters, className }) => {
 
   return (
     <>
-      <Box className={`${classes.chapterBar} ${className}`}>
+      <div className={`${classes.chapterBar} ${className}`}>
         <Grid container spacing={2} alignItems='center'>
           <Grid item xs={12}>
             {chapters?.map((chapter, index) => (
@@ -34,13 +34,16 @@ export const ChapterBar: React.FC<Props> = ({ chapters, className }) => {
                     direction='row'
                     alignItems='center'
                   >
-                    <Grid item xs={10} className={classes.flex}
+                    <Grid
+                      item
+                      xs={10}
+                      className={classes.flex}
                       title={chapter.title}
                     >
                       <StatusDot status={chapter?.status} />
-                      <Box className={`my-8 ${classes.chapterTitle}`}>{`Chapter ${index + 1}: ${
-                        chapter.title
-                      }`}</Box>
+                      <div
+                        className={`my-8 ${classes.chapterTitle}`}
+                      >{`Chapter ${index + 1}: ${chapter.title}`}</div>
                     </Grid>
                     <Grid item xs={2} className={classes.chapterLesson}>
                       {chapter.lessons?.length} lessons
@@ -53,7 +56,7 @@ export const ChapterBar: React.FC<Props> = ({ chapters, className }) => {
             ))}
           </Grid>
         </Grid>
-      </Box>
+      </div>
     </>
   )
 }
@@ -64,7 +67,7 @@ const useStyles = makeStyles((theme: any) =>
       margin: '0 15px',
       '& .MuiAccordion-root': {
         marginTop: '0!important',
-      }
+      },
     },
     lesson: {
       '&:firstChild': {
@@ -96,7 +99,7 @@ const useStyles = makeStyles((theme: any) =>
       color: theme.primaryTextColor,
     },
     chapterLesson: {
-      textAlign: 'right'
-    }
+      textAlign: 'right',
+    },
   })
 )

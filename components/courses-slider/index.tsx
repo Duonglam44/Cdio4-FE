@@ -52,7 +52,7 @@ export const CourseSlider: React.FC<ISlider> = ({
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     slideHeader: {
       display: 'flex',

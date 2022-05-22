@@ -14,14 +14,13 @@ export const PaginationItem: React.FC<IPagination> = ({
   onChangePage,
   className,
 }) => {
-
   const classes = useStyles()
 
   return (
     <Pagination
       className={`${classes.pagination} ${className}`}
       count={count}
-      onChange={(e, p) => {
+      onChange={(_, p) => {
         onChangePage(p)
       }}
       page={page}
@@ -37,12 +36,12 @@ const useStyles = makeStyles((theme: any) =>
       padding: '10px 0',
       '&  .Mui-selected': {
         color: theme.palette.secondary.main,
-        background: '#fff'
+        background: '#fff',
       },
       '& .MuiPaginationItem-root': {
         borderRadius: 5,
         border: '1px solid',
-      }
+      },
     },
   })
 )

@@ -3,18 +3,18 @@ import { CssBaseline, makeStyles } from '@material-ui/core'
 import Auth from '../auth/auth'
 import { GetUserDataThunkAction } from '../../redux/login/thunks'
 import { getJwt } from '../../utils/Auth'
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 interface ILayout {
   withoutPaths: string[]
   publicPages: string[]
   privatePage: string[]
+  children: React.ReactNode
 }
 
 const Layout: React.FC<ILayout> = ({ children, withoutPaths, publicPages }) => {
   const path = window.location.pathname
   const dispatch = useDispatch()
-  const user = useSelector((state: RootStateOrAny) => state.auth.data)
 
   const classes = useStyles()
   const token = getJwt()

@@ -32,9 +32,9 @@ const CoursesManagement = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleChangeTab = (tabSlug: number) => {
-    router.push(`courses/management?status=${tabSlug}`)
-  }
+  // const handleChangeTab = (tabSlug: number) => {
+  //   router.push(`courses/management?status=${tabSlug}`)
+  // }
 
   if (loading) return <CourseManagementLoading />
 

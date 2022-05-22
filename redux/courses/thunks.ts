@@ -45,7 +45,7 @@ export const getCourseById = (id: string) => async (dispatch: any) => {
     path: `/courses/auth/${id}`,
     method: 'GET',
     needThrowError: false,
-    errorHandler: (res) => {
+    errorHandler: () => {
       dispatch(getCourseByIdFailed())
     },
   })

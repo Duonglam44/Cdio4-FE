@@ -54,7 +54,7 @@ export const UserSideBar = () => {
   )
 }
 
-export const useStyles = makeStyles((theme: any) =>
+export const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       background: '#fff',

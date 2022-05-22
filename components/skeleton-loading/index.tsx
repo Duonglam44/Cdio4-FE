@@ -11,7 +11,7 @@ export const SkeletonLoading = ({ className }: { className?: string }) => {
     </div>
   )
 }
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     Col: {
       '-ms-flex': '0 0 25%',
