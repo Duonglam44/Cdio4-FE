@@ -22,9 +22,9 @@ export const CourseSlider: React.FC<ISlider> = ({
       {title && (
         <div className={classes.slideHeader}>
           <h1 className={classes.title}>{title}</h1>
-          <span className={classes.link}>
+          {/* <span className={classes.link}>
             <Link href={'/courses'}>more courses</Link>
-          </span>
+          </span> */}
         </div>
       )}
       <Swiper

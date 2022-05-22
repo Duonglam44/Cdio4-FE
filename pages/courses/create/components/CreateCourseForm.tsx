@@ -174,7 +174,7 @@ export const CreateCourseForm: React.FC<ICreate> = ({ setTab, tab }) => {
         </div>
 
         <label className='big-label' htmlFor='tags'>
-          Tags
+          Hashtag
         </label>
         <div className='input-box'>
           <TextareaAutosize
@@ -194,7 +194,7 @@ export const CreateCourseForm: React.FC<ICreate> = ({ setTab, tab }) => {
           onChange={handleChange}
           value={values.price}
           wrapperClass='input-box'
-          label='number'
+          label='Price'
         />
 
         {touched.discount && errors.discount && (
