@@ -6,7 +6,9 @@ import { GetUserDataThunkAction } from '../../redux/login/thunks'
 
 type Token = string | null | undefined
 
-const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children }) => {
+const Auth: React.FC<{ children: any; publicPages: string[] }> = ({
+  children,
+}) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -37,11 +39,7 @@ const Auth: React.FC<{children: any, publicPages: string[]}> = ({ children }) =>
   //   if (publicPages.includes(path)) return
   // }
 
-  return (
-    <>
-      {children}
-    </>
-  )
+  return <>{children}</>
 }
 
 export default Auth

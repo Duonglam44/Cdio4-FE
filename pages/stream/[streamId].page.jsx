@@ -76,6 +76,13 @@ function Stream() {
     getUserMedia()
   }, [onMic, onCam])
 
+  // useEffect(() => {
+  //   return () => {
+  //     document.querySelector('.footer').style.display = 'block'
+  //     document.querySelector('.header').style.display = 'block'
+  //   }
+  // }, [])
+
   const getUserMediaSuccess = (stream) => {
     try {
       window.localStream.getTracks().forEach((track) => track.stop())
@@ -349,9 +356,12 @@ function Stream() {
           >
             <span className='icon-box-remove' />
           </div>
-          <div className='cs-icon' onClick={() => {
-            window.location.reload();
-          }}>
+          <div
+            className='cs-icon'
+            onClick={() => {
+              window.location.reload()
+            }}
+          >
             <span className='icon-phone' />
           </div>
           <div

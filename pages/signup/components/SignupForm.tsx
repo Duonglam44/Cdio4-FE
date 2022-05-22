@@ -35,7 +35,9 @@ const validationSchema = Yup.object().shape({
 export const SignupForm = () => {
   const [isPopupCVField, setIsPopupCVField] = useState<boolean>(false)
   const dispatch = useDispatch()
-  const createCompleted = useSelector((state: RootStateOrAny) => state.auth.createCompleted)
+  const createCompleted = useSelector(
+    (state: RootStateOrAny) => state.auth.createCompleted
+  )
   const formik = useFormik({
     validationSchema,
     initialValues: {
@@ -71,6 +73,10 @@ export const SignupForm = () => {
     }
   }, [createCompleted])
 
+  const handleError = (touched?: boolean, error?: string) => {
+    return error && touched ? error : null!
+  }
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -83,7 +89,7 @@ export const SignupForm = () => {
         onChange={formik.handleChange}
         value={formik.values.firstName}
         label='First Name'
-        error={formik.errors.firstName}
+        error={handleError(formik.touched.firstName, formik.errors.firstName)}
       />
       <Input
         name='lastName'
@@ -91,7 +97,7 @@ export const SignupForm = () => {
         onChange={formik.handleChange}
         value={formik.values.lastName}
         label='Last Name'
-        error={formik.errors.lastName}
+        error={handleError(formik.touched.lastName, formik.errors.lastName)}
       />
       <Input
         name='email'
@@ -99,7 +105,7 @@ export const SignupForm = () => {
         onChange={formik.handleChange}
         value={formik.values.email}
         label='Email'
-        error={formik.errors.email}
+        error={handleError(formik.touched.email, formik.errors.email)}
       />
       <Input
         name='password'
@@ -107,7 +113,7 @@ export const SignupForm = () => {
         onChange={formik.handleChange}
         value={formik.values.password}
         label='Password'
-        error={formik.errors.password}
+        error={handleError(formik.touched.password, formik.errors.password)}
       />
       <Input
         name='confirmPassword'
@@ -115,7 +121,10 @@ export const SignupForm = () => {
         onChange={formik.handleChange}
         value={formik.values.confirmPassword}
         label='Confirm Password'
-        error={formik.errors.confirmPassword}
+        error={handleError(
+          formik.touched.confirmPassword,
+          formik.errors.confirmPassword
+        )}
       />
 
       <input

@@ -33,6 +33,10 @@ export const LoginForm: React.FC = () => {
     }
   })
 
+  const handleError = (touched?: boolean, error?: string) => {
+    return error && touched ? error : null!
+  }
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -44,7 +48,7 @@ export const LoginForm: React.FC = () => {
         name='email'
         value={formik.values.email}
         onChange={formik.handleChange}
-        error={formik.errors.email}
+        error={handleError(formik.touched.email, formik.errors.email)}
         label='Email'
       />
 
@@ -53,7 +57,7 @@ export const LoginForm: React.FC = () => {
         name='password'
         value={formik.values.password}
         onChange={formik.handleChange}
-        error={formik.errors.password}
+        error={handleError(formik.touched.password, formik.errors.password)}
         label='Password'
       />
 
