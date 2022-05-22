@@ -1,11 +1,11 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import io from 'socket.io-client'
 import { silence, black } from '../../helpers/BlackAndSilence'
 import { peerConnectionConfig } from '../../configs/socket'
 import { FormButton } from '../../components/Form-Button'
+import { useSelector } from 'react-redux'
+import Router from 'next/router'
 
-let mic = false
-let vid = false
 let connections = {}
 let socketId = ''
 let socket = null
@@ -17,18 +17,35 @@ function Stream() {
   const [messageList1, setMessageList1] = useState([])
   const [showListNumber, setShowListNumber] = useState(1)
   const [unReadMessage, setUnReadMessage] = useState()
+  const [onMic, setMic] = useState()
+  const [onCam, setCam] = useState()
   const inputMessageRef = useRef()
   const videoRef = useRef()
+  const currentUser = useSelector((state) => state.auth.data)
 
   const getPermissions = async () => {
+    let mic = false
+    let vid = false
     await navigator.mediaDevices
       .getUserMedia({ video: true })
-      .then(() => (vid = true))
-      .catch(() => (vid = false))
+      .then(() => {
+        vid = true
+        setCam(true)
+      })
+      .catch(() => {
+        vid = false
+        setCam(false)
+      })
     await navigator.mediaDevices
       .getUserMedia({ audio: true })
-      .then(() => (mic = true))
-      .catch(() => (mic = false))
+      .then(() => {
+        mic = true
+        setMic(true)
+      })
+      .catch(() => {
+        mic = false
+        setMic(false)
+      })
 
     if (!vid && !mic) return
     navigator.mediaDevices
@@ -43,17 +60,21 @@ function Stream() {
   }
 
   const getUserMedia = () => {
-    if (mic || vid) {
+    if (onMic || onCam) {
       navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
+        .getUserMedia({ video: onCam, audio: onMic })
         .then(getUserMediaSuccess)
-    } else {
-      try {
-        let tracks = videoRef.current.srcObject.getTracks()
-        tracks.forEach((track) => track.stop())
-      } catch (e) {}
+      return
     }
+    try {
+      let tracks = videoRef.current.srcObject.getTracks()
+      tracks.forEach((track) => track.stop())
+    } catch (error) {}
   }
+
+  useEffect(() => {
+    getUserMedia()
+  }, [onMic, onCam])
 
   const getUserMediaSuccess = (stream) => {
     try {
@@ -69,16 +90,13 @@ function Stream() {
       connections[id].addStream(window.localStream)
 
       connections[id].createOffer().then((description) => {
-        connections[id]
-          .setLocalDescription(description)
-          .then(() => {
-            socket.emit(
-              'signal',
-              id,
-              JSON.stringify({ sdp: connections[id].localDescription })
-            )
-          })
-          .catch((e) => {})
+        connections[id].setLocalDescription(description).then(() => {
+          socket.emit(
+            'signal',
+            id,
+            JSON.stringify({ sdp: connections[id].localDescription })
+          )
+        })
       })
     }
   }
@@ -131,7 +149,7 @@ function Stream() {
     socket.emit(
       'chat-message',
       inputMessageRef.current.value,
-      'Duong lam',
+      currentUser?.firstName,
       window.location.href,
       socketId
     )
@@ -192,6 +210,17 @@ function Stream() {
             video.playsinline = true
             videoWrap.appendChild(video)
 
+            let videoBadge = document.createElement('div')
+            videoBadge.classList.add('pinBadge')
+            let pin = document.createElement('span')
+            pin.classList.add('icon-pushpin')
+            pin.setAttribute('id', clientId)
+            pin.addEventListener('click', () => {
+              videoRef.current.srcObject = event.stream
+            })
+            videoBadge.appendChild(pin)
+
+            videoWrap.appendChild(videoBadge)
             app.appendChild(videoWrap)
           }
 
@@ -304,7 +333,25 @@ function Stream() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
         <div className='streamControl'>
-          <div className='cs-icon'>
+          <div
+            className={`${!onMic && 'slash'} cs-icon`}
+            onClick={() => {
+              setMic(!onMic)
+            }}
+          >
+            <span className='icon-mic' />
+          </div>
+          <div
+            className={`${!onCam && 'slash'} cs-icon`}
+            onClick={() => {
+              setCam(!onCam)
+            }}
+          >
+            <span className='icon-box-remove' />
+          </div>
+          <div className='cs-icon' onClick={() => {
+            window.location.reload();
+          }}>
             <span className='icon-phone' />
           </div>
           <div

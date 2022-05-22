@@ -44,10 +44,41 @@
   margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
   & > video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-image: url('/assets/images/placeholder.jpg');
+    object-fit: cover;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #838383;
+    border-radius: 10px;
+  }
+  &:hover .pinBadge {
+    opacity: 1;
+    visibility: visible;
+  }
+  .pinBadge {
+    opacity: 0;
+    visibility: hidden;
+    background-color: #3e393982;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all ease .3s;
+    > span {
+      cursor: pointer;
+    }
   }
 }
 
@@ -63,7 +94,7 @@
   border-top-left-radius: 15px;
   padding: 10px 30px;
   border-top-right-radius: 15px;
-  min-width: 350px;
+  min-width: 450px;
 }
 
 .hide {
