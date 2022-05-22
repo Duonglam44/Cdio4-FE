@@ -77,10 +77,7 @@ export const Header: React.FC = () => {
                   }}
                 >
                   <div className='header__avatar'>
-                    <img
-                      src={user?.imageUrl || defaultAvatar}
-                      alt=''
-                    />
+                    <img src={user?.imageUrl || defaultAvatar} alt='' />
                   </div>
                   {isShowOption && <UserOption />}
                 </div>

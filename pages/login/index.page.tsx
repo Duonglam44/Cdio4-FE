@@ -36,14 +36,23 @@ const Login: React.FC = () => {
         <div className='signIn__context'>
           <LoginForm />
           <div>
-            <FormButton type={ButtonType.SUBMIT} className='forgotPassword'
-              onClick={() => { router.replace('/forgot-password') }}
+            <FormButton
+              type={ButtonType.SUBMIT}
+              className='forgotPassword'
+              onClick={() => {
+                router.replace('/forgot-password')
+              }}
             >
               Forgot Password
             </FormButton>
-            <FormButton type={ButtonType.SUBMIT}
-              onClick={() => { router.replace('/signup') }}
-            >Create New Account</FormButton>
+            <FormButton
+              type={ButtonType.SUBMIT}
+              onClick={() => {
+                router.replace('/signup')
+              }}
+            >
+              Create New Account
+            </FormButton>
           </div>
         </div>
         <div className='signIn__copyright'>
