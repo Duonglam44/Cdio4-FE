@@ -100,8 +100,9 @@ export const UserCourses = () => {
     <div className={classes.wrap}>
       <div className={classes.head}>
         <h2 className={classes.title}>All Courses</h2>
-        <div className={classes.filterWrap}>
-          <span className={classes.filterTitle}>Filter :</span>
+        {userRole?.id !== 2 && (
+          <div className={classes.filterWrap}>
+            <span className={classes.filterTitle}>Filter :</span>
           <div className={classes.filterContext}>
             {Object.values(CourseFilterArray).map((filter, idx) => (
               <span
@@ -125,7 +126,7 @@ export const UserCourses = () => {
               </span>
             ))}
           </div>
-        </div>
+        </div>)}
       </div>
       <Grid container spacing={2}>
         {courses?.map((course: any) => (
