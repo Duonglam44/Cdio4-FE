@@ -55,7 +55,7 @@ const LessonItem = () => {
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {
       padding: '20px 0',

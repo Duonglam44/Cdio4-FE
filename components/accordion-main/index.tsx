@@ -3,7 +3,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Grid,
   createStyles,
   makeStyles
@@ -28,11 +27,9 @@ export const AccordionSection = ({
   children,
   expanded,
   onAccordionChange,
-  onEdit,
   label = 'Title',
   variant = 'primary',
   className,
-  editLabel = 'Edit',
   labelNode,
 }: Props) => {
 
@@ -78,7 +75,7 @@ export const AccordionSection = ({
     </Accordion>
   )
 }
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     accordionSection: {
       border: '1px dashed #9f9f9f',

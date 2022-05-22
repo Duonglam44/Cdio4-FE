@@ -13,6 +13,7 @@ interface IProps {
   className?: string
   returnContext?: string
   returnUrl?: string
+  children?: React.ReactNode
 }
 
 export const ErrorModal: React.FC<IProps> = ({
@@ -27,32 +28,34 @@ export const ErrorModal: React.FC<IProps> = ({
   return (
     <Modal open={true} className={`${classes.modal} ${className}`}>
       <Paper className={classes.paper}>
-        <div className={classes.errorBanner}>
-          <AiOutlineCloseCircle />
-        </div>
-        <p className={classes.ops}>Ooops!</p>
-        <h2 className={classes.title}>{title}</h2>
-        {children ? (
-          { children }
-        ) : (
-          <div className={classes.content}>
-            <Button
-              variant='outlined'
-              className={classes.button}
-              onClick={() => {
-                router.push(`${returnUrl}`)
-              }}
-            >
-              {returnContext}
-            </Button>
+        <>
+          <div className={classes.errorBanner}>
+            <AiOutlineCloseCircle />
           </div>
-        )}
+          <p className={classes.ops}>Ooops!</p>
+          <h2 className={classes.title}>{title}</h2>
+          {children ? (
+            { children }
+          ) : (
+            <div className={classes.content}>
+              <Button
+                variant='outlined'
+                className={classes.button}
+                onClick={() => {
+                  router.push(`${returnUrl}`)
+                }}
+              >
+                {returnContext}
+              </Button>
+            </div>
+          )}
+        </>
       </Paper>
     </Modal>
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     modal: {
       width: '100%',
@@ -74,7 +77,7 @@ const useStyles = makeStyles((theme: any) =>
         width: 70,
         height: 70,
         color: '#fff',
-      }
+      },
     },
     paper: {
       width: '100%',
@@ -88,7 +91,7 @@ const useStyles = makeStyles((theme: any) =>
       margin: '10px 0 0',
       fontSize: 30,
       fontWeight: 500,
-      textAlign: 'center'
+      textAlign: 'center',
     },
     content: {
       padding: '0 20px 20px',

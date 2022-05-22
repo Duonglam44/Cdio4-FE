@@ -30,7 +30,7 @@ const tabs = [
   },
 ]
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     wrap: {},
     content: {

@@ -37,7 +37,7 @@ export const OverView = () => {
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     lessonTitle: {
       fontSize: 18,

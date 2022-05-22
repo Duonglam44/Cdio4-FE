@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { Grid, createStyles, makeStyles } from '@material-ui/core'
 import { UserSideBar } from './components/UserSideBar'
 import { UserPageContext } from './components/UserPageContext'
@@ -16,11 +16,11 @@ const UserPage = () => {
   )
   const loading = useSelector((state: RootStateOrAny) => state.user.loading)
   const authLoading = useSelector((state: RootStateOrAny) => state.auth.loading)
-  const currentUserId = useSelector((state: RootStateOrAny) => state.auth._id)
-  const isCurrentUser = useMemo(
-    () => (currentUserId === thisUserData?._id ? true : false),
-    [thisUserData, currentUserId]
-  )
+  // const currentUserId = useSelector((state: RootStateOrAny) => state.auth._id)
+  // const isCurrentUser = useMemo(
+  //   () => (currentUserId === thisUserData?._id ? true : false),
+  //   [thisUserData, currentUserId]
+  // )
 
   useEffect(() => {
     dispatch(GetUser(router.query?.userId as string))
@@ -30,8 +30,6 @@ const UserPage = () => {
   if (loading || authLoading) return <UserIdLoading />
 
   if (!thisUserData) return <ErrorModal title={'This user is not exists!'} />
-
-  // if(!thisUserData) return router.push('/')
 
   return (
     <div className={classes.wrap}>

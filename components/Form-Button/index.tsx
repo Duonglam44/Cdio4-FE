@@ -7,7 +7,7 @@ type FormButton = {
   type?: ButtonType
   onClick?: (e: any) => void
   disabled?: boolean
-  children?: any,
+  children?: any
   variant?: any
 }
 
@@ -19,11 +19,16 @@ export const FormButton = ({
   children,
   variant,
 }: FormButton) => {
-
   const classes = useStyles()
 
   return (
-    <Button variant={variant} type={type} onClick={onClick} className={`${classes.button} ${className}`} disabled={disabled}>
+    <Button
+      variant={variant}
+      type={type}
+      onClick={onClick}
+      className={`${classes.button} ${className}`}
+      disabled={disabled}
+    >
       {children}
     </Button>
   )
@@ -31,7 +36,7 @@ export const FormButton = ({
 
 const useStyles = makeStyles((theme: any) =>
   createStyles({
-    'button': {
+    button: {
       width: '100%',
       maxWidth: '300px',
       margin: '0 auto',
@@ -44,8 +49,8 @@ const useStyles = makeStyles((theme: any) =>
       textTransform: 'capitalize',
       cursor: 'pointer',
       '&:hover': {
-        background: theme.palette.secondary.main
-      }
-    }
+        background: theme.palette.secondary.main,
+      },
+    },
   })
 )

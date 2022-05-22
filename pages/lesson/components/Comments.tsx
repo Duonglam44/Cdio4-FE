@@ -47,7 +47,7 @@ export const Comment = () => {
   )
 }
 
-const useStyles = makeStyles((theme: any) =>
+const useStyles = makeStyles(() =>
   createStyles({
     currentUserAvatar: {
       width: 30,

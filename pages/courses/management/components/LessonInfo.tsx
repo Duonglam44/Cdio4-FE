@@ -57,10 +57,10 @@ export const LessonsInfo: React.FC<Props> = ({ lessonsData }) => {
     }
   })
 
-  const handleRowClick = (record: any, index) => {
-    // setSelectedCourseId(record._id)
-    // await router.push(`/manage-courses/${record._id}`)
-  }
+  // const handleRowClick = (record: any, index) => {
+  //   setSelectedCourseId(record._id)
+  //   await router.push(`/manage-courses/${record._id}`)
+  // }
 
   const classes = useStyles()
 
@@ -70,8 +70,8 @@ export const LessonsInfo: React.FC<Props> = ({ lessonsData }) => {
       rowKey={record => record._id}
       columns={columns}
       data={lessonsDataTable}
-      onRow={(record, index) => ({
-        onClick: () => handleRowClick(record, index),
+      onRow={() => ({
+        // onClick: () => handleRowClick(record, index),
         style: {
           cursor: 'pointer',
         },
